@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "alcocraft:spruce_mug_sun_pale_ale",
+    "alcocraft:spruce_mug_digger_bitter",
+    "alcocraft:spruce_mug_nether_porter",
+    "alcocraft:spruce_mug_wither_stout",
+    "alcocraft:spruce_mug_magnet_pilsner",
+    "alcocraft:spruce_mug_drowned_ale",
+    "alcocraft:spruce_mug_night_rauch",
+    "alcocraft:spruce_mug_ice_beer",
+    "alcocraft:spruce_mug_kvass",
+    "alcocraft:spruce_mug_leprechaun_cider",
+    "alcocraft:spruce_mug_chorus_ale",
+    "alcocraft:spruce_mug_nether_star_lager"
+  ]
+}

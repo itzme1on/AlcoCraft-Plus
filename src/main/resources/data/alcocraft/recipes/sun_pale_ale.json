@@ -1,0 +1,20 @@
+{
+  "type": "alcocraft:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraft:hop"
+    },
+    {
+      "item": "alcocraft:dry_seeds"
+    },
+    {
+      "item": "minecraft:sunflower"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ],
+  "output": {
+    "item": "alcocraft:spruce_mug_sun_pale_ale"
+  }
+}

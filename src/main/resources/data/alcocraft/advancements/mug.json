@@ -1,0 +1,30 @@
+{
+    "display": {
+        "icon": {
+            "item": "alcocraft:spruce_mug_sun_pale_ale"
+        },
+        "title": {
+            "translate": "advancements.husbandry.mug.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.mug.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "alcocraft:keg",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag": "alcocraft:beer_mugs"
+                    }
+                ]
+            }
+        }
+    }
+}

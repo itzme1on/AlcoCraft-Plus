@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraft:block/spruce_mug_block_leprechaun_cider" },
+    "facing=east": { "model": "alcocraft:block/spruce_mug_block_leprechaun_cider", "y": 90 },
+    "facing=south": { "model": "alcocraft:block/spruce_mug_block_leprechaun_cider", "y": 180 },
+    "facing=west": { "model": "alcocraft:block/spruce_mug_block_leprechaun_cider", "y": 270 }
+  }
+}

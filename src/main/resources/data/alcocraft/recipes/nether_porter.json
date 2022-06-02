@@ -1,0 +1,20 @@
+{
+  "type": "alcocraft:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraft:hop"
+    },
+    {
+      "item": "alcocraft:dry_seeds"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "output": {
+    "item": "alcocraft:spruce_mug_nether_porter"
+  }
+}

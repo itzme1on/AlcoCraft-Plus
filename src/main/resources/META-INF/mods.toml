@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="MIT"
+[[mods]]
+modId="alcocraft"
+version="${file.jarVersion}"
+displayName="Alcocraft"
+logoFile="alcocraft.png"
+authors="hadrus"
+description='''
+Alcocraft is about brewing and drinking alcohol.
+'''
+[[dependencies.alcocraft]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.alcocraft]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"

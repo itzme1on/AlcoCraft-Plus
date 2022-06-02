@@ -1,0 +1,20 @@
+{
+  "type": "alcocraft:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraft:hop"
+    },
+    {
+      "item": "alcocraft:dry_seeds"
+    },
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    }
+  ],
+  "output": {
+    "item": "alcocraft:spruce_mug_leprechaun_cider"
+  }
+}

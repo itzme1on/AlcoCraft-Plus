@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "alcocraft:spruce_keg"
+        },
+        "title": {
+            "translate": "advancements.husbandry.keg.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.keg.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "alcocraft:hop",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "alcocraft:spruce_keg"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

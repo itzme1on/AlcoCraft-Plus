@@ -1,0 +1,20 @@
+{
+  "type": "alcocraft:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraft:hop"
+    },
+    {
+      "item": "alcocraft:dry_seeds"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "minecraft:chorus_fruit"
+    }
+  ],
+  "output": {
+    "item": "alcocraft:spruce_mug_chorus_ale"
+  }
+}

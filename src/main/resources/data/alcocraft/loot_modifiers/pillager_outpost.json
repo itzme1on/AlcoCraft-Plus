@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/pillager_outpost"
+    }
+  ],
+  "addition": "alcocraft:spruce_mug_night_rauch",
+  "type": "alcocraft:add_item"
+}

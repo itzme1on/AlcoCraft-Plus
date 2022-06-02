@@ -1,0 +1,20 @@
+{
+  "type": "alcocraft:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraft:hop"
+    },
+    {
+      "item": "alcocraft:dry_seeds"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:packed_ice"
+    }
+  ],
+  "output": {
+    "item": "alcocraft:spruce_mug_ice_beer"
+  }
+}

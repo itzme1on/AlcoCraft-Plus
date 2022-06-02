@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/ruined_portal"
+    }
+  ],
+  "addition": "alcocraft:spruce_mug_nether_porter",
+  "type": "alcocraft:add_item"
+}

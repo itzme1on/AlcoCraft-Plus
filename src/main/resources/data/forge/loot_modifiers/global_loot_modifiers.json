@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "entries": [
+    "alcocraft:hop_seeds_from_grass",
+    "alcocraft:abandoned_mineshaft",
+    "alcocraft:bastion_treasure",
+    "alcocraft:end_city_treasure",
+    "alcocraft:igloo_chest",
+    "alcocraft:nether_bridge",
+    "alcocraft:pillager_outpost",
+    "alcocraft:ruined_portal",
+    "alcocraft:shipwreck",
+    "alcocraft:simple_dungeon",
+    "alcocraft:underwater_ruins"
+  ]
+}
