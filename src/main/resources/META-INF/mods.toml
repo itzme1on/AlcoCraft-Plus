@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All rights reserved"
+issueTrackerURL="https://itzme1on.t.me/"
+[[mods]]
+modId="alcocraftplus"
+version="${file.jarVersion}"
+displayName="Alcocraft+"
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+#displayURL="https://modrinth.com/mods/alcocraftreloaded/" #optional
+logoFile="alcocraftplus.png"
+credits="Original AlcoCraft mod by hadrus"
+authors="itzme1on"
+description='''
+With this mod you will be able to brew beer and treat your good friends with it!
+'''
+[[dependencies.alcocraftplus]]
+modId="forge"
+mandatory=true
+versionRange="[40,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.alcocraftplus]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2,1.19)"
+ordering="NONE"
+side="BOTH"

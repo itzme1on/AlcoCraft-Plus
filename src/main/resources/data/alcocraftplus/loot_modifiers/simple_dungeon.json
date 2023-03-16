@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/simple_dungeon"
+    }
+  ],
+  "addition": "alcocraftplus:mug_of_sun_pale_ale",
+  "type": "alcocraftplus:add_item"
+}

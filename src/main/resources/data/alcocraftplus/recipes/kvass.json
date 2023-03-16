@@ -1,0 +1,20 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    {
+      "item": "alcocraftplus:hop"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "output": {
+    "item": "alcocraftplus:mug_of_kvass"
+  }
+}

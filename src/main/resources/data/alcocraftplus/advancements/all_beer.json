@@ -1,0 +1,178 @@
+{
+    "display": {
+        "icon": {
+            "item": "alcocraftplus:mug_of_nether_star_lager"
+        },
+        "title": {
+            "translate": "advancements.husbandry.all_beer.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.all_beer.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "alcocraftplus:mug",
+    "criteria": {
+        "mug_of_sun_pale_ale": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_sun_pale_ale"
+                    ]
+                }
+            }
+        },
+        "mug_of_digger_bitter": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_digger_bitter"
+                    ]
+                }
+            }
+        },
+        "mug_of_nether_porter": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_nether_porter"
+                    ]
+                }
+            }
+        },
+        "mug_of_wither_stout": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_wither_stout"
+                    ]
+                }
+            }
+        },
+        "mug_of_magnet_pilsner": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_magnet_pilsner"
+                    ]
+                }
+            }
+        },
+        "mug_of_drowned_ale": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_drowned_ale"
+                    ]
+                }
+            }
+        },
+        "mug_of_night_rauch": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_night_rauch"
+                    ]
+                }
+            }
+        },
+        "mug_of_ice_beer": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_ice_beer"
+                    ]
+                }
+            }
+        },
+        "mug_of_kvass": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_kvass"
+                    ]
+                }
+            }
+        },
+        "mug_of_leprechaun_cider": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_leprechaun_cider"
+                    ]
+                }
+            }
+        },
+        "mug_of_chorus_ale": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_chorus_ale"
+                    ]
+                }
+            }
+        },
+        "mug_of_nether_star_lager": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "alcocraftplus:mug_of_nether_star_lager"
+                    ]
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "mug_of_sun_pale_ale"
+        ],
+        [
+            "mug_of_digger_bitter"
+        ],
+        [
+            "mug_of_nether_porter"
+        ],
+        [
+            "mug_of_wither_stout"
+        ],
+        [
+            "mug_of_magnet_pilsner"
+        ],
+        [
+            "mug_of_drowned_ale"
+        ],
+        [
+            "mug_of_night_rauch"
+        ],
+        [
+            "mug_of_ice_beer"
+        ],
+        [
+            "mug_of_kvass"
+        ],
+        [
+            "mug_of_leprechaun_cider"
+        ],
+        [
+            "mug_of_chorus_ale"
+        ],
+        [
+            "mug_of_nether_star_lager"
+        ]
+    ]
+}
