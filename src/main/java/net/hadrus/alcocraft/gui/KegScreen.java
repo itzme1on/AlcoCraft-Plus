@@ -13,6 +13,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 public class KegScreen extends AbstractContainerScreen<KegMenu> {
@@ -83,9 +85,10 @@ public class KegScreen extends AbstractContainerScreen<KegMenu> {
 
         //Input fluid
         Fluid guiFluid = fluid;
-        ResourceLocation location = guiFluid.getAttributes().getStillTexture();
+        IClientFluidTypeExtensions fluidTypeExtensions = IClientFluidTypeExtensions.of(fluid);
+        ResourceLocation location = fluidTypeExtensions.getStillTexture();
         TextureAtlasSprite sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(location);
-        int color = guiFluid.getAttributes().getColor();
+        int color = fluidTypeExtensions.getTintColor();
 
         int z = this.menu.getWaterlevel();
         x = (width - sprite.getWidth()) / 2 - 80;
@@ -102,7 +105,7 @@ public class KegScreen extends AbstractContainerScreen<KegMenu> {
         }
 
         //Result fluid
-        location = guiFluid.getAttributes().getStillTexture();
+        location = fluidTypeExtensions.getStillTexture();
         sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(location);
 
         z = this.menu.getBeerLevel();

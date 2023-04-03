@@ -195,7 +195,7 @@ public class KegBlock extends BaseEntityBlock {
                 } else {
                     pLevel.playSound(null, pPos, SoundEvents.CHICKEN_EGG, SoundSource.BLOCKS, 1f, 0.01f);
                     pLevel.playSound(null, pPos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.3f, 0.7f);
-                    NetworkHooks.openGui(((ServerPlayer) pPlayer), (KegBlockEntity) entity, pPos);
+                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (KegBlockEntity) entity, pPos);
                 }
             } else {
                 throw new IllegalStateException("No beer today :(");

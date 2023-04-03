@@ -1,6 +1,5 @@
 package net.hadrus.alcocraft.recipes;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.hadrus.alcocraft.AlcoCraft;
@@ -13,9 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-import java.util.List;
-
 public class KegRecipe implements Recipe<SimpleContainer> {
 
     private final ResourceLocation id;
@@ -23,7 +19,7 @@ public class KegRecipe implements Recipe<SimpleContainer> {
     private final NonNullList<Ingredient> recipeItems;
 
     public KegRecipe(ResourceLocation id, ItemStack output,
-                                   NonNullList<Ingredient> recipeItems) {
+                     NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -32,7 +28,7 @@ public class KegRecipe implements Recipe<SimpleContainer> {
     @Override
     public boolean matches(SimpleContainer pContainer, Level pLevel) {
         return recipeItems.get(0).test(pContainer.getItem(0)) && recipeItems.get(1).test(pContainer.getItem(1))
-                && recipeItems.get(2).test(pContainer.getItem(2)) && recipeItems.get(3).test(pContainer.getItem(3));
+            && recipeItems.get(2).test(pContainer.getItem(2)) && recipeItems.get(3).test(pContainer.getItem(3));
     }
 
     @Override
@@ -71,7 +67,9 @@ public class KegRecipe implements Recipe<SimpleContainer> {
     }
 
     public static class Type implements RecipeType<KegRecipe> {
-        private Type() { }
+        private Type() {
+        }
+
         public static final Type INSTANCE = new Type();
         public static final String ID = "beer_brewing";
     }
@@ -79,7 +77,7 @@ public class KegRecipe implements Recipe<SimpleContainer> {
     public static class Serializer implements RecipeSerializer<KegRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(AlcoCraft.MOD_ID,"beer_brewing");
+            new ResourceLocation(AlcoCraft.MOD_ID, "beer_brewing");
 
         @Override
         public KegRecipe fromJson(ResourceLocation id, JsonObject json) {
@@ -116,25 +114,9 @@ public class KegRecipe implements Recipe<SimpleContainer> {
             buf.writeItemStack(recipe.getResultItem(), false);
         }
 
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
-            return INSTANCE;
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getRegistryName() {
-            return ID;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
-            return Serializer.castClass(RecipeSerializer.class);
-        }
-
         @SuppressWarnings("unchecked") // Need this wrapper, because generics
         private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
+            return (Class<G>) cls;
         }
     }
 }

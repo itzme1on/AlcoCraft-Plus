@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class AlcoMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.CONTAINERS, AlcoCraft.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, AlcoCraft.MOD_ID);
 
     public static final RegistryObject<MenuType<KegMenu>> KEG_MENU = registerMenuType(KegMenu::new, "keg_menu");
 

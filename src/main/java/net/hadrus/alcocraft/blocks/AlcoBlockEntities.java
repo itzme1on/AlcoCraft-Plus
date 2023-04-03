@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class AlcoBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AlcoCraft.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, AlcoCraft.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<KegBlockEntity>> KEG_ENTITY =
             BLOCK_ENTITIES.register("keg_entity",

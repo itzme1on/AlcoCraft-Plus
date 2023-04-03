@@ -39,7 +39,6 @@ public class AlcoCraft {
         AlcoEffects.register(eventBus);
         AlcoParticles.register(eventBus);
 
-        eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -55,8 +54,4 @@ public class AlcoCraft {
         MenuScreens.register(AlcoMenuTypes.KEG_MENU.get(), KegScreen::new);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-    }
 }

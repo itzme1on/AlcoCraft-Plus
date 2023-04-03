@@ -4,6 +4,7 @@ import net.hadrus.alcocraft.blocks.drinks.MugBlock;
 import net.hadrus.alcocraft.particles.AlcoParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -16,7 +17,7 @@ public class SunPaleAleMugBlock extends MugBlock {
     }
 
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRand) {
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRand) {
         if (pRand.nextFloat() < 0.4f) {
             double d0 = (double)pPos.getX() + 0.4D + pRand.nextDouble() * 0.2D;
             double d1 = (double)pPos.getY() + 0.2D + pRand.nextDouble() * (0.2D - 0.02D);

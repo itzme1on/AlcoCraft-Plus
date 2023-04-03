@@ -6,43 +6,32 @@ import net.hadrus.alcocraft.loot.HopSeedsFromGrass;
 import net.hadrus.alcocraft.particles.AlcoParticles;
 import net.hadrus.alcocraft.particles.YellowBubbleParticles;
 import net.hadrus.alcocraft.recipes.KegRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import javax.annotation.Nonnull;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid = AlcoCraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AlcoEventBusEvents {
 
     @SubscribeEvent
-    public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> event) {
-        Registry.register(Registry.RECIPE_TYPE, KegRecipe.Type.ID, KegRecipe.Type.INSTANCE);
+    public static void registerRecipeTypes(final RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.RECIPE_TYPES, (helper) -> {
+            event.getForgeRegistry().register(KegRecipe.Type.ID, KegRecipe.Type.INSTANCE);
+        });
     }
 
     @SubscribeEvent
-    public static void registerParticleFactories(final ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particleEngine.register(AlcoParticles.YELLOW_BUBBLES.get(),
-                YellowBubbleParticles.Provider::new);
+    public static void registerParticleFactories(final RegisterParticleProvidersEvent event) {
+        event.register(AlcoParticles.YELLOW_BUBBLES.get(), YellowBubbleParticles.Provider::new);
     }
 
     @SubscribeEvent
-    public static void registerModifierSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>>
-                                                           event) {
-        event.getRegistry().register(
-                new HopSeedsFromGrass.Serializer().setRegistryName
-                        (new ResourceLocation(AlcoCraft.MOD_ID,"hop_seeds_from_grass"))
-        );
-
-        event.getRegistry().register(
-                new DungeonChests.Serializer().setRegistryName
-                        (new ResourceLocation(AlcoCraft.MOD_ID,"add_item"))
-        );
+    public static void registerModifierSerializers(final RegisterEvent event) {
+        event.register(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, (helper) -> {
+            event.getForgeRegistry().register("hop_seeds_from_grass", HopSeedsFromGrass.CODEC);
+            event.getForgeRegistry().register("add_item", DungeonChests.CODEC);
+        });
     }
 }
