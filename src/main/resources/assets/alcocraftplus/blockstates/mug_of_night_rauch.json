@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/mug_of_night_rauch" },
+    "facing=east": { "model": "alcocraftplus:block/mug_of_night_rauch", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/mug_of_night_rauch", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/mug_of_night_rauch", "y": 270 }
+  }
+}

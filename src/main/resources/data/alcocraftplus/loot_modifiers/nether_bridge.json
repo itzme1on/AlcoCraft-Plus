@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/nether_bridge"
+    }
+  ],
+  "addition": "alcocraftplus:mug_of_nether_porter",
+  "type": "alcocraftplus:add_item"
+}

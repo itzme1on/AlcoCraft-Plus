@@ -1,13 +1,13 @@
 package net.hadrus.alcocraft.blocks;
 
-import net.hadrus.alcocraft.AlcoCraft;
-import net.hadrus.alcocraft.blocks.drinks.MugBlock;
-import net.hadrus.alcocraft.blocks.drinks.beer.*;
-import net.hadrus.alcocraft.blocks.plants.HopBlock;
-import net.hadrus.alcocraft.blocks.plants.HopPlantBlock;
-import net.hadrus.alcocraft.blocks.workstations.KegBlock;
+import net.hadrus.alcocraft.AlcoCraftPlus;
+import net.hadrus.alcocraft.blocks.mugs.MugBlock;
+import net.hadrus.alcocraft.blocks.mugs.beer.*;
+import net.hadrus.alcocraft.blocks.plants.Hop;
+import net.hadrus.alcocraft.blocks.plants.HopPlant;
+import net.hadrus.alcocraft.blocks.workstations.Keg;
 import net.hadrus.alcocraft.items.AlcoItems;
-import net.hadrus.alcocraft.misc.AlcoTab;
+import net.hadrus.alcocraft.misc.AlcoTabGroup;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -24,44 +24,90 @@ import java.util.function.Supplier;
 
 public class AlcoBlocks {
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, AlcoCraft.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, AlcoCraftPlus.MOD_ID);
 
-    public static final RegistryObject<Block> SPRUCE_KEG = registerBlock("spruce_keg",
-            () -> new KegBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()), AlcoTab.ALCO_TAB);
+    public static final RegistryObject<Block> KEG = registerBlock("keg",
+            () -> new Keg(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()), AlcoTabGroup.GROUP);
 
-    public static final RegistryObject<Block> HOP_PLANT_BLOCK = registerBlockWithoutItem("hop_plant_block",
-            () -> new HopPlantBlock(BlockBehaviour.Properties.copy(Blocks.CAVE_VINES_PLANT).lightLevel(CaveVines.emission(0)).noOcclusion()));
+    public static final RegistryObject<Block> HOP = registerBlockWithoutItem("hop",
+            () -> new Hop(BlockBehaviour.Properties
+                    .copy(Blocks.CAVE_VINES)
+                    .lightLevel(CaveVines.emission(0))
+                    .noOcclusion()));
 
-    public static final RegistryObject<Block> HOP_BLOCK = registerBlockWithoutItem("hop_block",
-            () -> new HopBlock(BlockBehaviour.Properties.copy(Blocks.CAVE_VINES).lightLevel(CaveVines.emission(0)).noOcclusion()));
+    public static final RegistryObject<Block> HOP_PLANT = registerBlockWithoutItem("hop_plant",
+            () -> new HopPlant(BlockBehaviour.Properties
+                    .copy(Blocks.CAVE_VINES)
+                    .lightLevel(CaveVines.emission(0))
+                    .noOcclusion()));
 
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_EMPTY = registerBlockWithoutItem("spruce_mug_block_empty",
-            () -> new MugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
+    public static final RegistryObject<Block> MUG_EMPTY = registerBlockWithoutItem(
+            "mug_empty",
+            () -> new MugBlock(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
 
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_SUN_PALE_ALE = registerBlockWithoutItem("spruce_mug_block_sun_pale_ale",
-            () -> new SunPaleAleMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_DIGGER_BITTER = registerBlockWithoutItem("spruce_mug_block_digger_bitter",
-            () -> new DiggerBitterMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_NETHER_PORTER = registerBlockWithoutItem("spruce_mug_block_nether_porter",
-            () -> new NetherPorterMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_WITHER_STOUT = registerBlockWithoutItem("spruce_mug_block_wither_stout",
-            () -> new WitherStoutMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_MAGNET_PILSNER = registerBlockWithoutItem("spruce_mug_block_magnet_pilsner",
-            () -> new MagnetPilsnerMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_DROWNED_ALE = registerBlockWithoutItem("spruce_mug_block_drowned_ale",
-            () -> new DrownedAleMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_NIGHT_RAUCH = registerBlockWithoutItem("spruce_mug_block_night_rauch",
-            () -> new NightRauchMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_ICE_BEER = registerBlockWithoutItem("spruce_mug_block_ice_beer",
-            () -> new IceBeerMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_KVASS = registerBlockWithoutItem("spruce_mug_block_kvass",
-            () -> new KvassMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_LEPRECHAUN_CIDER = registerBlockWithoutItem("spruce_mug_block_leprechaun_cider",
-            () -> new LeprechaunCiderMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_CHORUS_ALE = registerBlockWithoutItem("spruce_mug_block_chorus_ale",
-            () -> new ChorusAleMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
-    public static final RegistryObject<Block> SPRUCE_MUG_BLOCK_NETHER_STAR_LAGER = registerBlockWithoutItem("spruce_mug_block_nether_star_lager",
-            () -> new NetherStarLagerMugBlock(BlockBehaviour.Properties.copy(Blocks.BARREL).noOcclusion()));
+    public static final RegistryObject<Block> MUG_OF_CHORUS_ALE = registerBlockWithoutItem("mug_of_chorus_ale",
+            () -> new ChorusAleMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_DIGGER_BITTER = registerBlockWithoutItem("mug_of_digger_bitter",
+            () -> new DiggerBitterMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_DROWNED_ALE = registerBlockWithoutItem("mug_of_drowned_ale",
+            () -> new DrownedAleMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_ICE_BEER = registerBlockWithoutItem("mug_of_ice_beer",
+            () -> new IceBeerMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_KVASS = registerBlockWithoutItem("mug_of_kvass",
+            () -> new KvassMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_LEPRECHAUN_CIDER = registerBlockWithoutItem("mug_of_leprechaun_cider",
+            () -> new LeprechaunCiderMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_MAGNET_PILSNER = registerBlockWithoutItem("mug_of_magnet_pilsner",
+            () -> new MagnetPilsnerMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_NETHER_PORTER = registerBlockWithoutItem("mug_of_nether_porter",
+            () -> new NetherPorterMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_NETHER_STAR_LAGER = registerBlockWithoutItem("mug_of_nether_star_lager",
+            () -> new NetherStarLagerMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_NIGHT_RAUCH = registerBlockWithoutItem("mug_of_night_rauch",
+            () -> new NightRauchMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_SUN_PALE_ALE = registerBlockWithoutItem("mug_of_sun_pale_ale",
+            () -> new SunPaleAleMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
+
+    public static final RegistryObject<Block> MUG_OF_WITHER_STOUT = registerBlockWithoutItem("mug_of_wither_stout",
+            () -> new WitherStoutMug(BlockBehaviour.Properties
+                    .copy(Blocks.BARREL)
+                    .noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name,
                                                                      Supplier<T> block,

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/mug_of_magnet_pilsner" },
+    "facing=east": { "model": "alcocraftplus:block/mug_of_magnet_pilsner", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/mug_of_magnet_pilsner", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/mug_of_magnet_pilsner", "y": 270 }
+  }
+}

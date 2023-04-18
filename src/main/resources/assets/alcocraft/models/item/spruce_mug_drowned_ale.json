@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "alcocraft:item/spruce_mug_drowned_ale"
-  }
-}

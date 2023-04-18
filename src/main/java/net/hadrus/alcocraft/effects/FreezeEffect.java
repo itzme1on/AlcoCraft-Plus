@@ -17,51 +17,52 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 public class FreezeEffect extends MobEffect {
-    protected FreezeEffect(MobEffectCategory mobEffectCategory, int color) {
-        super(mobEffectCategory, color);
+    protected FreezeEffect(MobEffectCategory category, int color) {
+        super(category, color);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+    public void applyEffectTick(LivingEntity entity, int amplifier) {
+        if (entity.isOnGround()) {
+            BlockState state = Blocks.FROSTED_ICE.defaultBlockState();
+            BlockPos pos = entity.blockPosition();
 
-        if (pLivingEntity.isOnGround()) {
-            BlockState blockstate = Blocks.FROSTED_ICE.defaultBlockState();
-            BlockPos pPos = pLivingEntity.blockPosition();
+            int levelConflicting = 1;
 
-            int pLevelConflicting = 1;
+            float f = Math.min(16, 2 + levelConflicting);
 
-            float f = (float)Math.min(16, 2 + pLevelConflicting);
+            BlockPos.MutableBlockPos blockPos$mutableBlockPos = new BlockPos.MutableBlockPos();
 
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-
-            for(BlockPos blockpos : BlockPos.betweenClosed(pPos.offset((double)(-f), -1.0D, (double)(-f)), pPos.offset((double)f, -1.0D, (double)f))) {
-                if (blockpos.closerToCenterThan(pLivingEntity.position(), (double)f)) {
-                    blockpos$mutableblockpos.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
-                    BlockState blockstate1 = pLivingEntity.level.getBlockState(blockpos$mutableblockpos);
-                    if (blockstate1.isAir()) {
-                        BlockState blockstate2 = pLivingEntity.level.getBlockState(blockpos);
-                        boolean isFull = blockstate2.getBlock() == Blocks.WATER && blockstate2.getValue(LiquidBlock.LEVEL) == 0; //TODO: Forge, modded waters?
-                        if (blockstate2.getMaterial() == Material.WATER && isFull && blockstate.canSurvive(pLivingEntity.level, blockpos) && pLivingEntity.level.isUnobstructed(blockstate, blockpos, CollisionContext.empty()) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(pLivingEntity, net.minecraftforge.common.util.BlockSnapshot.create(pLivingEntity.level.dimension(), pLivingEntity.level, blockpos), net.minecraft.core.Direction.UP)) {
-                            pLivingEntity.level.setBlockAndUpdate(blockpos, blockstate);
-                            pLivingEntity.level.scheduleTick(blockpos, Blocks.FROSTED_ICE, Mth.nextInt(pLivingEntity.getRandom(), 60, 120));
+            for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
+                if (blockpos.closerToCenterThan(entity.position(), (double)f)) {
+                    blockPos$mutableBlockPos.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
+                    BlockState blockState1 = entity.level.getBlockState(blockPos$mutableBlockPos);
+                    if (blockState1.isAir()) {
+                        BlockState blockState2 = entity.level.getBlockState(blockpos);
+                        boolean isFull = blockState2.getBlock() == Blocks.WATER && blockState2.getValue(LiquidBlock.LEVEL) == 0;
+                        if (blockState2.getMaterial() == Material.WATER &&
+                                isFull &&
+                                state.canSurvive(entity.level, blockpos) &&
+                                entity.level.isUnobstructed(state, blockpos, CollisionContext.empty()) &&
+                                !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(entity, net.minecraftforge.common.util.BlockSnapshot.create(entity.level.dimension(), entity.level, blockpos), net.minecraft.core.Direction.UP)) {
+                            entity.level.setBlockAndUpdate(blockpos, state);
+                            entity.level.scheduleTick(blockpos, Blocks.FROSTED_ICE, Mth.nextInt(entity.getRandom(), 60, 120));
                         }
                     }
                 }
             }
         }
 
-        Level level = pLivingEntity.level;
+        Level world = entity.level;
 
-        for(Entity e : level.getEntities(pLivingEntity, new AABB(pLivingEntity.blockPosition()).inflate(5))){
-            if (e instanceof LivingEntity entity) {
-                    entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 2));
-            }
+        for (Entity e : world.getEntities(entity, new AABB(entity.blockPosition()).inflate(5))) {
+            if (e instanceof LivingEntity livingEntity)
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 2));
         }
-
     }
 
     @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
     }
 }

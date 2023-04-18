@@ -1,6 +1,6 @@
 package net.hadrus.alcocraft.effects;
 
-import net.hadrus.alcocraft.AlcoCraft;
+import net.hadrus.alcocraft.AlcoCraftPlus;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class AlcoEffects {
 
     public static final DeferredRegister<MobEffect> EFFECTS =
-            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, AlcoCraft.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, AlcoCraftPlus.MOD_ID);
 
     public static final RegistryObject<MobEffect> FLIGHT = EFFECTS.register("flight",
             () -> new FlightEffect(MobEffectCategory.BENEFICIAL, rawColorFromRGB(199, 183, 255)));

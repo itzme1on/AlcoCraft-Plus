@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/shipwreck_supply"
+    }
+  ],
+  "addition": "alcocraftplus:spruce_mug_drowned_ale",
+  "type": "alcocraftplus:add_item"
+}

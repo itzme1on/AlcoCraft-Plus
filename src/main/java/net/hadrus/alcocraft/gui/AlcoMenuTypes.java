@@ -1,6 +1,6 @@
 package net.hadrus.alcocraft.gui;
 
-import net.hadrus.alcocraft.AlcoCraft;
+import net.hadrus.alcocraft.AlcoCraftPlus;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class AlcoMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.MENU_TYPES, AlcoCraft.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, AlcoCraftPlus.MOD_ID);
 
     public static final RegistryObject<MenuType<KegMenu>> KEG_MENU = registerMenuType(KegMenu::new, "keg_menu");
 

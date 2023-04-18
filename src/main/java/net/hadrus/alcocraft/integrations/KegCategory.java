@@ -8,7 +8,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.hadrus.alcocraft.AlcoCraft;
+import net.hadrus.alcocraft.AlcoCraftPlus;
 import net.hadrus.alcocraft.blocks.AlcoBlocks;
 import net.hadrus.alcocraft.recipes.KegRecipe;
 import net.minecraft.network.chat.Component;
@@ -21,9 +21,9 @@ import javax.annotation.Nonnull;
 
 public class KegCategory implements IRecipeCategory<KegRecipe> {
 
-    public final static ResourceLocation UID = new ResourceLocation(AlcoCraft.MOD_ID, "beer_brewing");
+    public final static ResourceLocation UID = new ResourceLocation(AlcoCraftPlus.MOD_ID, "beer_brewing");
     public final static ResourceLocation TEXTURE =
-        new ResourceLocation(AlcoCraft.MOD_ID, "textures/gui/jei_gui.png");
+        new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/jei_gui.png");
 
     private static final RecipeType<KegRecipe> TYPE = new RecipeType<>(UID, KegRecipe.class);
 
@@ -32,7 +32,7 @@ public class KegCategory implements IRecipeCategory<KegRecipe> {
 
     public KegCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 48);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(AlcoBlocks.SPRUCE_KEG.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(AlcoBlocks.KEG.get()));
     }
 
     @Override

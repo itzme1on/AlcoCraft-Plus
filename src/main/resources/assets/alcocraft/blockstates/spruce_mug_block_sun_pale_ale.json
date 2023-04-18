@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "alcocraft:block/spruce_mug_block_sun_pale_ale" },
-    "facing=east": { "model": "alcocraft:block/spruce_mug_block_sun_pale_ale", "y": 90 },
-    "facing=south": { "model": "alcocraft:block/spruce_mug_block_sun_pale_ale", "y": 180 },
-    "facing=west": { "model": "alcocraft:block/spruce_mug_block_sun_pale_ale", "y": 270 }
-  }
-}

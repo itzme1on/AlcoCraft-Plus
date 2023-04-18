@@ -2,7 +2,7 @@ package net.hadrus.alcocraft.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.hadrus.alcocraft.AlcoCraft;
+import net.hadrus.alcocraft.AlcoCraftPlus;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -77,7 +77,7 @@ public class KegRecipe implements Recipe<SimpleContainer> {
     public static class Serializer implements RecipeSerializer<KegRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-            new ResourceLocation(AlcoCraft.MOD_ID, "beer_brewing");
+            new ResourceLocation(AlcoCraftPlus.MOD_ID, "beer_brewing");
 
         @Override
         public KegRecipe fromJson(ResourceLocation id, JsonObject json) {

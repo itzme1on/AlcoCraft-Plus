@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/mug_of_nether_porter" },
+    "facing=east": { "model": "alcocraftplus:block/mug_of_nether_porter", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/mug_of_nether_porter", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/mug_of_nether_porter", "y": 270 }
+  }
+}

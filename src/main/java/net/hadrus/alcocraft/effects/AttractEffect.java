@@ -11,27 +11,27 @@ import net.minecraft.world.phys.Vec3;
 
 public class AttractEffect extends MobEffect {
 
-    protected AttractEffect(MobEffectCategory mobEffectCategory, int color) {
-        super(mobEffectCategory, color);
+    protected AttractEffect(MobEffectCategory category, int color) {
+        super(category, color);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        Level level = pLivingEntity.level;
+    public void applyEffectTick(LivingEntity entity, int amplifier) {
+        Level world = entity.level;
 
-        for(Entity e : level.getEntities(pLivingEntity, new AABB(pLivingEntity.blockPosition()).inflate(15))){
+        for(Entity e : world.getEntities(entity, new AABB(entity.blockPosition()).inflate(15))){
             if (e instanceof ItemEntity item) {
-                Vec3 motion = pLivingEntity.position().subtract(item.position().add(0, item.getBbHeight() / 2, 0));
-                if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1) {
+                Vec3 motion = entity.position().subtract(item.position().add(0, item.getBbHeight() / 2, 0));
+                if (Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z) > 1)
                     motion = motion.normalize();
-                }
+
                 item.setDeltaMovement(motion.scale(1.0));
             }
         }
     }
 
     @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
     }
 }

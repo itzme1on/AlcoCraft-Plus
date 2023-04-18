@@ -1,0 +1,10 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/abandoned_mineshaft"
+    }
+  ],
+  "addition": "alcocraftplus:mug_of_digger_bitter",
+  "type": "alcocraftplus:add_item"
+}

@@ -3,7 +3,7 @@ package net.hadrus.alcocraft.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
-import net.hadrus.alcocraft.AlcoCraft;
+import net.hadrus.alcocraft.AlcoCraftPlus;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -14,16 +14,15 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 public class KegScreen extends AbstractContainerScreen<KegMenu> {
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(AlcoCraft.MOD_ID, "textures/gui/keg_gui.png");
+            new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/keg_gui.png");
     private static final ResourceLocation OVERLAY =
-            new ResourceLocation(AlcoCraft.MOD_ID, "textures/gui/keg_overlay.png");
+            new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/keg_overlay.png");
     private static final ResourceLocation BG =
-            new ResourceLocation(AlcoCraft.MOD_ID, "textures/gui/dark_bg.png");
+            new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/dark_bg.png");
 
     private static final Fluid fluid = Fluids.WATER;
 
@@ -51,18 +50,16 @@ public class KegScreen extends AbstractContainerScreen<KegMenu> {
             this.font.draw(pPoseStack, "00:00", 143, 49, rawColorFromRGB(215, 171, 121));
         } else {
             int time = this.menu.getProgress()/20;
-            int minutes = (int) (time / 60);
-            int seconds = (int) (time % 60);
+            int minutes = time / 60;
+            int seconds = time % 60;
 
             String min = String.valueOf(minutes);
-            if (minutes < 10) {
+            if (minutes < 10)
                 min = "0" + min;
-            }
 
             String sec =  String.valueOf(seconds);
-            if (seconds < 10) {
+            if (seconds < 10)
                 sec = "0" + sec;
-            }
 
             this.font.draw(pPoseStack, min + ":" + sec, 144, 50, rawColorFromRGB(97, 69, 36));
             this.font.draw(pPoseStack, min + ":" + sec, 143, 49, rawColorFromRGB(215, 171, 121));
@@ -104,7 +101,6 @@ public class KegScreen extends AbstractContainerScreen<KegMenu> {
             }
         }
 
-        //Result fluid
         location = fluidTypeExtensions.getStillTexture();
         sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(location);
 
@@ -149,7 +145,7 @@ public class KegScreen extends AbstractContainerScreen<KegMenu> {
                     141f / 255f, 1.0f);
         } else if (menu.getBeerType() == 12) {
             RenderSystem.setShaderColor(199f / 255f, 183f / 255f,
-                    255f / 255f, 1.0f);
+                    1.0f, 1.0f);
         }
 
         for (int j = 0; j <= 3; j++) {

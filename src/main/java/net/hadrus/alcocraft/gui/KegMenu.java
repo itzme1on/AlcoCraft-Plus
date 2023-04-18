@@ -1,7 +1,7 @@
 package net.hadrus.alcocraft.gui;
 
 import net.hadrus.alcocraft.blocks.AlcoBlocks;
-import net.hadrus.alcocraft.blocks.workstations.KegBlockEntity;
+import net.hadrus.alcocraft.blocks.workstations.KegEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public class KegMenu extends AbstractContainerMenu {
-    private final KegBlockEntity blockEntity;
+    private final KegEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
@@ -25,7 +25,7 @@ public class KegMenu extends AbstractContainerMenu {
         super(AlcoMenuTypes.KEG_MENU.get(), containerId);
 
         checkContainerSize(inventory, 4);
-        blockEntity = ((KegBlockEntity) entity);
+        blockEntity = ((KegEntity) entity);
         this.level = inventory.player.level;
         this.data = data;
 
@@ -117,7 +117,7 @@ public class KegMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, AlcoBlocks.SPRUCE_KEG.get());
+                pPlayer, AlcoBlocks.KEG.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
