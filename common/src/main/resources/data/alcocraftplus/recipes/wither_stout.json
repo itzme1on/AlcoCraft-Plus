@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "alcocraftplus:hop"
+    },
+    {
+      "item": "alcocraftplus:dry_seeds"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "item": "alcocraftplus:mug"
+    }
+  ],
+  "result": {
+    "item": "alcocraftplus:wither_stout"
+  }
+}

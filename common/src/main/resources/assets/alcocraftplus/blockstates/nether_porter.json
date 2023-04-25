@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/nether_porter" },
+    "facing=east": { "model": "alcocraftplus:block/nether_porter", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/nether_porter", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/nether_porter", "y": 270 }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "berries=false": {
+      "model": "alcocraftplus:block/hop_plant"
+    },
+    "berries=true": {
+      "model": "alcocraftplus:block/hop_plant_mature"
+    }
+  }
+}

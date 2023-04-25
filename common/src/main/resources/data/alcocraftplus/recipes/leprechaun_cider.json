@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "alcocraftplus:hop"
+    },
+    {
+      "item": "alcocraftplus:dry_seeds"
+    },
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "alcocraftplus:mug"
+    }
+  ],
+  "result": {
+    "item": "alcocraftplus:leprechaun_cider"
+  }
+}

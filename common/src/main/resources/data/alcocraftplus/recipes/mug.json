@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "p p",
+    "p p",
+    " p "
+  ],
+  "key": {
+    "p": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "alcocraftplus:mug",
+    "count": 4
+  }
+}

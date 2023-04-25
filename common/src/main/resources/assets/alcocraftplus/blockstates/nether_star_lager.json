@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/nether_star_lager" },
+    "facing=east": { "model": "alcocraftplus:block/nether_star_lager", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/nether_star_lager", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/nether_star_lager", "y": 270 }
+  }
+}

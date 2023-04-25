@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/kvass" },
+    "facing=east": { "model": "alcocraftplus:block/kvass", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/kvass", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/kvass", "y": 270 }
+  }
+}

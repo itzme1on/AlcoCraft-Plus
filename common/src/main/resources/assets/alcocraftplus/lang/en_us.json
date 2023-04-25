@@ -1,0 +1,29 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "With this mod you will be able to brew beer and treat your good friends with it!",
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "block.alcocraftplus.keg": "Keg",
+
+  "item.alcocraftplus.hop": "Hop",
+  "item.alcocraftplus.mug": "Empty mug",
+
+  "item.alcocraftplus.chorus_ale": "Mug of Chorus Ale",
+  "item.alcocraftplus.digger_bitter": "Mug of Digger Bitter",
+  "item.alcocraftplus.drowned_ale": "Mug of Drowned Ale",
+  "item.alcocraftplus.ice_beer": "Mug of Ice Beer",
+  "item.alcocraftplus.kvass": "Mug of Kvass",
+  "item.alcocraftplus.leprechaun_cider": "Mug of Leprechaun Cider",
+  "item.alcocraftplus.magnet_pilsner": "Mug of Magnet Pilsner",
+  "item.alcocraftplus.nether_porter": "Mug of Nether Porter",
+  "item.alcocraftplus.nether_star_lager": "Mug of Nether Star Lager",
+  "item.alcocraftplus.night_rauch": "Mug of Night Rauch",
+  "item.alcocraftplus.sun_pale_ale": "Mug of Sun Pale Ale",
+  "item.alcocraftplus.wither_stout": "Mug of Wither Stout",
+
+  "effect.alcocraftplus.attract": "Magnetism",
+  "effect.alcocraftplus.freeze": "Frost",
+  "effect.alcocraftplus.phantom": "Phantomism",
+  "effect.alcocraftplus.wither": "Power of Wither"
+}

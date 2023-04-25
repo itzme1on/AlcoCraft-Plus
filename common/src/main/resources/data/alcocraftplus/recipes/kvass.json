@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "alcocraftplus:hop"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    },
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "item": "alcocraftplus:mug"
+    }
+  ],
+  "result": {
+    "item": "alcocraftplus:kvass"
+  }
+}

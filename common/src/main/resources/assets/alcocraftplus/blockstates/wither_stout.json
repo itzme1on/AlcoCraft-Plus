@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/wither_stout" },
+    "facing=east": { "model": "alcocraftplus:block/wither_stout", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/wither_stout", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/wither_stout", "y": 270 }
+  }
+}

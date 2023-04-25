@@ -1,0 +1,29 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "С помощью этого мода вы сможете варить пиво и угощать им своих друзей!",
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "block.alcocraftplus.keg": "Кег",
+
+  "item.alcocraftplus.hop": "Хмель",
+  "item.alcocraftplus.mug": "Пустая кружка",
+
+  "item.alcocraftplus.chorus_ale": "Кружка хорусного эля",
+  "item.alcocraftplus.digger_bitter": "Кружка «Горняка-горького»",
+  "item.alcocraftplus.drowned_ale": "Кружка «Утоп-эля»",
+  "item.alcocraftplus.ice_beer": "Кружка ледяного пива",
+  "item.alcocraftplus.kvass": "Кружка кваса",
+  "item.alcocraftplus.leprechaun_cider": "Кружка сидра",
+  "item.alcocraftplus.magnet_pilsner": "Кружка «Пильзнера»",
+  "item.alcocraftplus.nether_porter": "Кружка «Незер-портье»",
+  "item.alcocraftplus.nether_star_lager": "Кружка лагера «Звезда Незера»",
+  "item.alcocraftplus.night_rauch": "Кружка «Ночного рауха»",
+  "item.alcocraftplus.sun_pale_ale": "Кружка «Пейл-эля»",
+  "item.alcocraftplus.wither_stout": "Кружка «Визера-крепкого»",
+
+  "effect.alcocraftplus.attract": "Магнетизм",
+  "effect.alcocraftplus.freeze": "Морозец",
+  "effect.alcocraftplus.phantom": "Фантомизм",
+  "effect.alcocraftplus.wither": "Сила Визера"
+}
