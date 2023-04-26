@@ -10,8 +10,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class AttractEffect extends MobEffect {
-    protected AttractEffect(MobEffectCategory category, int color) {
-        super(category, color);
+    private final int color;
+
+    public AttractEffect(int color) {
+        super(MobEffectCategory.BENEFICIAL, color);
+
+        this.color = color;
     }
 
     @Override
@@ -32,5 +36,9 @@ public class AttractEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 }

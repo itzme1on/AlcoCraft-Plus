@@ -7,6 +7,9 @@
   "block.alcocraftplus.keg": "Кег",
 
   "item.alcocraftplus.hop": "Хмель",
+  "item.alcocraftplus.hop_seeds": "Семена хмеля",
+  "item.alcocraftplus.dry_seeds": "Высушенные семена",
+
   "item.alcocraftplus.mug": "Пустая кружка",
 
   "item.alcocraftplus.chorus_ale": "Кружка хорусного эля",
@@ -14,7 +17,7 @@
   "item.alcocraftplus.drowned_ale": "Кружка «Утоп-эля»",
   "item.alcocraftplus.ice_beer": "Кружка ледяного пива",
   "item.alcocraftplus.kvass": "Кружка кваса",
-  "item.alcocraftplus.leprechaun_cider": "Кружка сидра",
+  "item.alcocraftplus.leprechaun_cider": "Сидр Leprechaun",
   "item.alcocraftplus.magnet_pilsner": "Кружка «Пильзнера»",
   "item.alcocraftplus.nether_porter": "Кружка «Незер-портье»",
   "item.alcocraftplus.nether_star_lager": "Кружка лагера «Звезда Незера»",
@@ -25,5 +28,14 @@
   "effect.alcocraftplus.attract": "Магнетизм",
   "effect.alcocraftplus.freeze": "Морозец",
   "effect.alcocraftplus.phantom": "Фантомизм",
-  "effect.alcocraftplus.wither": "Сила Визера"
+  "effect.alcocraftplus.wither": "Сила Визера",
+
+  "advancements.husbandry.hop.title": "Было ремесло, да хмелем поросло",
+  "advancements.husbandry.hop.description": "Получите хмель, выращивая семена хмеля на нижней стороне блока",
+
+  "advancements.husbandry.mug.title": "Пить или не пить",
+  "advancements.husbandry.mug.description": "Сварите ваше первое пиво",
+
+  "advancements.husbandry.all_beer.title": "Выпью их все",
+  "advancements.husbandry.all_beer.description": "Сварите и попробуйте все виды пива"
 }

@@ -10,8 +10,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 public class WitherEffect extends MobEffect {
-    protected WitherEffect(MobEffectCategory category, int color) {
-        super(category, color);
+    private final int color;
+
+    protected WitherEffect(int color) {
+        super(MobEffectCategory.BENEFICIAL, color);
+
+        this.color = color;
     }
 
     @Override
@@ -29,5 +33,9 @@ public class WitherEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 }

@@ -1,5 +1,6 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 architectury {
@@ -43,11 +44,11 @@ shadowJar {
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier null
+    classifier "fabric-1.18.2"
 }
 
 jar {
-    classifier "dev"
+    classifier "fabric-1.18.2"
 }
 
 sourcesJar {

@@ -7,6 +7,9 @@
   "block.alcocraftplus.keg": "Keg",
 
   "item.alcocraftplus.hop": "Hop",
+  "item.alcocraftplus.hop_seeds": "Hop seeds",
+  "item.alcocraftplus.dry_seeds": "Dry seeds",
+
   "item.alcocraftplus.mug": "Empty mug",
 
   "item.alcocraftplus.chorus_ale": "Mug of Chorus Ale",
@@ -25,5 +28,14 @@
   "effect.alcocraftplus.attract": "Magnetism",
   "effect.alcocraftplus.freeze": "Frost",
   "effect.alcocraftplus.phantom": "Phantomism",
-  "effect.alcocraftplus.wither": "Power of Wither"
+  "effect.alcocraftplus.wither": "Power of Wither",
+
+  "advancements.husbandry.hop.title": "Hopping around",
+  "advancements.husbandry.hop.description": "Get hop by growing hop seeds on the bottom side of the block.",
+
+  "advancements.husbandry.mug.title": "To beer or not to beer",
+  "advancements.husbandry.mug.description": "Brew your first beer",
+
+  "advancements.husbandry.all_beer.title": "Gotta drink em all",
+  "advancements.husbandry.all_beer.description": "Brew and drink all kinds of beer."
 }

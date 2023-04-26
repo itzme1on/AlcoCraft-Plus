@@ -9,7 +9,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,8 +17,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 public class FreezeEffect extends MobEffect {
-    protected FreezeEffect(MobEffectCategory category, int color) {
-        super(category, color);
+    private final int color;
+
+    protected FreezeEffect(int color) {
+        super(MobEffectCategory.BENEFICIAL, color);
+
+        this.color = color;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class FreezeEffect extends MobEffect {
             BlockPos.MutableBlockPos blockPos$mutableBlockPos = new BlockPos.MutableBlockPos();
 
             for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
-                if (blockpos.closerToCenterThan(entity.position(), (double)f)) {
+                if (blockpos.closerToCenterThan(entity.position(), f)) {
                     blockPos$mutableBlockPos.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                     BlockState blockState1 = entity.level.getBlockState(blockPos$mutableBlockPos);
                     if (blockState1.isAir()) {
@@ -64,5 +67,9 @@ public class FreezeEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 }

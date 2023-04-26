@@ -7,9 +7,6 @@
   "authors": [
     "itzme1on"
   ],
-  "contributors": [
-    "CCr4ft3r"
-  ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/alcocraft/",
     "issues": "https://github.com/itzme1on/AlcoCraft-Plus/issues",
@@ -24,8 +21,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14.19",
-    "minecraft": ">=1.18.2"
+    "fabricloader": ">=0.14.14",
+    "minecraft": ">=1.18.2",
+    "architectury": ">=4.9.84"
   },
   "custom": {
     "modmenu": {

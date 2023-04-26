@@ -7,8 +7,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 public class PhantomEffect extends MobEffect {
-    protected PhantomEffect(MobEffectCategory category, int color) {
-        super(category, color);
+    private final int color;
+
+    protected PhantomEffect(int color) {
+        super(MobEffectCategory.BENEFICIAL, color);
+
+        this.color = color;
     }
 
     @Override
@@ -20,5 +24,9 @@ public class PhantomEffect extends MobEffect {
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 }

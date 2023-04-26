@@ -3,24 +3,19 @@ package me.itzme1on.alcocraftplus.trades;
 import dev.architectury.registry.level.entity.trade.SimpleTrade;
 import dev.architectury.registry.level.entity.trade.TradeRegistry;
 import me.itzme1on.alcocraftplus.items.AlcoItems;
-import net.minecraft.core.Registry;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class AlcoTrades {
-    public static void init() {
-        for (var villagerProfession : Registry.VILLAGER_PROFESSION)
-            if (villagerProfession.equals(VillagerProfession.FARMER))
-                TradeRegistry.registerVillagerTrade(villagerProfession, 1, createTrades());
+    public static VillagerTrades.ItemListing[] FARMER_TRADES;
 
-        TradeRegistry.registerTradeForWanderingTrader(false, AlcoTrades.createTrades());
-    }
+    public static void setup() {
+        FARMER_TRADES = new VillagerTrades.ItemListing[] {
+                new SimpleTrade(Items.EMERALD.getDefaultInstance(), ItemStack.EMPTY, AlcoItems.HOP_SEEDS.get().getDefaultInstance(), 100, 0, 1)
+        };
 
-    private static VillagerTrades.ItemListing[] createTrades() {
-        var trade = new SimpleTrade(Items.EMERALD.getDefaultInstance(), ItemStack.EMPTY, AlcoItems.HOP_SEEDS.get().getDefaultInstance(), 1, 0, 1.0F);
-
-        return new VillagerTrades.ItemListing[] { trade };
+        TradeRegistry.registerVillagerTrade(VillagerProfession.FARMER, 1, AlcoTrades.FARMER_TRADES);
     }
 }
