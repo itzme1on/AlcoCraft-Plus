@@ -192,11 +192,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "alcocraftplus",
-                "Specification-Vendor"    : "hadrus",
+                "Specification-Vendor"    : "itzme1on",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "hadrus",
+                "Implementation-Vendor"   : "itzme1on",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
