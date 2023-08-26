@@ -1,0 +1,56 @@
+{
+  "itemGroup.alcocraftplustab": "Alcocraft+",
+
+  "block.alcocraftplus.keg": "Бочонок",
+  "block.alcocraftplus.hop": "Хмель",
+  "block.alcocraftplus.hop_plant": "Хмель",
+
+  "item.alcocraftplus.hop": "Хмель",
+  "item.alcocraftplus.hop_seeds": "Семена хмеля",
+  "item.alcocraftplus.dry_seeds": "Сушёные семена пшеницы",
+
+  "item.alcocraftplus.mug_empty": "Пустая кружка",
+
+  "item.alcocraftplus.mug_of_sun_pale_ale": "Кружка «Пейл-эля»",
+  "item.alcocraftplus.mug_of_digger_bitter": "Кружка «Горняка-горького»",
+  "item.alcocraftplus.mug_of_nether_porter": "Кружка «Незер-портье»",
+  "item.alcocraftplus.mug_of_wither_stout": "Кружка «Визера-крепкого»",
+  "item.alcocraftplus.mug_of_magnet_pilsner": "Кружка «Пильзнера»",
+  "item.alcocraftplus.mug_of_drowned_ale": "Кружка «Утоп-эля»",
+  "item.alcocraftplus.mug_of_night_rauch": "Кружка «Ночного рауха»",
+  "item.alcocraftplus.mug_of_ice_beer": "Кружка холодного пива",
+  "item.alcocraftplus.mug_of_kvass": "Кружка кваса",
+  "item.alcocraftplus.mug_of_leprechaun_cider": "Кружка сидра",
+  "item.alcocraftplus.mug_of_chorus_ale": "Кружка хорусного эля",
+
+  "block.alcocraftplus.mug_empty": "Пустая кружка",
+
+  "block.alcocraftplus.mug_of_sun_pale_ale": "Кружка «Пейл-эля»",
+  "block.alcocraftplus.mug_of_digger_bitter": "Кружка «Горняка-горького»",
+  "block.alcocraftplus.mug_of_nether_porter": "Кружка «Незер-портье»",
+  "block.alcocraftplus.mug_of_wither_stout": "Кружка «Визера-крепкого»",
+  "block.alcocraftplus.mug_of_magnet_pilsner": "Кружка «Пильзнера»",
+  "block.alcocraftplus.mug_of_drowned_ale": "Кружка «Утоп-эля»",
+  "block.alcocraftplus.mug_of_night_rauch": "Кружка «Ночного рауха»",
+  "block.alcocraftplus.mug_of_ice_beer": "Кружка холодного пива",
+  "block.alcocraftplus.mug_of_kvass": "Кружка кваса",
+  "block.alcocraftplus.mug_of_leprechaun_cider": "Кружка сидра",
+  "block.alcocraftplus.mug_of_chorus_ale": "Кружка хорусного эля",
+
+  "effect.alcocraftplus.freeze": "Мёрзлый",
+  "effect.alcocraftplus.phantom": "Хорошо отдохнувший",
+  "effect.alcocraftplus.attract": "Притяжение",
+  "effect.alcocraftplus.wither": "Касание визера",
+
+  "advancements.husbandry.hop.title": "В хозяйстве сгодится...",
+  "advancements.husbandry.hop.description": "Получите хмель, посадив семена хмеля на нижнюю часть блока",
+
+  "advancements.husbandry.keg.title": "Кубок мудреца",
+  "advancements.husbandry.keg.description": "Создайте кружку и начните свой путь пивовара",
+
+  "advancements.husbandry.mug.title": "Жидкое золото",
+  "advancements.husbandry.mug.description": "Сварите пиво",
+
+  "advancements.husbandry.all_beer.title": "Твоя сила и мудрость",
+  "advancements.husbandry.all_beer.description": "Сварите и выпейте все сорта пива"
+}

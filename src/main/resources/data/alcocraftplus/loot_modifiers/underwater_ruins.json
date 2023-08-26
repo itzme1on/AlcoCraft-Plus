@@ -1,0 +1,14 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/underwater_ruin_big"
+    },
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/underwater_ruin_small"
+    }
+  ],
+  "addition": "alcocraftplus:mug_of_drowned_ale",
+  "type": "alcocraftplus:add_item"
+}

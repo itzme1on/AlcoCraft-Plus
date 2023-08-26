@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "alcocraftplus:block/mug_of_leprechaun_cider" },
+    "facing=east": { "model": "alcocraftplus:block/mug_of_leprechaun_cider", "y": 90 },
+    "facing=south": { "model": "alcocraftplus:block/mug_of_leprechaun_cider", "y": 180 },
+    "facing=west": { "model": "alcocraftplus:block/mug_of_leprechaun_cider", "y": 270 }
+  }
+}
