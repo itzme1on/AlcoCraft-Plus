@@ -20,8 +20,9 @@ public class WitherEffect extends MobEffect {
 
         for (Entity e : world.getEntities(entity, new AABB(entity.blockPosition()).inflate(50))) {
             if (e instanceof LivingEntity livingEntity) {
-                if (entity.getLastHurtByMob() == entity)
-                    entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 10));
+                if (entity.getLastHurtByMob() == livingEntity) {
+                    livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 10));
+                }
             }
         }
     }
