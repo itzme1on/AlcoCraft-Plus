@@ -11,7 +11,7 @@ public class AlcoBeerProperties {
             .nutrition(5)
             .saturationMod(0.6f)
             .alwaysEat()
-            .effect(() -> new MobEffectInstance(MobEffects.LUCK, 1200, 0), 1.0f)
+            .effect(() -> new MobEffectInstance(MobEffects.LEVITATION, 400, 0), 1.0f)
             .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 1.0f)
             .build();
 

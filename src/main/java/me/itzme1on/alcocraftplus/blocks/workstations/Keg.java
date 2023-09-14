@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public class Keg extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-    
+
     public Keg(Properties pProperties) {
         super(pProperties);
     }
@@ -82,7 +82,7 @@ public class Keg extends BaseEntityBlock {
             if (entity instanceof KegEntity)
                 ((KegEntity) entity).drops();
         }
-        
+
         super.onRemove(oldState, world, pos, newState, isMoving);
     }
 
@@ -100,13 +100,13 @@ public class Keg extends BaseEntityBlock {
 
                     if (!player.isCreative())
                         itemStack.shrink(1);
-                    
+
                     if (itemStack.isEmpty())
                         player.setItemInHand(hand, new ItemStack(Items.BUCKET));
 
                     world.gameEvent(player, GameEvent.FLUID_PLACE, pos);
-                } 
-                
+                }
+
                 else if (itemStack.is(AlcoItems.MUG_EMPTY.get()) && ((KegEntity) entity).beerLevel != 0) {
 
                     if (!player.isCreative())
@@ -121,6 +121,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_SUN_PALE_ALE.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_SUN_PALE_ALE.get()), false);
+                            break;
                         }
 
                         case 2: {
@@ -129,6 +130,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_DIGGER_BITTER.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_DIGGER_BITTER.get()), false);
+                            break;
                         }
 
                         case 3: {
@@ -137,6 +139,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_NETHER_PORTER.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_NETHER_PORTER.get()), false);
+                            break;
                         }
 
                         case 4: {
@@ -145,6 +148,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_WITHER_STOUT.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_WITHER_STOUT.get()), false);
+                            break;
                         }
 
                         case 5: {
@@ -153,6 +157,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_MAGNET_PILSNER.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_MAGNET_PILSNER.get()), false);
+                            break;
                         }
 
                         case 6: {
@@ -161,6 +166,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_DROWNED_ALE.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_DROWNED_ALE.get()), false);
+                            break;
                         }
 
                         case 7: {
@@ -169,6 +175,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_NIGHT_RAUCH.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_NIGHT_RAUCH.get()), false);
+                            break;
                         }
 
                         case 8: {
@@ -177,6 +184,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_ICE_BEER.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_ICE_BEER.get()), false);
+                            break;
                         }
 
                         case 9: {
@@ -185,6 +193,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_KVASS.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_KVASS.get()), false);
+                            break;
                         }
 
                         case 10: {
@@ -193,6 +202,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_LEPRECHAUN_CIDER.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_LEPRECHAUN_CIDER.get()), false);
+                            break;
                         }
 
                         case 11: {
@@ -201,6 +211,7 @@ public class Keg extends BaseEntityBlock {
 
                             else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_CHORUS_ALE.get())))
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_CHORUS_ALE.get()), false);
+                            break;
                         }
 
                         case 12: {
@@ -209,6 +220,7 @@ public class Keg extends BaseEntityBlock {
                             } else if (!player.getInventory().add(new ItemStack(AlcoItems.MUG_OF_NETHER_STAR_LAGER.get()))) {
                                 player.drop(new ItemStack(AlcoItems.MUG_OF_NETHER_STAR_LAGER.get()), false);
                             }
+
                         }
                     }
 
