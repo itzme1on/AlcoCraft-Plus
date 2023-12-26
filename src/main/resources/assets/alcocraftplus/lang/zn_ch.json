@@ -1,0 +1,56 @@
+{
+  "itemGroup.alcocraftplustab": "酿酒工艺+",
+
+  "block.alcocraftplus.keg": "酿酒桶",
+  "block.alcocraftplus.hop": "啤酒花",
+  "block.alcocraftplus.hop_plant": "啤酒花",
+
+  "item.alcocraftplus.hop": "啤酒花",
+  "item.alcocraftplus.hop_seeds": "啤酒花种子",
+  "item.alcocraftplus.dry_seeds": "烘焙小麦种子",
+
+  "item.alcocraftplus.mug_empty": "空酒杯",
+
+  "item.alcocraftplus.mug_of_sun_pale_ale": "洋白啤",
+  "item.alcocraftplus.mug_of_digger_bitter": "矿工苦酒",
+  "item.alcocraftplus.mug_of_nether_porter": "波特酒",
+  "item.alcocraftplus.mug_of_wither_stout": "黑凋灵酒",
+  "item.alcocraftplus.mug_of_magnet_pilsner": "比尔森",
+  "item.alcocraftplus.mug_of_drowned_ale": "溺水麦芽",
+  "item.alcocraftplus.mug_of_night_rauch": "夜劳赫酒",
+  "item.alcocraftplus.mug_of_ice_beer": "冰啤酒",
+  "item.alcocraftplus.mug_of_kvass": "格瓦斯",
+  "item.alcocraftplus.mug_of_leprechaun_cider": "绿啤",
+  "item.alcocraftplus.mug_of_chorus_ale": "紫颂啤酒",
+
+  "block.alcocraftplus.mug_empty": "空酒杯",
+
+  "block.alcocraftplus.mug_of_sun_pale_ale": "洋白啤",
+  "block.alcocraftplus.mug_of_digger_bitter": "矿工苦酒",
+  "block.alcocraftplus.mug_of_nether_porter": "波特酒",
+  "block.alcocraftplus.mug_of_wither_stout": "黑凋灵酒",
+  "block.alcocraftplus.mug_of_magnet_pilsner": "比尔森",
+  "block.alcocraftplus.mug_of_drowned_ale": "溺水麦芽",
+  "block.alcocraftplus.mug_of_night_rauch": "夜劳赫酒",
+  "block.alcocraftplus.mug_of_ice_beer": "冰啤酒",
+  "block.alcocraftplus.mug_of_kvass": "格瓦斯",
+  "block.alcocraftplus.mug_of_leprechaun_cider": "绿啤",
+  "block.alcocraftplus.mug_of_chorus_ale": "紫颂啤酒",
+
+  "effect.alcocraftplus.freeze": "霜冻",
+  "effect.alcocraftplus.phantom": "精力充沛",
+  "effect.alcocraftplus.attract": "吸引",
+  "effect.alcocraftplus.wither": "凋零之触",
+
+  "advancements.husbandry.hop.title": "酒鬼的雀跃",
+  "advancements.husbandry.hop.description": "通过在方块的底部种植啤酒花种子来获得啤酒花.",
+
+  "advancements.husbandry.keg.title": "一切始于一个桶",
+  "advancements.husbandry.keg.description": "制作一个酿酒桶，开启你的酿造之旅.",
+
+  "advancements.husbandry.mug.title": "喝还是不喝?",
+  "advancements.husbandry.mug.description": "酿造出你的第一杯啤酒.",
+
+  "advancements.husbandry.all_beer.title": "必须喝个够",
+  "advancements.husbandry.all_beer.description": "酿造并饮用所有啤酒."
+}
