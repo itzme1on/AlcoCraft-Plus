@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "alcocraftplus:hop"
+        },
+        "title": {
+            "translate": "advancements.husbandry.hop.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.hop.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "minecraft:husbandry/root",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "alcocraftplus:hop"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

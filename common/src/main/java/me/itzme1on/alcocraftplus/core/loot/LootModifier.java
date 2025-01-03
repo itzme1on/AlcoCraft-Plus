@@ -1,0 +1,46 @@
+package me.itzme1on.alcocraftplus.core.loot;
+
+import dev.architectury.event.events.common.LootEvent;
+import me.itzme1on.alcocraftplus.AlcoCraftPlus;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
+
+public class LootModifier {
+    public static void modifyLootTable(ResourceLocation id, LootEvent.LootTableModificationContext context) {
+        String prefix = "minecraft:chests/";
+        String name = id.toString();
+
+        if (name.startsWith(prefix)) {
+            String file = name.substring(name.indexOf(prefix) + prefix.length());
+
+            switch (file) {
+                case "abandoned_mineshaft",
+                     "bastion_treasure",
+                     "end_city_treasure",
+                     "igloo_chest",
+                     "nether_bridge",
+                     "pillager_outpost",
+                     "ruined_portal",
+                     "shipwreck_supply",
+                     "simple_dungeon",
+                     "underwater_ruin_big",
+                     "underwater_ruin_small" -> context.addPool(getPool(file));
+                default -> {
+                }
+            }
+        }
+    }
+
+    public static LootPool getPool(String entryName) {
+        return LootPool.lootPool().add(getPoolEntry(entryName)).build();
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static LootPoolEntryContainer.Builder getPoolEntry(String name) {
+        ResourceLocation table = new ResourceLocation(AlcoCraftPlus.MOD_ID, "chests/" + name);
+
+        return LootTableReference.lootTableReference(table);
+    }
+}

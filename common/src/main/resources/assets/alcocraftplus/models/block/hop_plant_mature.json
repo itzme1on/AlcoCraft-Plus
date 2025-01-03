@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "alcocraftplus:block/hop_plant_mature"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "С помощью этого мода вы сможете варить пиво и угощать им своих друзей!",
+
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "item.alcocraftplus.hop": "Хмель",
+  "item.alcocraftplus.hop_seeds": "Семена хмеля",
+  "item.alcocraftplus.dry_seeds": "Высушенные семена",
+
+  "block.alcocraftplus.keg": "Кег",
+  "block.alcocraftplus.mug": "Пустая кружка",
+  "block.alcocraftplus.chorus_ale": "Кружка хорусного эля",
+  "block.alcocraftplus.digger_bitter": "Кружка «Горняка-горького»",
+  "block.alcocraftplus.drowned_ale": "Кружка «Утоп-эля»",
+  "block.alcocraftplus.ice_beer": "Кружка ледяного пива",
+  "block.alcocraftplus.kvass": "Кружка кваса",
+  "block.alcocraftplus.leprechaun_cider": "Сидр Leprechaun",
+  "block.alcocraftplus.magnet_pilsner": "Кружка «Пильзнера»",
+  "block.alcocraftplus.nether_porter": "Кружка «Незер-портье»",
+  "block.alcocraftplus.nether_star_lager": "Кружка лагера «Звезда Незера»",
+  "block.alcocraftplus.night_rauch": "Кружка «Ночного рауха»",
+  "block.alcocraftplus.sun_pale_ale": "Кружка «Пейл-эля»",
+  "block.alcocraftplus.wither_stout": "Кружка «Визера-крепкого»",
+
+  "effect.alcocraftplus.attract": "Магнетизм",
+  "effect.alcocraftplus.freeze": "Морозец",
+  "effect.alcocraftplus.phantom": "Фантомизм",
+  "effect.alcocraftplus.wither": "Сила Визера",
+
+  "advancements.husbandry.hop.title": "В хозяйстве сгодится...",
+  "advancements.husbandry.hop.description": "Получите хмель, посадив семена хмеля на нижнюю часть блока",
+  "advancements.husbandry.keg.title": "Кубок мудреца",
+  "advancements.husbandry.keg.description": "Создайте кружку и начните свой путь пивовара",
+  "advancements.husbandry.mug.title": "Жидкое золото",
+  "advancements.husbandry.mug.description": "Сварите пиво",
+  "advancements.husbandry.all_beer.title": "Твоя сила и мудрость",
+  "advancements.husbandry.all_beer.description": "Сварите и выпейте все сорта пива"
+}

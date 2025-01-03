@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "alcocraftplus:keg"
+        },
+        "title": {
+            "translate": "advancements.husbandry.keg.title"
+        },
+        "description": {
+            "translate": "advancements.husbandry.keg.description"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "parent": "alcocraftplus:hop",
+    "criteria": {
+        "requirement": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "alcocraftplus:keg"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

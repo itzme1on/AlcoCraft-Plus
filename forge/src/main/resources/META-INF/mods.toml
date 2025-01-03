@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+
+displayURL = "https://github.com/itzme1on/AlcoCraft-Plus"
+issueTrackerURL = "https://github.com/itzme1on/AlcoCraft-Plus/issues"
+
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "alcocraftplus"
+version = "${version}"
+displayName = "AlcoCraft+"
+authors = "itzme1on"
+description = '''
+With this mod you will be able to brew beer and treat your good friends with it!
+'''
+logoFile = "logo.png"
+
+[[dependencies.alcocraftplus]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.alcocraftplus]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.alcocraftplus]]
+modId = "architectury"
+mandatory = true
+versionRange = "[9.2.14,)"
+ordering = "AFTER"
+side = "BOTH"
