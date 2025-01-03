@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:$rootProject.forge_version"
+    forge "net.minecraftforge:forge:$rootProject.minecraft_version-$rootProject.forge_version"
 
     modApi "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
 
