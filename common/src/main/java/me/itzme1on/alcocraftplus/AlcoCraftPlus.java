@@ -1,5 +1,6 @@
 package me.itzme1on.alcocraftplus;
 
+import dev.architectury.event.events.common.LifecycleEvent;
 import me.itzme1on.alcocraftplus.core.events.CommonEvents;
 import me.itzme1on.alcocraftplus.core.registries.*;
 import org.apache.logging.log4j.LogManager;
@@ -24,5 +25,7 @@ public final class AlcoCraftPlus {
         BlockEntitiesRegistry.register();
 
         CommonEvents.register();
+
+        LifecycleEvent.SETUP.register(CompostableRegistry::register);
     }
 }
