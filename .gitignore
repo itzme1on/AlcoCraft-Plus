@@ -2,6 +2,7 @@ build/
 *.ipr
 fabric/run/
 forge/run/
+common/run/
 *.iws
 out/
 *.iml
@@ -21,3 +22,5 @@ classes/
 *.launch.DS_Store
 .DS_Store
 .architectury-transformer/
+
+changelog.md
