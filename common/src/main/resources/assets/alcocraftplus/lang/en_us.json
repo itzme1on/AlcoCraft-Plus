@@ -1,0 +1,40 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "With this mod you will be able to brew beer and treat your good friends with it!",
+
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "item.alcocraftplus.hop": "Hop",
+  "item.alcocraftplus.hop_seeds": "Hop seeds",
+  "item.alcocraftplus.dry_seeds": "Dry seeds",
+  "item.alcocraftplus.keg": "Keg",
+
+  "block.alcocraftplus.mug": "Empty mug",
+  "block.alcocraftplus.chorus_ale": "Mug of Chorus Ale",
+  "block.alcocraftplus.digger_bitter": "Mug of Digger Bitter",
+  "block.alcocraftplus.drowned_ale": "Mug of Drowned Ale",
+  "block.alcocraftplus.ice_beer": "Mug of Ice Beer",
+  "block.alcocraftplus.kvass": "Mug of Kvass",
+  "block.alcocraftplus.leprechaun_cider": "Mug of Leprechaun Cider",
+  "block.alcocraftplus.magnet_pilsner": "Mug of Magnet Pilsner",
+  "block.alcocraftplus.nether_porter": "Mug of Nether Porter",
+  "block.alcocraftplus.nether_star_lager": "Mug of Nether Star Lager",
+  "block.alcocraftplus.night_rauch": "Mug of Night Rauch",
+  "block.alcocraftplus.sun_pale_ale": "Mug of Sun Pale Ale",
+  "block.alcocraftplus.wither_stout": "Mug of Wither Stout",
+
+  "effect.alcocraftplus.attract": "Magnetism",
+  "effect.alcocraftplus.freeze": "Frost",
+  "effect.alcocraftplus.phantom": "Phantomism",
+  "effect.alcocraftplus.wither": "Power of Wither",
+
+  "advancements.husbandry.hop.title": "Hopping around",
+  "advancements.husbandry.hop.description": "Get hop by growing hop seeds on the bottom side of the block.",
+  "advancements.husbandry.keg.title": "It's all starts with a Keg",
+  "advancements.husbandry.keg.description": "Craft a keg and start your journey in brewing.",
+  "advancements.husbandry.mug.title": "To beer or not to beer",
+  "advancements.husbandry.mug.description": "Brew your first beer",
+  "advancements.husbandry.all_beer.title": "Gotta drink em all",
+  "advancements.husbandry.all_beer.description": "Brew and drink all kinds of beer."
+}

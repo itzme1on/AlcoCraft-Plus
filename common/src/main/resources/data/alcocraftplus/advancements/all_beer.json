@@ -1,0 +1,178 @@
+{
+  "display": {
+    "icon": {
+      "item": "alcocraftplus:kvass"
+    },
+    "title": {
+      "translate": "advancements.husbandry.all_beer.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.all_beer.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "alcocraftplus:mug",
+  "criteria": {
+    "kvass": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:kvass"
+          ]
+        }
+      }
+    },
+    "chorus_ale": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:chorus_ale"
+          ]
+        }
+      }
+    },
+    "digger_bitter": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:digger_bitter"
+          ]
+        }
+      }
+    },
+    "drowned_ale": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:drowned_ale"
+          ]
+        }
+      }
+    },
+    "ice_beer": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:ice_beer"
+          ]
+        }
+      }
+    },
+    "leprechaun_cider": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:leprechaun_cider"
+          ]
+        }
+      }
+    },
+    "magnet_pilsner": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:magnet_pilsner"
+          ]
+        }
+      }
+    },
+    "nether_porter": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:nether_porter"
+          ]
+        }
+      }
+    },
+    "nether_star_lager": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:nether_star_lager"
+          ]
+        }
+      }
+    },
+    "night_rauch": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:night_rauch"
+          ]
+        }
+      }
+    },
+    "sun_pale_ale": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:sun_pale_ale"
+          ]
+        }
+      }
+    },
+    "wither_stout": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "alcocraftplus:wither_stout"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "kvass"
+    ],
+    [
+      "chorus_ale"
+    ],
+    [
+      "digger_bitter"
+    ],
+    [
+      "drowned_ale"
+    ],
+    [
+      "ice_beer"
+    ],
+    [
+      "leprechaun_cider"
+    ],
+    [
+      "magnet_pilsner"
+    ],
+    [
+      "nether_porter"
+    ],
+    [
+      "nether_star_lager"
+    ],
+    [
+      "night_rauch"
+    ],
+    [
+      "sun_pale_ale"
+    ],
+    [
+      "wither_stout"
+    ]
+  ]
+}

@@ -1,0 +1,84 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+version = rootProject.mod_version
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    forge {
+        convertAccessWideners.set(true)
+    }
+}
+
+configurations {
+    common
+    shadowCommon
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
+}
+
+repositories {
+    maven { url 'https://maven.shedaniel.me/' }
+    maven { url 'https://maven.minecraftforge.net/' }
+}
+
+dependencies {
+    forge "net.minecraftforge:forge:$rootProject.minecraft_version-$rootProject.forge_version"
+
+    modApi "dev.architectury:architectury-forge:$rootProject.architectury_api_version"
+
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    common(project(path: ":common", configuration: "namedElements")) {
+        transitive = false
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier.set("dev-shadow")
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier.set(null)
+}
+
+jar {
+    archiveClassifier.set("dev")
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}

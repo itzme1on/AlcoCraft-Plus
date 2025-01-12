@@ -1,0 +1,82 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "me.shedaniel.unified-publishing"
+}
+
+version = rootProject.mod_version
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+configurations {
+    common
+    shadowCommon
+
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    modApi "dev.architectury:architectury-fabric:$rootProject.architectury_api_version"
+
+    modImplementation("com.terraformersmc:modmenu:$rootProject.modmenu_version")
+
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
+    
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mc_version", project.minecraft_version
+    inputs.property "loader_version", project.fabric_loader_version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "mc_version": project.minecraft_version,
+                "loader_version": project.fabric_loader_version
+    }
+}
+
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier.set("dev-shadow")
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier.set(null)
+}
+
+jar {
+    archiveClassifier.set("dev")
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}

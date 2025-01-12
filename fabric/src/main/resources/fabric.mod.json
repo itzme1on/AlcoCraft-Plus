@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "alcocraftplus",
+  "version": "${version}",
+  "name": "AlcoCraft+",
+  "description": "With this mod you will be able to brew beer and treat your good friends with it!",
+  "authors": [
+    "itzme1on"
+  ],
+  "license": "All Rights Reserved",
+  "icon": "logo.png",
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/alcocraft",
+    "sources": "https://github.com/itzme1on/AlcoCraft-Plus",
+    "issues": "https://github.com/itzme1on/AlcoCraft-Plus/issues",
+    "discord": "https://discord.gg/Qsr8cAdjxW"
+  },
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.itzme1on.alcocraftplus.fabric.AlcoCraftPlusFabric"
+    ],
+    "client": [
+      "me.itzme1on.alcocraftplus.fabric.client.AlcoCraftPlusFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "me.itzme1on.alcocraftplus.core.compat.jei.JEIPlugin"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19",
+    "architectury": ">=5.14.84"
+  },
+  "suggests": {
+    "modmenu": ">=4.0.4"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/Qsr8cAdjxW"
+      }
+    }
+  }
+}
