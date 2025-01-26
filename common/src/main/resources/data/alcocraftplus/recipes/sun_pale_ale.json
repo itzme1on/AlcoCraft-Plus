@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:sun_pale_ale"
+    "id": "alcocraftplus:sun_pale_ale",
+    "Count": 1
   }
 }

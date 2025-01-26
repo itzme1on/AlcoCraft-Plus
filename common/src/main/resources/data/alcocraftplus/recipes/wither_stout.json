@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:wither_stout"
+    "id": "alcocraftplus:wither_stout",
+    "Count": 1
   }
 }

@@ -23,9 +23,4 @@ public class WitherEffect extends MobEffect {
                 if (entity.getLastHurtByMob() == livingEntity)
                     livingEntity.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 5));
     }
-
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
-    }
 }

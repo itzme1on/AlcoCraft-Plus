@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:nether_star_lager"
+    "id": "alcocraftplus:nether_star_lager",
+    "Count": 1
   }
 }

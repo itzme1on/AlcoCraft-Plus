@@ -1,28 +1,27 @@
 package me.itzme1on.alcocraftplus.core.recipes;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
 
 public class KegRecipes implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public KegRecipes(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
-        this.id = id;
+    public KegRecipes(ItemStack output, NonNullList<Ingredient> recipeItems) {
         this.output = output;
         this.recipeItems = recipeItems;
     }
@@ -79,11 +78,6 @@ public class KegRecipes implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public @NotNull ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
     public @NotNull RecipeSerializer<?> getSerializer() {
         return RecipesRegistry.KEG_RECIPE_SERIALIZER.get();
     }
@@ -95,49 +89,37 @@ public class KegRecipes implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<KegRecipes> {
         @Override
-        public @NotNull KegRecipes fromJson(ResourceLocation id, JsonObject pSerializedRecipe) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
-
-            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
-
-            if (ingredients.size() != 4) {
-                throw new IllegalArgumentException("KegRecipes requires exactly 4 ingredients!");
-            }
-
-            NonNullList<Ingredient> inputs = NonNullList.withSize(4, Ingredient.EMPTY);
-
-            for (int i = 0; i < 4; i++)
-                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-
-            return new KegRecipes(id, output, inputs);
+        public @NotNull Codec<KegRecipes> codec() {
+            return RecordCodecBuilder.create(instance -> instance.group(
+                    ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                    Ingredient.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.recipeItems)
+            ).apply(instance, (output, ingredients) -> new KegRecipes(
+                    output,
+                    NonNullList.of(Ingredient.EMPTY, ingredients.toArray(new Ingredient[0]))
+            )));
         }
 
         @Override
-        public @NotNull KegRecipes fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @NotNull KegRecipes fromNetwork(FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
-
             inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-
             ItemStack output = buf.readItem();
 
-            return new KegRecipes(id, output, inputs);
+            return new KegRecipes(output, inputs);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, KegRecipes recipe) {
             buf.writeInt(recipe.getIngredients().size());
-
             for (Ingredient ing : recipe.getIngredients()) ing.toNetwork(buf);
-
-            buf.writeItem(recipe.getResultItem(null));
+            buf.writeItem(recipe.getResultItem(RegistryAccess.EMPTY));
         }
     }
 
     public static NonNullList<KegRecipes> getAll(Level world) {
         return world.getRecipeManager().getRecipes().stream()
-                .filter(recipe -> recipe.getType() == RecipesRegistry.KEG_RECIPE_TYPE.get())
-                .map(recipe -> (KegRecipes) recipe)
+                .filter(recipeHolder -> recipeHolder.value().getType() == RecipesRegistry.KEG_RECIPE_TYPE.get())
+                .map(recipe -> (KegRecipes) recipe.value())
                 .collect(Collectors.toCollection(NonNullList::create));
     }
-
 }

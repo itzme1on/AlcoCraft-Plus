@@ -36,7 +36,7 @@ public class FreezeEffect extends MobEffect {
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
                     BlockPos below = pos.offset(x, -1, z);
-                    
+
                     if (below.distSqr(pos) <= radius * radius) {
                         BlockState blockState = level.getBlockState(below);
 
@@ -62,10 +62,5 @@ public class FreezeEffect extends MobEffect {
                 if (nearbyEntity instanceof Enemy || (nearbyEntity instanceof Wolf && !((TamableAnimal) nearbyEntity).isTame()))
                     ((LivingEntity) nearbyEntity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
         });
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
     }
 }

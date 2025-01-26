@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:magnet_pilsner"
+    "id": "alcocraftplus:magnet_pilsner",
+    "Count": 1
   }
 }

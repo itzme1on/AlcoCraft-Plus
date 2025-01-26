@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:leprechaun_cider"
+    "id": "alcocraftplus:leprechaun_cider",
+    "Count": 1
   }
 }

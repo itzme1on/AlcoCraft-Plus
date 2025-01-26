@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:nether_porter"
+    "id": "alcocraftplus:nether_porter",
+    "Count": 1
   }
 }

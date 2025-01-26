@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -98,6 +99,7 @@ public class KegGuiHandler extends AbstractContainerMenu {
         return this.level.getRecipeManager()
                 .getAllRecipesFor(RecipesRegistry.KEG_RECIPE_TYPE.get())
                 .stream()
+                .map(RecipeHolder::value)
                 .anyMatch(recipe -> recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(stack)));
     }
 

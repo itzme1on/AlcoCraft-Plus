@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:drowned_ale"
+    "id": "alcocraftplus:drowned_ale",
+    "Count": 1
   }
 }

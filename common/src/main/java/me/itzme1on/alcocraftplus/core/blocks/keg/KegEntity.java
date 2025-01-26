@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -152,7 +153,9 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
             inventory.setItem(i, entity.inventory.get(i));
         }
 
-        Optional<KegRecipes> match = pLevel.getRecipeManager().getRecipeFor(RecipesRegistry.KEG_RECIPE_TYPE.get(), inventory, pLevel);
+        assert pLevel != null;
+
+        Optional<RecipeHolder<KegRecipes>> match = pLevel.getRecipeManager().getRecipeFor(RecipesRegistry.KEG_RECIPE_TYPE.get(), inventory, pLevel);
 
         match.ifPresent(recipe -> {
             for (int i = 0; i < entity.inventory.size(); i++) {
@@ -161,7 +164,7 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
                 }
             }
 
-            entity.beerType = BeerTypeMapperUtil.getBeerType(recipe.getResultItem(level.registryAccess()).getItem());
+            entity.beerType = BeerTypeMapperUtil.getBeerType(recipe.value().getResultItem(level.registryAccess()).getItem());
 
             entity.beerLevel = entity.waterLevel;
             entity.waterLevel = 0;
@@ -174,7 +177,9 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
     private static boolean canBrew(KegEntity entity) {
         SimpleContainer container = new SimpleContainer(entity.inventory.toArray(new ItemStack[0]));
 
-        Optional<KegRecipes> recipes = entity.level.getRecipeManager()
+        assert entity.level != null;
+        
+        Optional<RecipeHolder<KegRecipes>> recipes = entity.level.getRecipeManager()
                 .getRecipeFor(RecipesRegistry.KEG_RECIPE_TYPE.get(), container, entity.level);
 
         return recipes.isPresent() && !hasBeer(entity) && hasWater(entity);

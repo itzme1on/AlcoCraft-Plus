@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:ice_beer"
+    "id": "alcocraftplus:ice_beer",
+    "Count": 1
   }
 }

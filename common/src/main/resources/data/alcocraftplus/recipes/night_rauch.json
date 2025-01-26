@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:night_rauch"
+    "id": "alcocraftplus:night_rauch",
+    "Count": 1
   }
 }

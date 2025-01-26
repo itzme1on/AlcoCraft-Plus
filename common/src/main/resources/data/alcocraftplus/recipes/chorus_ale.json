@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:chorus_ale"
+    "id": "alcocraftplus:chorus_ale",
+    "Count": 1
   }
 }

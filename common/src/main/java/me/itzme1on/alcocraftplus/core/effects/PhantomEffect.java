@@ -19,9 +19,4 @@ public class PhantomEffect extends MobEffect {
         if (!level.isClientSide && entity instanceof Player player)
             player.resetStat(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
     }
-
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
-    }
 }

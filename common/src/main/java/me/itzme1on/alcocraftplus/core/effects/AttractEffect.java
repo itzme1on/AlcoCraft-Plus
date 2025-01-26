@@ -28,9 +28,4 @@ public class AttractEffect extends MobEffect {
                 item.setDeltaMovement(motion.scale(1.0));
             }
     }
-
-    @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
-    }
 }

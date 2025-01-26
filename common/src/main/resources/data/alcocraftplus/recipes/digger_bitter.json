@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:digger_bitter"
+    "id": "alcocraftplus:digger_bitter",
+    "Count": 1
   }
 }

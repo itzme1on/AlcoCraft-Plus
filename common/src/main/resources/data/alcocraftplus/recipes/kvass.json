@@ -15,6 +15,7 @@
     }
   ],
   "output": {
-    "item": "alcocraftplus:kvass"
+    "id": "alcocraftplus:kvass",
+    "Count": 1
   }
 }
