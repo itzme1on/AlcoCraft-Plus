@@ -8,7 +8,14 @@ plugins {
 def changelog_file = rootProject.file('CHANGELOG.md')
 
 loom {
-    accessWidenerPath = file("src/main/resources/alcocraftplus.accesswidener")
+    accessWidenerPath = file("../common/src/main/resources/alcocraftplus.accesswidener")
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.parchmentmc.org' }
+    maven { url 'https://maven.fabricmc.net/' }
+    maven { url 'https://maven.shedaniel.me/' } // Added repository for RoughlyEnoughItems
 }
 
 configurations {
@@ -33,7 +40,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     implementation project(path: ':common', configuration: 'namedElements')
     // REI Dependency (example)
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:18.0.804"
     // Architectury API Dependency
     modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
