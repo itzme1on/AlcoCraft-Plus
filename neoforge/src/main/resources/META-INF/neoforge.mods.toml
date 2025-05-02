@@ -1,0 +1,52 @@
+# Use the placeholder provided by build.gradle (which is set to "neoforge")
+modLoader = "${loader}"
+# Use the placeholder for the NeoForge version range from build.gradle
+loaderVersion = "${neo_version_range}"
+license = "${mod_license}"
+# Optional: Specify issue tracker and display URLs using placeholders
+issueTrackerURL = "${mod_issues_url}"
+displayURL = "${mod_page_url}"
+# Optional: Specify logo file if you have one (e.g., logo.png in resources)
+logoFile = "logo.png"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_display_name}"
+authors = "${mod_authors}"
+description = '''${mod_description}''' # Use triple quotes for multi-line description
+# Optional: Specify logo file here as well/instead
+# logoFile = "logo.png"
+
+# Dependency on NeoForge itself
+[[dependencies."${mod_id}"]]
+modId = "neoforge"
+type = "required" # Use modern 'type' field
+# Use the placeholder for the NeoForge version range
+versionRange = "${neo_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+# Dependency on Minecraft
+[[dependencies."${mod_id}"]]
+modId = "minecraft"
+type = "required" # Use modern 'type' field
+# Use the placeholder for the Minecraft version range
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+# Dependency on Architectury API
+# While often automatically detected via Gradle, explicitly listing it like the template is safe.
+[[dependencies."${mod_id}"]]
+modId = "architectury"
+type = "required" # Use modern 'type' field
+# Construct the version range using the property. Note: No '$' needed inside the string.
+# Ensure architectury_api_version in gradle.properties is just the version number (e.g., 15.0.3)
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER" # Load after Minecraft and NeoForge
+side = "BOTH"
+
+# Add the mixins block if you plan to use mixins
+[[mixins]]
+config = "${mod_id}.mixins.json" # Use placeholder for consistency

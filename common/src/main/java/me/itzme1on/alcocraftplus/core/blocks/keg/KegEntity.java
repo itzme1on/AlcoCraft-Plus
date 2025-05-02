@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -146,23 +147,26 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
 
     private void brew(Level level, BlockPos pos, BlockState state, KegEntity entity) {
         Level pLevel = entity.getLevel();
-        SimpleContainer inventory = new SimpleContainer(entity.inventory.size());
-
+        SimpleContainer inventoryWrapper = new SimpleContainer(entity.inventory.size());
         for (int i = 0; i < entity.inventory.size(); i++) {
-            inventory.setItem(i, entity.inventory.get(i));
+            inventoryWrapper.setItem(i, entity.inventory.get(i));
         }
 
-        Optional<KegRecipes> match = pLevel.getRecipeManager().getRecipeFor(RecipesRegistry.KEG_RECIPE_TYPE.get(), inventory, pLevel);
+        Optional<KegRecipes> match = pLevel.getRecipeManager()
+                .getRecipeFor(RecipesRegistry.KEG_RECIPE_TYPE.get(), inventoryWrapper, pLevel);
 
         match.ifPresent(recipe -> {
             for (int i = 0; i < entity.inventory.size(); i++) {
-                if (!entity.inventory.get(i).isEmpty()) {
-                    entity.inventory.get(i).shrink(1);
+                ItemStack stackInSlot = entity.inventory.get(i);
+                if (!stackInSlot.isEmpty()) {
+                    boolean isIngredient = recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(stackInSlot));
+                    if (isIngredient) {
+                        stackInSlot.shrink(1);
+                    }
                 }
             }
 
             entity.beerType = BeerTypeMapperUtil.getBeerType(recipe.getResultItem(level.registryAccess()).getItem());
-
             entity.beerLevel = entity.waterLevel;
             entity.waterLevel = 0;
             entity.resetProgress();

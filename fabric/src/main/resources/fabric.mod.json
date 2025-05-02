@@ -15,24 +15,26 @@
     "issues": "${mod_issues_url}"
   },
   "environment": "*",
+
   "entrypoints": {
     "main": [
-      "me.itzme1on.alcocraftplus.fabric.AlcoCraftPlusFabric"
+      "me.itzme1on.alcocraftplus.AlcoCraftPlus"
     ],
     "client": [
       "me.itzme1on.alcocraftplus.fabric.client.AlcoCraftPlusFabricClient"
     ],
-    "jei_mod_plugin": [
-      "me.itzme1on.alcocraftplus.core.compat.jei.JEIPlugin"
+    "rei_client": [
+      "me.itzme1on.alcocraftplus.core.compat.rei.AlcoCraftREIPlugin"
     ]
   },
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20",
-    "architectury": ">=9.2.14"
+    "minecraft": ">=1.21.4",
+    "architectury": ">=15.0.3"
   },
+
   "suggests": {
-    "modmenu": ">=7.2.2"
+    "modmenu": "13.0.3"
   },
   "custom": {
     "modmenu": {

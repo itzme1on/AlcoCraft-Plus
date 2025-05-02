@@ -1,16 +1,18 @@
-architectury {
-    common(rootProject.enabled_platforms.split(","))
+plugins {
+    id 'architectury-plugin'
+    id 'java'
 }
 
-repositories {
-    maven { url 'https://maven.shedaniel.me/' }
-    maven { url = 'https://maven.minecraftforge.net/' }
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    compileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
+}
 
-    modApi "dev.architectury:architectury:${rootProject.architectury_api_version}"
-
-    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
 }

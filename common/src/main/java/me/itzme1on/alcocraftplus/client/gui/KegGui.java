@@ -23,7 +23,7 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/keg_gui.png");
     private static final ResourceLocation BG = new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/dark_bg.png");
 
-    private static final Fluid fluid = Fluids.WATER;
+    private static final Fluid WATER_FLUID = Fluids.WATER;
 
     private static final int[] BUBBLE_LENGTHS = {0, 6, 11, 16, 20, 24, 28};
 
