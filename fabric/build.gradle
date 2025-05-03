@@ -31,8 +31,8 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     implementation project(":common")
-    // REI Dependency (example)
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:18.0.804"
+    // REI Dependency
+    //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:18.0.804"
     // Architectury API Dependency
     modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
     shadowBundle(project(path: ":common", configuration: "transformProductionFabric")) {

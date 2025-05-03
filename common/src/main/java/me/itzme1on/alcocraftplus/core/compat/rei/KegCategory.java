@@ -1,4 +1,4 @@
-package me.itzme1on.alcocraftplus.core.compat.jei;
+package me.itzme1on.alcocraftplus.core.compat.rei;
 
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.core.recipes.KegRecipes;
