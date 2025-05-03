@@ -35,10 +35,10 @@ include('neoforge')
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
+        maven { url = "https://maven.neoforged.net/releases/" } // Required for NeoForge
         mavenCentral()
         maven { url = "https://maven.architectury.dev/" }
         maven { url = "https://maven.fabricmc.net/" } // Fabric dependencies
-        maven { url = "https://maven.neoforged.net/releases/" } // Required for NeoForge
         maven { url = "https://maven.terraformersmc.com/releases/" } // ModMenu, etc.
         maven { url = "https://jitpack.io" } // Common for libraries
         maven { url = "https://maven.shedaniel.me/" }

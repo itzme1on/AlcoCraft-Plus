@@ -4,8 +4,21 @@ plugins {
     id 'com.modrinth.minotaur'
 }
 
+def changelog_file = rootProject.file('CHANGELOG.md')
+//def parchmentCoords = "org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}@zip"
+
 loom {
-    //parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}@zip")
+    accessWidenerPath = file("../common/src/main/resources/alcocraftplus.accesswidener")
+}
+
+repositories {
+    mavenCentral() // For general dependencies
+    maven { url = "https://maven.architectury.dev/" } // For Architectury dependencies
+    maven { url = "https://maven.fabricmc.net/" } // For Fabric dependencies
+    maven { url = "https://maven.neoforged.net/releases/" } // NeoForge Maven repository
+    maven { url = "https://maven.shedaniel.me/" } // For RoughlyEnoughItems (REI) or similar mods
+    maven { url = "https://libraries.minecraft.net/" } // Minecraft libraries
+    maven { url = "https://maven.parchmentmc.org" } // Required for Parchment mappings
 }
 
 configurations {
@@ -20,10 +33,15 @@ configurations {
 
 dependencies {
     minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+    mappings loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}@zip")
+    }
     modImplementation "net.neoforged:neoforge:${rootProject.neoforge_version}"
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
     modApi "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:${rootProject.rei_version}"
-    common(project(path: ":common", configuration: "namedElements")) {
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rootProject.rei_version}"
+    common(project(path: ":common")) {
         transitive = false
     }
     shadowBundle(project(path: ":common", configuration: "transformProductionNeoForge")) {
