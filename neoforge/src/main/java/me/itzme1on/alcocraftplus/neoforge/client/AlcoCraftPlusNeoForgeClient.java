@@ -1,15 +1,14 @@
-package me.itzme1on.alcocraftplus.fabric.client;
+package me.itzme1on.alcocraftplus.neoforge.client;
 
 //import necessary components from common
+
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.fabric.client.gui.KegGui;
 import me.itzme1on.alcocraftplus.client.particles.YellowBubbleParticle;
 import me.itzme1on.alcocraftplus.client.renderer.BlockEntityRenderer;
 import me.itzme1on.alcocraftplus.client.renderer.BlockRenderer;
 import me.itzme1on.alcocraftplus.core.registries.ParticlesRegistry;
 import me.itzme1on.alcocraftplus.core.registries.ScreenHandlerRegistry;
-
-//Import Fabric APIs
+import me.itzme1on.alcocraftplus.fabric.client.gui.KegGui;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,7 +16,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
 
 @Environment(EnvType.CLIENT)
-public final class AlcoCraftPlusFabricClient implements ClientModInitializer {
+public final class AlcoCraftPlusNeoForgeClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
