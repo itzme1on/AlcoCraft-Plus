@@ -9,10 +9,48 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.shedaniel.me/" } // REI API repository
+}
+
 dependencies {
     compileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
 }
 
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 21
+}
+
+configurations {
+    namedElements {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    namedElements tasks.jar
+}
+
+configurations {
+    transformProductionFabric {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    transformProductionFabric tasks.jar
+}
+
+configurations {
+    transformProductionNeoForge {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    transformProductionNeoForge tasks.jar
 }
