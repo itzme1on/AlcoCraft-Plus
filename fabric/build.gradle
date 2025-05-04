@@ -13,9 +13,9 @@ loom {
 
 repositories {
     mavenCentral()
-    maven { url 'https://maven.parchmentmc.org' }
-    maven { url 'https://maven.fabricmc.net/' }
-    maven { url 'https://maven.shedaniel.me/' } // Added repository for RoughlyEnoughItems
+    maven { url = 'https://maven.parchmentmc.org' }
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.shedaniel.me/' } // Added repository for RoughlyEnoughItems
 }
 
 configurations {
@@ -29,10 +29,15 @@ dependencies {
     minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
     mappings "net.fabricmc:yarn:${rootProject.yarn_version}"
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+   // modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation fabricApi.module("fabric-api-base", rootProject.fabric_api_version)
+    modImplementation fabricApi.module("fabric-lifecycle-events-v1", rootProject.fabric_api_version) // Often needed
+    modImplementation fabricApi.module("fabric-screen-handler-api-v1", rootProject.fabric_api_version) // <<< For HandledScreens
+    modImplementation fabricApi.module("fabric-particles-v1", rootProject.fabric_api_version) // <<< For ParticleFactoryRegistry
+    modImplementation fabricApi.module("fabric-renderer-api-v1", rootProject.fabric_api_version)
     implementation project(":common")
     // REI Dependency
-    //modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:18.0.804"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
     // Architectury API Dependency
     modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
     shadowBundle(project(path: ":common", configuration: "transformProductionFabric")) {

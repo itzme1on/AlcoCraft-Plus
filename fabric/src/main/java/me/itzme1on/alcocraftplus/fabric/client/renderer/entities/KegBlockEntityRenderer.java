@@ -1,4 +1,4 @@
-package me.itzme1on.alcocraftplus.client.renderer.entities;
+package me.itzme1on.alcocraftplus.fabric.client.renderer.entities;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

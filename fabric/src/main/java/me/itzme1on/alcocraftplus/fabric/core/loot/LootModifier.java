@@ -2,8 +2,8 @@ package me.itzme1on.alcocraftplus.fabric.core.loot;
 
 import dev.architectury.event.events.common.LootEvent;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
-import net.minecraft.resources.ResourceLocation;
+import me.itzme1on.alcocraftplus.fabric.core.registries.ItemsRegistry;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 public class LootModifier {
-    public static void modifyChestLootTable(ResourceLocation id, LootEvent.LootTableModificationContext context) {
+    public static void modifyChestLootTable(Identifier id, LootEvent.LootTableModificationContext context) {
         String prefix = "minecraft:chests/";
         String name = id.toString();
 
@@ -53,13 +53,13 @@ public class LootModifier {
 
     @SuppressWarnings("rawtypes")
     private static LootPoolEntryContainer.Builder getPoolEntry(String name) {
-        ResourceLocation table = new ResourceLocation(AlcoCraftPlus.MOD_ID, "chests/" + name);
+        Identifier table = new Identifier(AlcoCraftPlus.MOD_ID, "chests/" + name);
 
         return LootTableReference.lootTableReference(table);
     }
 
-    public static void modifyLootTable(ResourceLocation id, LootEvent.LootTableModificationContext context) {
-        if (id.equals(new ResourceLocation("minecraft", "blocks/grass"))) {
+    public static void modifyLootTable(Identifier id, LootEvent.LootTableModificationContext context) {
+        if (id.equals(new Identifier("minecraft", "blocks/grass"))) {
             modifyGrassLootTable(context);
         } else {
             modifyChestLootTable(id, context);

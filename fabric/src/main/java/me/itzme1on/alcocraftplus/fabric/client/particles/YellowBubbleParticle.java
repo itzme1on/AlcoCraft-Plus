@@ -1,7 +1,7 @@
-package me.itzme1on.alcocraftplus.client.particles;
+package me.itzme1on.alcocraftplus.fabric.client.particles;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.core.particles.SimpleParticleType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

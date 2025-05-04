@@ -1,6 +1,6 @@
 package me.itzme1on.alcocraftplus.fabric.core.utils;
 
-import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.ItemsRegistry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 

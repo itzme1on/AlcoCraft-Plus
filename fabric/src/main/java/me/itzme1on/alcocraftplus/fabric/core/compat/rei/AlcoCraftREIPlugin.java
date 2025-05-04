@@ -1,9 +1,9 @@
-// Suggested package: me.itzme1on.alcocraftplus.core.compat.rei
+// Suggested package: me.itzme1on.alcocraftplus.fabric.core.compat.rei
 package me.itzme1on.alcocraftplus.fabric.core.compat.rei;
 
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.core.recipes.KegRecipes;
-import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.recipes.KegRecipes;
+import me.itzme1on.alcocraftplus.fabric.core.registries.BlocksRegistry;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;

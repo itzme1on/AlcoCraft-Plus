@@ -1,15 +1,15 @@
 package me.itzme1on.alcocraftplus.fabric.core.blocks.keg;
 
-import me.itzme1on.alcocraftplus.client.gui.handler.KegGuiHandler;
-import me.itzme1on.alcocraftplus.core.helpers.ImplementedInventory;
-import me.itzme1on.alcocraftplus.core.recipes.KegRecipes;
-import me.itzme1on.alcocraftplus.core.registries.BlockEntitiesRegistry;
-import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
-import me.itzme1on.alcocraftplus.core.utils.BeerTypeMapperUtil;
+import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegGuiHandler;
+import me.itzme1on.alcocraftplus.fabric.core.helpers.ImplementedInventory;
+import me.itzme1on.alcocraftplus.fabric.core.recipes.KegRecipes;
+import me.itzme1on.alcocraftplus.fabric.core.registries.BlockEntitiesRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.RecipesRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.utils.BeerTypeMapperUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.text.Text;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;

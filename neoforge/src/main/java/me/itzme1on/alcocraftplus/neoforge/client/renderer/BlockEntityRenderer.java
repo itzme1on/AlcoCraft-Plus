@@ -1,8 +1,8 @@
-package me.itzme1on.alcocraftplus.client.renderer;
+package me.itzme1on.alcocraftplus.neoforge.client.renderer;
 
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
-import me.itzme1on.alcocraftplus.client.renderer.entities.KegBlockEntityRenderer;
 import me.itzme1on.alcocraftplus.core.registries.BlockEntitiesRegistry;
+import me.itzme1on.alcocraftplus.neoforge.client.renderer.entities.KegBlockEntityRenderer;
 
 public class BlockEntityRenderer {
     public static void init() {

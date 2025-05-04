@@ -4,24 +4,24 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.hooks.fluid.FluidStackHooks;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegGuiHandler;
-import me.itzme1on.alcocraftplus.core.utils.ColorUtil;
+import me.itzme1on.alcocraftplus.fabric.core.utils.ColorUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.texture.TextureAtlasSprite;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
 @Environment(EnvType.CLIENT)
-public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/keg_gui.png");
-    private static final ResourceLocation BG = new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/dark_bg.png");
+public class KegGui extends HandledScreen<KegGuiHandler> {
+    private static final Identifier TEXTURE = new Identifier(AlcoCraftPlus.MOD_ID, "textures/gui/keg_gui.png");
+    private static final Identifier BG = new Identifier(AlcoCraftPlus.MOD_ID, "textures/gui/dark_bg.png");
 
     private static final Fluid WATER_FLUID = Fluids.WATER;
 
@@ -30,36 +30,36 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     private int bubbleAnimationTimer;
     private final int animationDurationTicks = 100;
 
-    public KegGui(KegGuiHandler menu, Inventory inventory, Component title) {
+    public KegGui(KegGuiHandler menu, PlayerInventory inventory, Text title) { // Use PlayerInventory and Text
         super(menu, inventory, title);
     }
-
+        
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionShader);
+    protected void drawBackground(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         RenderSystem.setShaderTexture(0, BG);
         int x = (width - imageWidth) / 2 + 3;
         int y = (height - imageHeight) / 2 + 3;
-        guiGraphics.blit(BG, x, y, 0, 0, imageWidth - 6, imageHeight - 6);
+        graphics.blit(BG, x, y, 0, 0, imageWidth - 6, imageHeight - 6);
 
-        renderFluid(guiGraphics, x, y);
+        renderFluid(graphics, x, y);
 
         RenderSystem.setShaderTexture(0, TEXTURE);
 
         x = (width - imageWidth) / 2;
         y = (height - imageHeight) / 2 - 2;
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight + 2);
+        graphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight + 2);
 
-        renderProgressBars(guiGraphics, x, y);
+        renderProgressBars(graphics, x, y);
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, delta);
-        renderTooltip(guiGraphics, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+        renderBackground(graphics, mouseX, mouseY, delta);
+        super.render(graphics, mouseX, mouseY, delta);
+        drawMouseoverTooltip(graphics, mouseX, mouseY);
 
         if (menu.isCrafting(0)) {
             bubbleAnimationTimer++;
@@ -70,7 +70,7 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         }
     }
 
-    private void renderProgressBars(GuiGraphics guiGraphics, int x, int y) {
+    private void renderProgressBars(GuiGraphics graphics, int x, int y) {
         if (menu.isCrafting(0)) {
             int bubbleIndex = bubbleAnimationTimer * BUBBLE_LENGTHS.length / animationDurationTicks;
 
@@ -78,19 +78,19 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
 
             int bubbleHeight = getBubbleHeight(bubbleIndex);
 
-            guiGraphics.blit(TEXTURE, x + 150, y + 17 + 28 - bubbleHeight, 176, 28 - bubbleHeight, 11, bubbleHeight);
+            graphics.blit(TEXTURE, x + 150, y + 17 + 28 - bubbleHeight, 176, 28 - bubbleHeight, 11, bubbleHeight);
         }
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(font, title, titleLabelX, titleLabelY, ColorUtil.getColorFromRGB(215, 171, 121));
-        guiGraphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, ColorUtil.getColorFromRGB(64, 64, 64), false);
+    protected void drawForeground(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(font, title, titleLabelX, titleLabelY, ColorUtil.getColorFromRGB(215, 171, 121));
+        graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, ColorUtil.getColorFromRGB(64, 64, 64), false);
 
-        renderTimer(guiGraphics);
+        renderTimer(graphics);
     }
 
-    private void renderTimer(GuiGraphics guiGraphics) {
+    private void renderTimer(GuiGraphics graphics) {
         int colorShadow = ColorUtil.getColorFromRGB(97, 69, 36);
         int colorText = ColorUtil.getColorFromRGB(215, 171, 121);
 
@@ -98,8 +98,8 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         int maxProgress = menu.getMaxProgress();
 
         if (!menu.isCrafting(0)) {
-            guiGraphics.drawString(font, "00:00", 143, 47, colorShadow);
-            guiGraphics.drawString(font, "00:00", 143, 47, colorText);
+            graphics.drawString(font, "00:00", 143, 47, colorShadow);
+            graphics.drawString(font, "00:00", 143, 47, colorText);
         } else {
             if (maxProgress > 0) {
                 int remainingProgress = maxProgress - progress;
@@ -107,41 +107,41 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
 
                 String formattedTime = formatTime(timeInSeconds);
 
-                guiGraphics.drawString(font, formattedTime, 143, 47, colorShadow);
-                guiGraphics.drawString(font, formattedTime, 143, 47, colorText);
+                graphics.drawString(font, formattedTime, 143, 47, colorShadow);
+                graphics.drawString(font, formattedTime, 143, 47, colorText);
             } else {
-                guiGraphics.drawString(font, "00:00", 143, 47, colorShadow);
-                guiGraphics.drawString(font, "00:00", 143, 47, colorText);
+                graphics.drawString(font, "00:00", 143, 47, colorShadow);
+                graphics.drawString(font, "00:00", 143, 47, colorText);
             }
         }
     }
 
-    private void renderFluid(GuiGraphics guiGraphics, int x, int y) {
+    private void renderFluid(GuiGraphics graphics, int x, int y) {
         int beerLevel = menu.getBeerLevel();
         int beerType = menu.getBeerType();
         int waterLevel = menu.getWaterLevel();
 
         int maxWaterLevel = 40;
 
-        TextureAtlasSprite sprite = FluidStackHooks.getStillTexture(fluid);
+        TextureAtlasSprite sprite = FluidStackHooks.getStillTexture(WATER_FLUID);
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
         if (beerLevel > 0) {
             int color = getBeerColor(beerType);
 
-            renderFluidArea(guiGraphics, x, y, beerLevel, maxWaterLevel, color, sprite);
+            renderFluidArea(graphics, x, y, beerLevel, maxWaterLevel, color, sprite);
         }
 
         if (waterLevel > 0 && beerLevel < maxWaterLevel) {
-            int color = FluidStackHooks.getColor(fluid);
+            int color = FluidStackHooks.getColor(WATER_FLUID);
 
-            renderFluidArea(guiGraphics, x, y, waterLevel, maxWaterLevel, color, sprite);
+            renderFluidArea(graphics, x, y, waterLevel, maxWaterLevel, color, sprite);
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    private void renderFluidArea(GuiGraphics guiGraphics, int x, int y, int fluidLevel, int maxFluidLevel, int color, TextureAtlasSprite sprite) {
+    private void renderFluidArea(GuiGraphics graphics, int x, int y, int fluidLevel, int maxFluidLevel, int color, TextureAtlasSprite sprite) {
         int textureWidth = 16;
         int textureHeight = 16;
 
@@ -153,7 +153,7 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
 
         for (int row = 0; row < numRowsToDraw; row++) {
             for (int col = 0; col <= 8; col++) {
-                guiGraphics.blit(x + textureWidth * col, y + textureHeight * (3 - row), 0, textureWidth, textureHeight, sprite);
+                graphics.blit(x + textureWidth * col, y + textureHeight * (3 - row), 0, textureWidth, textureHeight, sprite);
             }
         }
     }

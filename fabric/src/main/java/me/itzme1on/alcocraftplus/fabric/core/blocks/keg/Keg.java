@@ -1,8 +1,8 @@
 package me.itzme1on.alcocraftplus.fabric.core.blocks.keg;
 
-import me.itzme1on.alcocraftplus.core.registries.BlockEntitiesRegistry;
-import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
-import me.itzme1on.alcocraftplus.core.utils.BeerTypeMapperUtil;
+import me.itzme1on.alcocraftplus.fabric.core.registries.BlockEntitiesRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.ItemsRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.utils.BeerTypeMapperUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

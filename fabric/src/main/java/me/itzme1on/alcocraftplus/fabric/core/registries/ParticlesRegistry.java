@@ -6,7 +6,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.architectury.utils.Env;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.client.particles.YellowBubbleParticle;
+import me.itzme1on.alcocraftplus.fabric.client.particles.YellowBubbleParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;

@@ -1,6 +1,6 @@
 package me.itzme1on.alcocraftplus.fabric.core.misc;
 
-import me.itzme1on.alcocraftplus.core.registries.EffectsRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.EffectsRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;

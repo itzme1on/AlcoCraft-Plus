@@ -1,6 +1,6 @@
 package me.itzme1on.alcocraftplus.fabric.core.items;
 
-import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.ItemsRegistry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;

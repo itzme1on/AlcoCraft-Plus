@@ -1,8 +1,8 @@
 package me.itzme1on.alcocraftplus.fabric.core.compat.rei;
 
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.core.recipes.KegRecipes;
-import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.recipes.KegRecipes;
+import me.itzme1on.alcocraftplus.fabric.core.registries.BlocksRegistry;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,14 +16,14 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.text.Text;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class KegCategory implements IRecipeCategory<KegRecipes> {
-    public final static ResourceLocation TEXTURE =
-            new ResourceLocation(AlcoCraftPlus.MOD_ID, "textures/gui/jei_gui.png");
+    public final static Identifier TEXTURE =
+            new Identifier(AlcoCraftPlus.MOD_ID, "textures/gui/jei_gui.png");
 
     private final IDrawableStatic background;
     private final IDrawable icon;
@@ -64,8 +64,8 @@ public class KegCategory implements IRecipeCategory<KegRecipes> {
     }
 
     @Override
-    public void draw(KegRecipes recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        arrow.draw(guiGraphics, 113, SLOTS_Y_POSITION - 1);
+    public void draw(KegRecipes recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+        arrow.draw(graphics, 113, SLOTS_Y_POSITION - 1);
     }
 
     @Override

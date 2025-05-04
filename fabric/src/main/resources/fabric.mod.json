@@ -18,13 +18,13 @@
 
   "entrypoints": {
     "main": [
-      "me.itzme1on.alcocraftplus.AlcoCraftPlus"
+      "me.itzme1on.alcocraftplus.fabric.AlcoCraftPlusFabric"
     ],
     "client": [
       "me.itzme1on.alcocraftplus.fabric.client.AlcoCraftPlusFabricClient"
     ],
     "rei_client": [
-      "me.itzme1on.alcocraftplus.core.compat.rei.AlcoCraftREIPlugin"
+      "me.itzme1on.alcocraftplus.fabric.core.compat.rei.AlcoCraftREIPlugin"
     ]
   },
   "depends": {

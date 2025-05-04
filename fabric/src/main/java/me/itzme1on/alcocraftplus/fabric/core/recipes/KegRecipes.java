@@ -2,11 +2,11 @@ package me.itzme1on.alcocraftplus.fabric.core.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.RecipesRegistry;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -16,11 +16,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.stream.Collectors;
 
 public class KegRecipes implements Recipe<SimpleContainer> {
-    private final ResourceLocation id;
+    private final Identifier id;
     private final ItemStack output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public KegRecipes(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
+    public KegRecipes(Identifier id, ItemStack output, NonNullList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -78,7 +78,7 @@ public class KegRecipes implements Recipe<SimpleContainer> {
     }
 
     @Override
-    public @NotNull ResourceLocation getId() {
+    public @NotNull Identifier getId() {
         return id;
     }
 
@@ -94,7 +94,7 @@ public class KegRecipes implements Recipe<SimpleContainer> {
 
     public static class Serializer implements RecipeSerializer<KegRecipes> {
         @Override
-        public @NotNull KegRecipes fromJson(ResourceLocation id, JsonObject pSerializedRecipe) {
+        public @NotNull KegRecipes fromJson(Identifier id, JsonObject pSerializedRecipe) {
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
 
             JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
@@ -112,7 +112,7 @@ public class KegRecipes implements Recipe<SimpleContainer> {
         }
 
         @Override
-        public @NotNull KegRecipes fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public @NotNull KegRecipes fromNetwork(Identifier id, FriendlyByteBuf buf) {
             NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
             inputs.replaceAll(ignored -> Ingredient.fromNetwork(buf));

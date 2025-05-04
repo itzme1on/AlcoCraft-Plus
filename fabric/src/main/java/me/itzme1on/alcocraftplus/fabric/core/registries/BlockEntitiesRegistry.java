@@ -3,7 +3,7 @@ package me.itzme1on.alcocraftplus.fabric.core.registries;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import me.itzme1on.alcocraftplus.core.blocks.keg.KegEntity;
+import me.itzme1on.alcocraftplus.fabric.core.blocks.keg.KegEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 

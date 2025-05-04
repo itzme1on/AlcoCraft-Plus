@@ -1,15 +1,22 @@
 package me.itzme1on.alcocraftplus.neoforge; // Correct package
 
-import dev.architectury.platform.neoforge.EventBuses; // Correct import
+import me.itzme1on.alcocraftplus.neoforge.core.registries.*;
+import dev.architectury.platform.neoforge.EventBuses;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
-import net.neoforged.bus.api.IEventBus; // Correct import
-import net.neoforged.fml.common.Mod; // Correct import
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
 
 @Mod(AlcoCraftPlus.MOD_ID)
 public final class AlcoCraftPlusNeoForge {
-    public AlcoCraftPlusNeoForge(IEventBus modEventBus) { // Correct constructor injection
+    public AlcoCraftPlusNeoForge(IEventBus modEventBus) {
         EventBuses.registerModEventBus(AlcoCraftPlus.MOD_ID, modEventBus); // Correct registration
-
-        AlcoCraftPlus.init(); // Correct common init call
+        ItemsRegistry.register(modEventBus);
+        BlocksRegistry.register(modEventBus);
+        BlockEntitiesRegistry.register(modEventBus);
+        ScreenHandlerRegistry.register(modEventBus);
+        EffectsRegistry.register(modEventBus);
+        RecipesRegistry.register(modEventBus);
+        ParticlesRegistry.register(modEventBus);
+        AlcoCraftPlus.initializeCommon();
     }
 }

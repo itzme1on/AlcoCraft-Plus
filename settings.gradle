@@ -9,7 +9,7 @@ pluginManagement {
     }
     plugins {
         // Declare versions for plugins applied by ID in buildscripts
-        id 'dev.architectury.loom' version '1.9.420'
+        id 'dev.architectury.loom' version '1.10-SNAPSHOT'
         id 'architectury-plugin' version '3.3.115'
         id 'com.github.johnrengelman.shadow' version '8.1.1'
         id 'com.modrinth.minotaur' version '2.+' // Example

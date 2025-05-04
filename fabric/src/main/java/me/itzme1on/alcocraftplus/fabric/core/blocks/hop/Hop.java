@@ -1,7 +1,7 @@
 package me.itzme1on.alcocraftplus.fabric.core.blocks.hop;
 
-import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;
-import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.BlocksRegistry;
+import me.itzme1on.alcocraftplus.fabric.core.registries.ItemsRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;

@@ -1,4 +1,4 @@
-package me.itzme1on.alcocraftplus.client.renderer;
+package me.itzme1on.alcocraftplus.fabric.client.renderer;
 
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;

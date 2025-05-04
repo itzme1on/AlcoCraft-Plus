@@ -1,8 +1,8 @@
 package me.itzme1on.alcocraftplus.neoforge.client.gui.handler;
 
-import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
-import me.itzme1on.alcocraftplus.core.registries.ScreenHandlerRegistry;
-import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegSlot;
+import me.itzme1on.alcocraftplus.neoforge.core.registries.RecipesRegistry;
+import me.itzme1on.alcocraftplus.neoforge.core.registries.ScreenHandlerRegistry;
+import me.itzme1on.alcocraftplus.neoforge.client.gui.handler.KegSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
