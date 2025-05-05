@@ -1,8 +1,7 @@
 package me.itzme1on.alcocraftplus.fabric.client.gui.handler;
 
-import me.itzme1on.alcocraftplus.fabric.core.registries.RecipesRegistry;
+import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
 import me.itzme1on.alcocraftplus.fabric.core.registries.ScreenHandlerRegistry;
-import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegSlot;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

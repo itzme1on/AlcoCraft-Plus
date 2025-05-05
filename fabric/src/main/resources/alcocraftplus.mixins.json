@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.itzme1on.alcocraftplus.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "KegMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.architectury.hooks.fluid.FluidStackHooks;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegGuiHandler;
-import me.itzme1on.alcocraftplus.fabric.core.utils.ColorUtil;
+import me.itzme1on.alcocraftplus.core.utils.ColorUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;

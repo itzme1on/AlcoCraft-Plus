@@ -1,0 +1,78 @@
+package me.itzme1on.alcocraftplus.core.fluids;
+
+import dev.architectury.core.fluid.SimpleArchitecturyFluidAttributes;
+import dev.architectury.core.fluid.SimpleFlowingFluid;
+import me.itzme1on.alcocraftplus.AlcoCraftPlus;
+import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;
+import me.itzme1on.alcocraftplus.core.registries.FluidsRegistry;
+import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.block.state.StateDefinition;
+
+public abstract class DiggerBitterFluid extends SimpleFlowingFluid {
+
+    public static final Identifier STILL_TEXTURE = new Identifier(AlcoCraftPlus.MOD_ID, "fluid/digger_bitter_still");
+    public static final Identifier FLOWING_TEXTURE = new Identifier(AlcoCraftPlus.MOD_ID, "fluid/digger_bitter_flow");
+    public static final Identifier OVERLAY_TEXTURE = STILL_TEXTURE;
+
+    public static final SimpleArchitecturyFluidAttributes ATTRIBUTES = SimpleArchitecturyFluidAttributes.builder()
+            .density(1030)
+            .viscosity(1200)
+            .temperature(295)
+            .luminosity(0)
+            .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
+            .overlay(OVERLAY_TEXTURE)
+            .tintColor(0xFFCD853F) // Amber/Brown color for Bitter
+            .translationKey("fluid.alcocraftplus.digger_bitter")
+            .texture(STILL_TEXTURE)
+            .build(FluidsRegistry.DIGGER_BITTER_STILL, FluidsRegistry.DIGGER_BITTER_FLOWING);
+
+    protected DiggerBitterFluid(SimpleArchitecturyFluidAttributes attributes) {
+        super(FluidsRegistry.DIGGER_BITTER_STILL,
+                FluidsRegistry.DIGGER_BITTER_FLOWING,
+                BlocksRegistry.DIGGER_BITTER_BLOCK,
+                ItemsRegistry.DIGGER_BITTER_BUCKET,
+                attributes);
+    }
+
+    public static class Flowing extends DiggerBitterFluid {
+        public Flowing() {
+            super(ATTRIBUTES.texture(FLOWING_TEXTURE));
+        }
+
+        @Override
+        protected void registerDefaultState(Fluid fluid, StateDefinition.Builder<Fluid, FluidState> builder) {
+            super.registerDefaultState(fluid, builder);
+            builder.add(LEVEL);
+        }
+
+        @Override
+        public int getAmount(FluidState state) {
+            return state.getValue(LEVEL);
+        }
+
+        @Override
+        public boolean isSource(FluidState state) {
+            return false;
+        }
+    }
+
+    public static class Still extends DiggerBitterFluid {
+        public Still() {
+            super(ATTRIBUTES);
+        }
+
+        @Override
+        public int getAmount(FluidState state) {
+            return 8;
+        }
+
+        @Override
+        public boolean isSource(FluidState state) {
+            return true;
+        }
+    }
+}

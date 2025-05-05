@@ -6,7 +6,7 @@ import me.itzme1on.alcocraftplus.fabric.client.gui.KegGui;
 import me.itzme1on.alcocraftplus.fabric.client.particles.YellowBubbleParticle;
 import me.itzme1on.alcocraftplus.fabric.client.renderer.BlockEntityRenderer;
 import me.itzme1on.alcocraftplus.fabric.client.renderer.BlockRenderer;
-import me.itzme1on.alcocraftplus.fabric.core.registries.ParticlesRegistry;
+import me.itzme1on.alcocraftplus.core.registries.ParticlesRegistry;
 import me.itzme1on.alcocraftplus.fabric.core.registries.ScreenHandlerRegistry;
 
 //Import Fabric APIs

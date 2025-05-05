@@ -1,0 +1,40 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "Con questa mod potrai produrre birra e offrirla ai tuoi amici!",
+
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "item.alcocraftplus.hop": "Luppolo",
+  "item.alcocraftplus.hop_seeds": "Semi di luppolo",
+  "item.alcocraftplus.dry_seeds": "Semi secchi",
+
+  "block.alcocraftplus.keg": "Barile",
+  "block.alcocraftplus.mug": "Boccale vuoto",
+  "block.alcocraftplus.chorus_ale": "Boccale di Birra del Chorus",
+  "block.alcocraftplus.digger_bitter": "Boccale di Bitter dello Scavatore",
+  "block.alcocraftplus.drowned_ale": "Boccale di Birra dell'Annegato",
+  "block.alcocraftplus.ice_beer": "Boccale di Birra Glaciale",
+  "block.alcocraftplus.kvass": "Boccale di Kvass",
+  "block.alcocraftplus.leprechaun_cider": "Boccale di Sidro del Folletto",
+  "block.alcocraftplus.magnet_pilsner": "Boccale di Pilsner Magnetica",
+  "block.alcocraftplus.nether_porter": "Boccale di Nether Porter",
+  "block.alcocraftplus.nether_star_lager": "Boccale di Lager della Stella del Nether",
+  "block.alcocraftplus.night_rauch": "Boccale di Rauch Notturna",
+  "block.alcocraftplus.sun_pale_ale": "Boccale di Pale Ale del Sole",
+  "block.alcocraftplus.wither_stout": "Boccale di Del Wither Tarchiato",
+
+  "effect.alcocraftplus.attract": "Magnetismo",
+  "effect.alcocraftplus.freeze": "Congelamento",
+  "effect.alcocraftplus.phantom": "Phantomismo",
+  "effect.alcocraftplus.wither": "Potere del Wither",
+
+  "advancements.husbandry.hop.title": "Saltellando in giro",
+  "advancements.husbandry.hop.description": "Ottieni il luppolo coltivando i semi di luppolo sulla faccia inferiore di un blocco.",
+  "advancements.husbandry.keg.title": "Tutto inizia con un Barile",
+  "advancements.husbandry.keg.description": "Crea un barile e inizia il tuo viaggio nella produzione della birra.",
+  "advancements.husbandry.mug.title": "To beer or not to beer",
+  "advancements.husbandry.mug.description": "Produci la tua prima birra",
+  "advancements.husbandry.all_beer.title": "Bevile tutte!",
+  "advancements.husbandry.all_beer.description": "Produci e bevi tutti i tipi di birra."
+}

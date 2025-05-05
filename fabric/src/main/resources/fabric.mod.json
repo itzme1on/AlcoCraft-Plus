@@ -15,7 +15,9 @@
     "issues": "${mod_issues_url}"
   },
   "environment": "*",
-
+  "mixins": [
+    "alcocraftplus.mixins.json"
+  ],
   "entrypoints": {
     "main": [
       "me.itzme1on.alcocraftplus.fabric.AlcoCraftPlusFabric"

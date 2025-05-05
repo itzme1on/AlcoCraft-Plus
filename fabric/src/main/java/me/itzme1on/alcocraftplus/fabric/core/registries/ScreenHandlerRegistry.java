@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.fabric.client.gui.handler.KegGuiHandler;
-import me.itzme1on.alcocraftplus.fabric.core.utils.IdentifierUtil;
+import me.itzme1on.alcocraftplus.core.utils.IdentifierUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
