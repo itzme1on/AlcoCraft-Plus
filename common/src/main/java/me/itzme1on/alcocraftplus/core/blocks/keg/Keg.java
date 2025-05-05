@@ -146,9 +146,9 @@ public class Keg extends BaseEntityBlock {
         if (!level.isClientSide() && !player.isCreative()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
 
-            if (blockEntity instanceof KegEntity kegEntity)
-
+            if (blockEntity instanceof KegEntity kegEntity) {
         }
+    }
 
         super.playerWillDestroy(level, pos, state, player);
     }
