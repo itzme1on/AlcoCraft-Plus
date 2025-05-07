@@ -1,6 +1,6 @@
 plugins {
-    id 'fabric-loom' // Use a specific version of Fabric Loom
-    id 'com.modrinth.minotaur' // Modrinth publishing plugin
+    id 'fabric-loom'
+    id 'com.modrinth.minotaur'
     id "me.shedaniel.unified-publishing" // REI publishing
 }
 
@@ -18,25 +18,14 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
+    mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-
-    // Example additional mod dependencies
-    // modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mod_id", rootProject.mod_id
-    inputs.property "mod_version", project.version
-
     filesMatching("fabric.mod.json") {
-        expand(
-                "version": project.version,
-                "mod_id": rootProject.mod_id,
-                "mod_version": project.version
-        )
+        expand project.properties
     }
 }
 
@@ -72,7 +61,7 @@ publishing {
     repositories {
         maven {
             name = "LocalRepo"
-            url = uri("file://${buildDir}/repo")
+            url = layout.buildDirectory.dir("repo").get().asFile.toURI()
         }
     }
 }
@@ -85,6 +74,6 @@ modrinth {
     loaders = ["fabric"]                   // Specify loaders
     gameVersions = [project.minecraft_version] // Minecraft version
     dependencies {
-        required.project("fabric-api") // Add required dependencies for Modrinth
+        required.project("fabric-api")
     }
 }
