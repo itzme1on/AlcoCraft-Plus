@@ -4,103 +4,87 @@ plugins {
     id "me.shedaniel.unified-publishing" // REI publishing
 }
 
-def changelog_file = rootProject.file('CHANGELOG.md')
+version = project.mod_version
+group = project.maven_group
 
-repositories {
-    mavenCentral()
-    maven { url = 'https://maven.fabricmc.net/' } // Fabric Maven repository
-    maven { url = 'https://maven.shedaniel.me/' } // REI Maven repository
+base {
+    archivesName = project.mod_id
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
-    }
-
-    client {
-        java {
-            srcDir 'src/client/java'
-        }
-        resources {
-            srcDir 'src/client/resources'
-        }
-    }
-
-    server {
-        java {
-            srcDir 'src/server/java'
-        }
-        resources {
-            srcDir 'src/server/resources'
-        }
-    }
+repositories {
+    mavenCentral() // General repository
+    maven { url = "https://maven.fabricmc.net/" } // Fabric Maven repository
 }
 
 dependencies {
-    // Minecraft Dependency
-    minecraft "com.mojang:minecraft:${rootProject.findProperty("minecraft_version")}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-    // Yarn Mappings
-    mappings "net.fabricmc:yarn:${rootProject.findProperty("yarn_version")}:v2"
-
-    // Fabric Loader
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.findProperty("fabric_loader_version")}"
-
-    // Fabric API
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.findProperty("fabric_api_version")}"
-
-    // Shared "common" project dependency
-    implementation project(":common")
-
-    // REI (Roughly Enough Items)
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.findProperty("rei_version")}"
-}
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN") // Use environment variable for Modrinth token
-    projectId = rootProject.findProperty("mod_modrinth_id") // Modrinth project ID
-    versionNumber = rootProject.findProperty("mod_version") // Mod version
-    versionType = rootProject.findProperty("release_channel") // Release channel (e.g., beta, release)
-    loaders = ["fabric"] // Specify Fabric loader
-    file = tasks.named("remapJar").get().archiveFile // Jar file to upload
-
-    if (changelog_file.exists()) {
-        changelog = changelog_file.text
-    }
-
-    dependencies {
-        required.project 'fabric-api' // Fabric API as a required dependency
-        optional.project 'modmenu' // Optional ModMenu dependency
-        optional.project 'roughly-enough-items' // Optional REI dependency
-    }
+    // Example additional mod dependencies
+    // modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
 }
 
 processResources {
-    inputs.property 'version', rootProject.findProperty("mod_version") // Inject mod version
+    inputs.property "version", project.version
+    inputs.property "mod_id", rootProject.mod_id
+    inputs.property "mod_version", project.version
+
     filesMatching("fabric.mod.json") {
-        expand project.properties // Expand Gradle properties
+        expand(
+                "version": project.version,
+                "mod_id": rootProject.mod_id,
+                "mod_version": project.version
+        )
     }
 }
 
-tasks {
-    jar {
-        archiveClassifier.set("dev") // Add "dev" classifier to the jar
-    }
 
-    remapJar {
-        inputFile.set(tasks.named("jar").get().archiveFile) // Use jar as input
-        archiveClassifier.set('') // No classifier for remapped jar
-    }
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
 
-    sourcesJar {
-        // Include sources from the "common" module
-        def commonSources = project(":common").tasks.named("sourcesJar", Jar)
-        dependsOn commonSources
-        from commonSources.get().archiveFile.map { zipTree(it) }
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.base.archivesName.get()}" }
+    }
+}
+
+tasks.named("remapJar") {
+    archiveClassifier.set("")
+}
+
+publishing {
+    publications {
+        if (!publications.names.contains('mavenJava')) {
+            register('mavenJava', MavenPublication) {
+                from components.java
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "LocalRepo"
+            url = uri("file://${buildDir}/repo")
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") // Use environment variable for authentication
+    projectId = rootProject.mod_modrinth_id    // Modrinth project ID
+    versionNumber = project.version        // Mod version
+    versionType = "release"                // Change to "beta" or "alpha" if needed
+    loaders = ["fabric"]                   // Specify loaders
+    gameVersions = [project.minecraft_version] // Minecraft version
+    dependencies {
+        required.project("fabric-api") // Add required dependencies for Modrinth
     }
 }
