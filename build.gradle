@@ -1,76 +1,83 @@
 plugins {
-    // No plugins applied directly to the root project in this setup,
-    // unless you have specific root-level tasks/configurations.
-    // 'maven-publish' is applied in subprojects where needed.
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
 }
 
-// Configure all projects (root and subprojects)
-allprojects {
-    apply plugin: 'java' // Apply java plugin to all
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://maven.architectury.dev/" }
+    maven { url = "https://maven.neoforged.net/releases/" }
+}
 
-    // Use properties defined in gradle.properties
+dependencies {
+    // Root project typically has no direct modding dependencies in this setup.
+}
+
+// The entire loom {} block is removed from here.
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+allprojects {
+    apply plugin: 'java'
     group = rootProject.maven_group
     version = rootProject.mod_version
 
     java {
-        // Use Java 21 toolchain
         toolchain.languageVersion = JavaLanguageVersion.of(21)
-        // Automatically create sources JARs
         withSourcesJar()
     }
 
     tasks.withType(JavaCompile).configureEach {
-        it.options.encoding = 'UTF-8' // Consistent encoding
-        // Ensure bytecode compatibility with Java 21
-        it.options.release = 21
+        options.encoding = 'UTF-8'
+        options.release = 21
     }
-
-    // Repositories are now managed centrally in settings.gradle
-    // repositories { }
 }
 
-// Configure subprojects (common, fabric, neoforge)
 subprojects {
     apply plugin: 'maven-publish'
 
-    // Platform-specific configurations (Fabric, NeoForge)
-    if (project.name != 'common') {
+    repositories {
+        mavenCentral()
+        maven { url = "https://maven.fabricmc.net/" }
+        maven { url = "https://maven.architectury.dev/" }
+        maven { url = "https://maven.neoforged.net/releases/" }
+        maven { url = "https://maven.shedaniel.me/" }
+        maven { url = "https://libraries.minecraft.net/" }
+        maven { url = "https://maven.parchmentmc.org" }
+    }
 
-        dependencies {
-            // Depend on the common project's compiled classes and resources
-            implementation project(path: ':common', configuration: 'namedElements')
-
+    dependencies {
+        if (project.name != 'common') {
+            implementation project(':common')
         }
+    }
 
-        // Configure publishing for platform projects
-        publishing {
-            publications {
-                mavenJava(MavenPublication) {
-                    // Use a consistent artifactId format
-                    artifactId = "${rootProject.mod_id}-${project.name}"
-                    // Publish the regular (non-shadow) JAR by default
-                    from components.java
-                    // OR uncomment to publish the shadow JAR instead:
-                    // artifact tasks.named('shadowJar')
-                }
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                artifactId = "${rootProject.mod_id}-${project.name}"
+                from components.java
             }
-            // Configure publishing repositories here or globally
-            // repositories { maven { url = '...' } }
         }
-
-    } else {
-        // Configuration specific to the 'common' project
-        // It usually doesn't need loom or shadow.
-        // Ensure it produces a JAR that platform projects can depend on (handled by 'java' plugin)
     }
 }
 
-// Example: Global task to process resources using project properties
 tasks.withType(ProcessResources).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE // Or WARN/FAIL as needed
-
-    // Replace tokens in mod metadata files
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     filesMatching(['fabric.mod.json', 'mods.toml', 'neoforge.mods.toml']) {
         expand project.properties
+    }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }

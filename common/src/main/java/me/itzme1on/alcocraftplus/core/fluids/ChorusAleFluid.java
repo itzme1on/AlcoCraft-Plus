@@ -1,7 +1,5 @@
 package me.itzme1on.alcocraftplus.core.fluids;
 
-import dev.architectury.core.fluid.SimpleArchitecturyFluidAttributes;
-import dev.architectury.core.fluid.SimpleFlowingFluid;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.core.registries.BlocksRegistry;
 import me.itzme1on.alcocraftplus.core.registries.FluidsRegistry;

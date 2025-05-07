@@ -145,13 +145,14 @@ public class Keg extends BaseEntityBlock {
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && !player.isCreative()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-
             if (blockEntity instanceof KegEntity kegEntity) {
-        }
-    }
+                // Inner if body (can be empty)
+            } // <-- ADDED closing brace for inner if
+        } // <-- Closing brace for outer if
 
-        super.playerWillDestroy(level, pos, state, player);
-    }
+        super.playerWillDestroy(level, pos, state, player); // Super call AFTER ifs
+    } // <-- Closing brace for method
+
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
@@ -187,7 +188,7 @@ public class Keg extends BaseEntityBlock {
     }
 
     private boolean canAddWater(ItemStack heldItem, KegEntity keg) {
-        return heldItem.is(Items.WATER_BUCKET) && keg.waterLevel <= keg.maxWaterLevel - 10 && keg.beerLevel == 0;
+        return heldItem.is(Items.WATER_BUCKET) && keg.waterLevel <= keg.maxWaterLevel - 12 && keg.beerLevel == 0;
     }
 
     private InteractionResult handleAddingWater(Level level, BlockPos pos, Player player, InteractionHand hand, KegEntity keg) {

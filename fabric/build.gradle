@@ -1,112 +1,106 @@
 plugins {
-    id "dev.architectury.loom"
-    id "com.github.johnrengelman.shadow" version '8.1.1'
-    id "me.shedaniel.unified-publishing"
-    id 'com.modrinth.minotaur'
+    id 'fabric-loom' // Use a specific version of Fabric Loom
+    id 'com.modrinth.minotaur' // Modrinth publishing plugin
+    id "me.shedaniel.unified-publishing" // REI publishing
 }
 
 def changelog_file = rootProject.file('CHANGELOG.md')
 
-loom {
-    accessWidenerPath = file("../common/src/main/resources/alcocraftplus.accesswidener")
-}
-
 repositories {
     mavenCentral()
-    maven { url = 'https://maven.parchmentmc.org' }
-    maven { url = 'https://maven.fabricmc.net/' }
-    maven { url = 'https://maven.shedaniel.me/' } // Added repository for RoughlyEnoughItems
+    maven { url = 'https://maven.fabricmc.net/' } // Fabric Maven repository
+    maven { url = 'https://maven.shedaniel.me/' } // REI Maven repository
 }
 
-configurations {
-    shadowBundle {
-        canBeResolved = true
-        canBeConsumed = false
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+
+    client {
+        java {
+            srcDir 'src/client/java'
+        }
+        resources {
+            srcDir 'src/client/resources'
+        }
+    }
+
+    server {
+        java {
+            srcDir 'src/server/java'
+        }
+        resources {
+            srcDir 'src/server/resources'
+        }
     }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    mappings "net.fabricmc:yarn:${rootProject.yarn_version}"
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-   // modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    modImplementation fabricApi.module("fabric-api-base", rootProject.fabric_api_version)
-    modImplementation fabricApi.module("fabric-lifecycle-events-v1", rootProject.fabric_api_version) // Often needed
-    modImplementation fabricApi.module("fabric-screen-handler-api-v1", rootProject.fabric_api_version) // <<< For HandledScreens
-    modImplementation fabricApi.module("fabric-particles-v1", rootProject.fabric_api_version) // <<< For ParticleFactoryRegistry
-    modImplementation fabricApi.module("fabric-renderer-api-v1", rootProject.fabric_api_version)
+    // Minecraft Dependency
+    minecraft "com.mojang:minecraft:${rootProject.findProperty("minecraft_version")}"
+
+    // Yarn Mappings
+    mappings "net.fabricmc:yarn:${rootProject.findProperty("yarn_version")}:v2"
+
+    // Fabric Loader
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.findProperty("fabric_loader_version")}"
+
+    // Fabric API
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.findProperty("fabric_api_version")}"
+
+    // Shared "common" project dependency
     implementation project(":common")
-    // REI Dependency
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
-    // Architectury API Dependency
-    modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
-    shadowBundle(project(path: ":common", configuration: "transformProductionFabric")) {
-        transitive = false
-    }
+
+    // REI (Roughly Enough Items)
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.findProperty("rei_version")}"
 }
 
 modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = mod_modrinth_id
-    versionNumber = mod_version
-    versionType = release_channel
-    loaders = ["fabric"]
-    file = tasks.named("remapJar").get().archiveFile
+    token = System.getenv("MODRINTH_TOKEN") // Use environment variable for Modrinth token
+    projectId = rootProject.findProperty("mod_modrinth_id") // Modrinth project ID
+    versionNumber = rootProject.findProperty("mod_version") // Mod version
+    versionType = rootProject.findProperty("release_channel") // Release channel (e.g., beta, release)
+    loaders = ["fabric"] // Specify Fabric loader
+    file = tasks.named("remapJar").get().archiveFile // Jar file to upload
 
     if (changelog_file.exists()) {
         changelog = changelog_file.text
     }
 
     dependencies {
-        required.project 'architectury-api'
-        required.project 'fabric-api'
-        optional.project 'modmenu'
-        optional.project 'roughly-enough-items'
+        required.project 'fabric-api' // Fabric API as a required dependency
+        optional.project 'modmenu' // Optional ModMenu dependency
+        optional.project 'roughly-enough-items' // Optional REI dependency
     }
 }
 
 processResources {
+    inputs.property 'version', rootProject.findProperty("mod_version") // Inject mod version
     filesMatching("fabric.mod.json") {
-        expand(
-                // Use rootProject properties for clarity if defined globally
-                "mod_authors": rootProject.findProperty("mod_authors"),
-                "mod_discord_url": rootProject.findProperty("mod_discord_url"),
-                "mod_description": rootProject.findProperty("mod_description"),
-                "mod_display_name": rootProject.findProperty("mod_display_name"),
-                "mod_git_url": rootProject.findProperty("mod_git_url"),
-                "mod_id": rootProject.findProperty("mod_id"),
-                "mod_issues_url": rootProject.findProperty("mod_issues_url"),
-                "mod_license": rootProject.findProperty("mod_license"),
-                "mod_name": rootProject.findProperty("mod_display_name"), // Often same as display name
-                "mod_page_url": rootProject.findProperty("mod_page_url"),
-                // Use the globally defined version property
-                "mod_version": rootProject.mod_version
-        )
+        expand project.properties // Expand Gradle properties
     }
-    inputs.property 'version', rootProject.mod_version
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
-}
+tasks {
+    jar {
+        archiveClassifier.set("dev") // Add "dev" classifier to the jar
+    }
 
-remapJar {
-    inputFile.set shadowJar.archiveFile
-}
+    remapJar {
+        inputFile.set(tasks.named("jar").get().archiveFile) // Use jar as input
+        archiveClassifier.set('') // No classifier for remapped jar
+    }
 
-jar {
-    archiveClassifier.set("dev")
-}
-
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) { variant ->
-        skip()
+    sourcesJar {
+        // Include sources from the "common" module
+        def commonSources = project(":common").tasks.named("sourcesJar", Jar)
+        dependsOn commonSources
+        from commonSources.get().archiveFile.map { zipTree(it) }
     }
 }

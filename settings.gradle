@@ -1,30 +1,46 @@
 pluginManagement {
     repositories {
+        // General plugin repositories
         mavenCentral()
-        gradlePluginPortal() // Standard Gradle plugins
-        maven { url = "https://maven.architectury.dev/" } // Architectury plugins (loom, architectury-plugin)
-        maven { url = "https://maven.shedaniel.me/" }
-        maven { url = "https://maven.fabricmc.net/" }
-        maven { url = "https://maven.neoforged.net/releases/" }
+        gradlePluginPortal()
+
+        // Loader-specific repositories
+        maven { url = "https://maven.fabricmc.net/" } // Fabric dependencies
+        maven { url = "https://maven.neoforged.net/releases/" } // NeoForge dependencies
+        maven { url = "https://maven.shedaniel.me/" } // Shedaniel libraries (e.g., REI)
     }
     plugins {
-        // Declare versions for plugins applied by ID in buildscripts
-        id 'dev.architectury.loom' version '1.10-SNAPSHOT'
-        id 'architectury-plugin' version '3.3.115'
-        id 'com.github.johnrengelman.shadow' version '8.1.1'
-        id 'com.modrinth.minotaur' version '2.+' // Example
-        id 'me.shedaniel.unified-publishing' version '0.1.+' // Example
+        id 'java'
+
+        // Fabric Loom for Fabric-specific builds
+        id 'fabric-loom' version '1.10.5'
+
+        // NeoGradle (NeoForge) for Forge-specific builds
+        id 'net.neoforged.gradle.userdev' version '7.0.184'
+
+        // Other general plugins
+        id 'com.gradleup.shadow' version '8.3.5'
+        id 'com.modrinth.minotaur' version '2.+'
+        id 'me.shedaniel.unified-publishing' version '0.1.+'
     }
-
-
 }
 
 plugins {
-    // Apply settings plugins like toolchain management
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.10.0'
+    id("org.gradle.toolchains.foojay-resolver") version "0.10.0"
 }
 
-rootProject.name = 'alcocraftplus' // Or your desired root project name
+toolchainManagement {
+    jvm {
+        javaRepositories {
+            repository("foojay") {
+                resolverClass = org.gradle.toolchains.foojay.FoojayToolchainResolver
+            }
+        }
+    }
+}
+
+// Root project name
+rootProject.name = 'alcocraftplus'
 
 // Include the subprojects
 include('common')
@@ -35,14 +51,17 @@ include('neoforge')
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
-        maven { url = "https://maven.neoforged.net/releases/" } // Required for NeoForge
-        mavenCentral()
-        maven { url = "https://maven.architectury.dev/" }
+        mavenCentral() // General Maven repository
+
+        // Loader-specific repositories
         maven { url = "https://maven.fabricmc.net/" } // Fabric dependencies
+        maven { url = "https://maven.neoforged.net/releases/" } // NeoForge dependencies
+        maven { url = "https://maven.shedaniel.me/" } // Shedaniel libraries (e.g., REI)
         maven { url = "https://maven.terraformersmc.com/releases/" } // ModMenu, etc.
-        maven { url = "https://jitpack.io" } // Common for libraries
-        maven { url = "https://maven.shedaniel.me/" }
-        maven { url = "https://maven.parchmentmc.org" }
+
+        // Additional common repositories
+        maven { url = "https://jitpack.io" } // JitPack for libraries
+        maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
         maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
         maven { url = "https://repo.spongepowered.org/repository/snapshots/" }
     }

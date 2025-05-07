@@ -1,6 +1,5 @@
 package me.itzme1on.alcocraftplus.core.events;
 
-import dev.architectury.event.events.common.LootEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootDataManager;
 

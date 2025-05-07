@@ -1,6 +1,5 @@
 package me.itzme1on.alcocraftplus.core.events;
 
-import dev.architectury.event.events.common.LootEvent;
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.core.registries.ItemsRegistry;
 import net.minecraft.resources.Identifier;

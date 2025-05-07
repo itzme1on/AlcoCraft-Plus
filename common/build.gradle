@@ -1,6 +1,5 @@
 plugins {
-    id 'architectury-plugin'
-    id 'java'
+    id 'java-library'
 }
 
 java {
@@ -9,50 +8,18 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = "UTF-8"
+}
+
 repositories {
     mavenCentral()
-    maven { url = "https://maven.shedaniel.me/" } // REI API repository
+    maven { url = "https://maven.shedaniel.me/" }
 }
 
 dependencies {
-    compileOnly "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
-    implementation "org.apache.logging.log4j:log4j-api:2.20.0"
+    compileOnlyApi "me.shedaniel:RoughlyEnoughItems-api:${rootProject.rei_version}"
+    api "org.apache.logging.log4j:log4j-api:2.20.0"
     implementation "org.apache.logging.log4j:log4j-core:2.20.0"
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
-}
-
-configurations {
-    namedElements {
-        canBeResolved = false
-        canBeConsumed = true
-    }
-}
-
-artifacts {
-    namedElements tasks.jar
-}
-
-configurations {
-    transformProductionFabric {
-        canBeResolved = false
-        canBeConsumed = true
-    }
-}
-
-artifacts {
-    transformProductionFabric tasks.jar
-}
-
-configurations {
-    transformProductionNeoForge {
-        canBeResolved = false
-        canBeConsumed = true
-    }
-}
-
-artifacts {
-    transformProductionNeoForge tasks.jar
 }
