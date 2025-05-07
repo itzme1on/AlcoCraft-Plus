@@ -1,7 +1,7 @@
 plugins {
     id 'fabric-loom'
     id 'com.modrinth.minotaur'
-    id "me.shedaniel.unified-publishing" // REI publishing
+    id 'me.shedaniel.unified-publishing' // REI publishing
 }
 
 version = project.mod_version
@@ -21,7 +21,10 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+    implementation project(':common')
 }
+
 
 processResources {
     filesMatching("fabric.mod.json") {
