@@ -97,8 +97,7 @@ This copyright notice and the license text must be included in all copies of the
 
 ## Acknowledgment
 
-AlcoCraft+ is an original work by Danil Venikov (itzme1on). It is inspired by the original mod **"AlcoCraft" by hadrus
-**.
+AlcoCraft+ is an original work by Danil Venikov (itzme1on). It is inspired by the original mod **"AlcoCraft" by hadrus**.
 
 If portions of code or assets from the original were used, they are covered by the following MIT License:
 
