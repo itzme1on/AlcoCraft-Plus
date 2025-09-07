@@ -1,0 +1,13 @@
+architectury {
+    common rootProject.enabled_platforms.split(',')
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "dev.architectury:architectury:${architectury_api_version}"
+
+    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:${rei_version}"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:${rei_version}"
+}

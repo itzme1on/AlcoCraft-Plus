@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    { "item": "minecraft:sugar" },
+    { "item": "minecraft:apple" },
+    { "item": "minecraft:honeycomb" },
+    { "item": "minecraft:bread" }
+  ],
+  "result": {
+    "id": "alcocraftplus:kvass",
+    "count": 1
+  }
+}

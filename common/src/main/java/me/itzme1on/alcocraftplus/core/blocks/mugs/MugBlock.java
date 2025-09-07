@@ -1,0 +1,109 @@
+package me.itzme1on.alcocraftplus.core.blocks.mugs;
+
+import net.minecraft.core.BlockPos;
+import me.itzme1on.alcocraftplus.core.utils.SidedResultsUtil;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
+
+public class MugBlock extends Block {
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
+    public static final VoxelShape SHAPE = Block.box(4.0d, 0.0d, 4.0d, 12.0d, 8.0d, 12.0d);
+
+    public MugBlock() {
+        super(BlockBehaviour.Properties
+                .ofFullCopy(Blocks.SPRUCE_PLANKS)
+                .instabreak()
+                .noOcclusion());
+    }
+
+    @Override
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level,
+                                        BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState state = this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
+
+        return this.canSurvive(state, context.getLevel(), context.getClickedPos()) ? state : null;
+    }
+
+    @Override
+    public @NotNull BlockState rotate(BlockState state, Rotation direction) {
+        return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
+        Rotation rotation = mirror.getRotation(state.getValue(FACING));
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSupportCenter(level, pos.below(), Direction.UP);
+    }
+
+    @Override
+    public @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
+                                           LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (dir == Direction.DOWN && !this.canSurvive(state, level, pos))
+            return Blocks.AIR.defaultBlockState();
+
+        return super.updateShape(state, dir, neighborState, level, pos, neighborPos);
+    }
+
+
+    @Override
+    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos,
+                                                        Player player, BlockHitResult blockHitResult) {
+        if (!player.isSpectator() && player.getMainHandItem().isEmpty()) {
+            if (!level.isClientSide()) {
+                ItemStack mug = new ItemStack(blockState.getBlock().asItem());
+
+                if (!player.addItem(mug))
+                    player.drop(mug, false);
+
+                level.removeBlock(blockPos, false);
+            }
+
+            return SidedResultsUtil.blockSidedSuccess(level);
+        }
+
+        return SidedResultsUtil.pass();
+    }
+}
+
