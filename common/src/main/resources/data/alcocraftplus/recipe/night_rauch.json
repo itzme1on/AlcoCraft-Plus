@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:charcoal",
+    "minecraft:phantom_membrane"
+  ],
+  "result": {
+    "id": "alcocraftplus:night_rauch",
+    "count": 1
+  }
+}

@@ -1,0 +1,27 @@
+include('common', 'fabric', 'neoforge')
+
+pluginManagement.repositories {
+    gradlePluginPortal()
+    mavenCentral()
+    maven {
+        name = "Fabric"
+        url = "https://maven.fabricmc.net/"
+    }
+    maven {
+        name = "NeoForge"
+        url = "https://maven.neoforged.net/releases"
+    }
+    maven {
+        name = "ArchitecturyAPI"
+        url = "https://maven.architectury.dev/"
+    }
+    maven {
+        url "https://maven.firstdark.dev/releases"
+    }
+}
+
+rootProject.name = 'AlcoCraft+'
+
+project(":common").name = "Common"
+project(":neoforge").name = "NeoForge"
+project(":fabric").name = "Fabric"

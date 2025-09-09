@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:prismarine_crystals",
+    "minecraft:prismarine_shard"
+  ],
+  "result": {
+    "id": "alcocraftplus:drowned_ale",
+    "count": 1
+  }
+}
