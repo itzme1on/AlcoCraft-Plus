@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:nether_wart",
+    "minecraft:wither_skeleton_skull"
+  ],
+  "result": {
+    "id": "alcocraftplus:wither_stout",
+    "count": 1
+  }
+}

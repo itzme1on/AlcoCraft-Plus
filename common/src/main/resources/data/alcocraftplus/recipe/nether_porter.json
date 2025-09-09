@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:gold_nugget",
+    "minecraft:blaze_powder"
+  ],
+  "result": {
+    "id": "alcocraftplus:nether_porter",
+    "count": 1
+  }
+}
