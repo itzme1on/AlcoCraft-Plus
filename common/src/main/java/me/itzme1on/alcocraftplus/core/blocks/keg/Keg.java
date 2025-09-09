@@ -150,7 +150,6 @@ public class Keg extends BaseEntityBlock {
             return SidedResultsUtil.itemSidedSuccess(level);
         }
 
-        // Если в руке нет подходящего предмета – открываем меню прямо отсюда,
         return openKegScreen(state, level, pos, player);
     }
 

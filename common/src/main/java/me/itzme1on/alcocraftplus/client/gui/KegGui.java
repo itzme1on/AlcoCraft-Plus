@@ -178,7 +178,6 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     private void renderFluidArea(GuiGraphics guiGraphics, int x, int y, int fluidLevel, int maxFluidLevel, int color, TextureAtlasSprite sprite) {
         final int textureWidth = 16, textureHeight = 16;
 
-        // Convert RGB to ARGB (opaque) for blit color-tint overloads
         final int argb = (0xFF << 24) | (color & 0xFFFFFF);
 
         int denom = Math.max(1, maxFluidLevel / 4);
