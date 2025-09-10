@@ -1,7 +1,7 @@
 {
   "pack": {
-    "pack_format": 55,
-    "supported_formats": [34, 46, 55],
+    "pack_format": 63,
+    "supported_formats": [34, 46, 55, 63],
     "description": {
       "translate": "pack.alcocraftplus.3d_models_pack.description"
     }
