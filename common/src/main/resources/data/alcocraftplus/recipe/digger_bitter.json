@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:glow_lichen",
+    "minecraft:diamond"
+  ],
+  "result": {
+    "id": "alcocraftplus:digger_bitter",
+    "count": 1
+  }
+}
