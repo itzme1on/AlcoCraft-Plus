@@ -35,11 +35,3 @@ type = "required"
 versionRange = "[${architectury_api_version},)"
 ordering = "AFTER"
 side = "BOTH"
-
-[[dependencies."${mod_id}"]]
-modId = "jei"
-type = "optional"
-reason = "integration"
-versionRange = "[${architectury_api_version},)"
-ordering = "AFTER"
-side = "CLIENT"
