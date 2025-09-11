@@ -39,26 +39,30 @@ dependencies {
 }
 
 processResources {
+    def expandProps = [
+            "architectury_api_version"     : (project.findProperty("architectury_api_version") ?: "").toString(),
+            "neoforge_loader_version_range": (project.findProperty("neoforge_loader_version_range") ?: "").toString(),
+            "neoforge_version_range"       : (project.findProperty("neoforge_version_range") ?: "").toString(),
+            "mod_authors"                  : (project.findProperty("mod_authors") ?: "").toString(),
+            "mod_discord_url"              : (project.findProperty("mod_discord_url") ?: "").toString(),
+            "mod_description"              : (project.findProperty("mod_description") ?: "").toString(),
+            "mod_display_name"             : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_git_url"                  : (project.findProperty("mod_git_url") ?: "").toString(),
+            "mod_id"                       : (project.findProperty("mod_id") ?: "").toString(),
+            "mod_issues_url"               : (project.findProperty("mod_issues_url") ?: "").toString(),
+            "mod_license"                  : (project.findProperty("mod_license") ?: "").toString(),
+            "mod_name"                     : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_page_url"                 : (project.findProperty("mod_page_url") ?: "").toString(),
+            "mod_version"                  : (project.findProperty("mod_version") ?: "").toString(),
+            "minecraft_min_version"        : (project.findProperty("minecraft_min_version") ?: "").toString(),
+            "minecraft_max_version"        : (project.findProperty("minecraft_max_version") ?: "").toString(),
+            "jei_min_version"              : (project.findProperty("jei_version") ?: "").toString(),
+    ]
+
+    inputs.properties(expandProps)
+
     filesMatching('META-INF/neoforge.mods.toml') {
-        expand(
-                "architectury_api_version": project.findProperty("architectury_api_version"),
-                "neoforge_loader_version_range": project.findProperty("neoforge_loader_version_range"),
-                "neoforge_version_range": project.findProperty("neoforge_version_range"),
-                "mod_authors": project.findProperty("mod_authors"),
-                "mod_discord_url": project.findProperty("mod_discord_url"),
-                "mod_description": project.findProperty("mod_description"),
-                "mod_display_name": project.findProperty("mod_display_name"),
-                "mod_git_url": project.findProperty("mod_git_url"),
-                "mod_id": project.findProperty("mod_id"),
-                "mod_issues_url": project.findProperty("mod_issues_url"),
-                "mod_license": project.findProperty("mod_license"),
-                "mod_name": project.findProperty("mod_display_name"),
-                "mod_page_url": project.findProperty("mod_page_url"),
-                "mod_version": project.findProperty("mod_version"),
-                "minecraft_min_version": project.findProperty("minecraft_min_version"),
-                "minecraft_max_version": project.findProperty("minecraft_max_version"),
-                "jei_min_version": project.findProperty("jei_version")
-        )
+        expand(expandProps)
     }
 
     from(project(':Common').sourceSets.main.resources.srcDirs) {

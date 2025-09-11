@@ -37,25 +37,29 @@ dependencies {
 }
 
 processResources {
+    def expandProps = [
+            "mod_authors"             : (project.findProperty("mod_authors") ?: "").toString(),
+            "mod_discord_url"         : (project.findProperty("mod_discord_url") ?: "").toString(),
+            "mod_description"         : (project.findProperty("mod_description") ?: "").toString(),
+            "mod_display_name"        : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_git_url"             : (project.findProperty("mod_git_url") ?: "").toString(),
+            "mod_id"                  : (project.findProperty("mod_id") ?: "").toString(),
+            "mod_issues_url"          : (project.findProperty("mod_issues_url") ?: "").toString(),
+            "mod_license"             : (project.findProperty("mod_license") ?: "").toString(),
+            "mod_name"                : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_page_url"            : (project.findProperty("mod_page_url") ?: "").toString(),
+            "mod_version"             : (project.findProperty("mod_version") ?: "").toString(),
+            "fabric_loader_version"   : (project.findProperty("fabric_loader_version") ?: "").toString(),
+            "minecraft_min_version"   : (project.findProperty("minecraft_min_version") ?: "").toString(),
+            "minecraft_max_version"   : (project.findProperty("minecraft_max_version") ?: "").toString(),
+            "java_version"            : (project.findProperty("java_version") ?: "").toString(),
+            "architectury_api_version": (project.findProperty("architectury_api_version") ?: "").toString(),
+    ]
+
+    inputs.properties(expandProps)
+
     filesMatching('fabric.mod.json') {
-        expand(
-                "mod_authors": project.findProperty("mod_authors"),
-                "mod_discord_url": project.findProperty("mod_discord_url"),
-                "mod_description": project.findProperty("mod_description"),
-                "mod_display_name": project.findProperty("mod_display_name"),
-                "mod_git_url": project.findProperty("mod_git_url"),
-                "mod_id": project.findProperty("mod_id"),
-                "mod_issues_url": project.findProperty("mod_issues_url"),
-                "mod_license": project.findProperty("mod_license"),
-                "mod_name": project.findProperty("mod_display_name"),
-                "mod_page_url": project.findProperty("mod_page_url"),
-                "mod_version": project.findProperty("mod_version"),
-                "fabric_loader_version": project.findProperty("fabric_loader_version"),
-                "minecraft_min_version": project.findProperty("minecraft_min_version"),
-                "minecraft_max_version": project.findProperty("minecraft_max_version"),
-                "java_version": project.findProperty("java_version"),
-                "architectury_api_version": project.findProperty("architectury_api_version"),
-        )
+        expand(expandProps)
     }
 }
 
