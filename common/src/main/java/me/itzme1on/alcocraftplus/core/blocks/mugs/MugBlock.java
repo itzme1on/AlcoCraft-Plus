@@ -2,7 +2,10 @@ package me.itzme1on.alcocraftplus.core.blocks.mugs;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -17,9 +20,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MugBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -28,7 +33,7 @@ public class MugBlock extends Block {
 
     public MugBlock() {
         super(BlockBehaviour.Properties
-                .copy(Blocks.CRAFTING_TABLE)
+                .copy(Blocks.SPRUCE_PLANKS)
                 .instabreak()
                 .noOcclusion());
     }
@@ -39,8 +44,11 @@ public class MugBlock extends Block {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState state = this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
+
+        return this.canSurvive(state, context.getLevel(), context.getClickedPos()) ? state : null;
     }
 
     @Override
@@ -51,8 +59,7 @@ public class MugBlock extends Block {
     @Override
     public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         Rotation rotation = mirror.getRotation(state.getValue(FACING));
-
-        return this.defaultBlockState().setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
@@ -66,16 +73,34 @@ public class MugBlock extends Block {
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
-                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (direction == Direction.DOWN && !this.canSurvive(state, level, pos))
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
+                                           LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (direction == Direction.DOWN && !this.canSurvive(state, level, pos)) {
             return Blocks.AIR.defaultBlockState();
+        }
 
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        super.playerWillDestroy(level, pos, state, player);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                 InteractionHand hand, BlockHitResult hit) {
+        ItemStack heldItem = player.getItemInHand(hand);
+
+        if (!player.isSpectator() && heldItem.isEmpty()) {
+            if (!level.isClientSide()) {
+                ItemStack mug = new ItemStack(state.getBlock().asItem());
+
+                if (!player.addItem(mug)) {
+                    player.drop(mug, false);
+                }
+
+                level.removeBlock(pos, false);
+            }
+
+            return InteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        return InteractionResult.PASS;
     }
 }

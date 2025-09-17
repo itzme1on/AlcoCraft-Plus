@@ -36,5 +36,14 @@
   "advancements.husbandry.mug.title": "Жидкое золото",
   "advancements.husbandry.mug.description": "Сварите пиво",
   "advancements.husbandry.all_beer.title": "Твоя сила и мудрость",
-  "advancements.husbandry.all_beer.description": "Сварите и выпейте все сорта пива"
+  "advancements.husbandry.all_beer.description": "Сварите и выпейте все сорта пива",
+
+  "alcocraftplus.tooltip.key_shift": "Shift",
+  "alcocraftplus.tooltip.key_use": "ПКМ",
+  "alcocraftplus.tooltip.mug.default": "Удерживайте [%s] для деталей",
+  "alcocraftplus.tooltip.mug.place.line1": "Удерживайте [%s], чтобы поставить кружку",
+  "alcocraftplus.tooltip.mug.place.line2": "Нажмите [%s] пустой рукой по кружке, чтобы забрать её",
+
+  "pack.alcocraftplus.3d_models_pack.title": "3D-модели кружек",
+  "pack.alcocraftplus.3d_models_pack.description": "3D-модели кружек"
 }

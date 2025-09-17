@@ -26,6 +26,9 @@
       "me.itzme1on.alcocraftplus.core.compat.jei.JEIPlugin"
     ]
   },
+  "mixins": [
+    "alcocraftplus.fabric.mixins.json"
+  ],
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20",

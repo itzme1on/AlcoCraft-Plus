@@ -1,14 +1,16 @@
-pluginManagement {
-    repositories {
-        maven { url "https://maven.fabricmc.net/" }
-        maven { url "https://maven.architectury.dev/" }
-        maven { url "https://files.minecraftforge.net/maven/" }
-        gradlePluginPortal()
-    }
+include('common', 'fabric', 'forge')
+
+pluginManagement.repositories {
+    gradlePluginPortal()
+    mavenCentral()
+    maven { url "https://maven.fabricmc.net/" }
+    maven { url "https://maven.architectury.dev/" }
+    maven { url "https://files.minecraftforge.net/maven/" }
+    maven { url "https://maven.firstdark.dev/releases" }
 }
 
-rootProject.name = 'alcocraftplus'
+rootProject.name = 'AlcoCraft+'
 
-include 'common'
-include 'fabric'
-include 'forge'
+project(":common").name = "Common"
+project(":forge").name = "Forge"
+project(":fabric").name = "Fabric"

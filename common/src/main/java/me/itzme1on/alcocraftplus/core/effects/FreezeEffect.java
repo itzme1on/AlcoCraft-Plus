@@ -24,8 +24,11 @@ public class FreezeEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
+        Level level = entity.level();
+
+        if (level.isClientSide()) return;
+
         if (entity.onGround()) {
-            Level level = entity.level();
             BlockPos pos = entity.blockPosition();
             BlockState iceState = Blocks.FROSTED_ICE.defaultBlockState();
 
@@ -36,32 +39,38 @@ public class FreezeEffect extends MobEffect {
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
                     BlockPos below = pos.offset(x, -1, z);
-                    
+
                     if (below.distSqr(pos) <= radius * radius) {
                         BlockState blockState = level.getBlockState(below);
 
-                        if (blockState.getBlock() == Blocks.WATER && blockState.getValue(LiquidBlock.LEVEL) == 0)
-                            if (level.getBlockState(mutablePos.set(below).above()).isAir())
+                        if (blockState.getBlock() == Blocks.WATER && blockState.getValue(LiquidBlock.LEVEL) == 0) {
+                            if (level.getBlockState(mutablePos.set(below).above()).isAir()) {
                                 if (iceState.canSurvive(level, below) && level.isUnobstructed(iceState, below, CollisionContext.empty())) {
                                     level.setBlockAndUpdate(below, iceState);
 
                                     level.scheduleTick(below, Blocks.FROSTED_ICE, Mth.nextInt(entity.getRandom(), 60, 120));
                                 }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        double slownessRadius = 5.0;
+        if ((entity.tickCount % 10) == 0) {
+            double slownessRadius = 5.0 + amplifier;
 
-        AABB aabb = new AABB(entity.getX() - slownessRadius, entity.getY() - slownessRadius, entity.getZ() - slownessRadius,
-                entity.getX() + slownessRadius, entity.getY() + slownessRadius, entity.getZ() + slownessRadius);
+            AABB aabb = new AABB(entity.getX() - slownessRadius, entity.getY() - slownessRadius, entity.getZ() - slownessRadius,
+                    entity.getX() + slownessRadius, entity.getY() + slownessRadius, entity.getZ() + slownessRadius);
 
-        entity.level().getEntities(null, aabb).forEach(nearbyEntity -> {
-            if (nearbyEntity != entity && nearbyEntity instanceof LivingEntity)
-                if (nearbyEntity instanceof Enemy || (nearbyEntity instanceof Wolf && !((TamableAnimal) nearbyEntity).isTame()))
-                    ((LivingEntity) nearbyEntity).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 2));
-        });
+            for (LivingEntity nearby : level.getEntitiesOfClass(LivingEntity.class, aabb)) {
+                if (nearby == entity) continue;
+
+                if (nearby instanceof Enemy || (nearby instanceof Wolf && !((TamableAnimal) nearby).isTame())) {
+                    nearby.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, Math.max(0, 1 + amplifier)));
+                }
+            }
+        }
     }
 
     @Override

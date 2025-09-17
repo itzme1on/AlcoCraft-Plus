@@ -1,11 +1,10 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "me.shedaniel.unified-publishing"
-    id 'com.modrinth.minotaur'
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
 loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
+    accessWidenerPath = project(":Common").loom.accessWidenerPath
 }
 
 architectury {
@@ -15,7 +14,7 @@ architectury {
 
 configurations {
     common
-    shadowCommon
+    shadowBundle
 
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
@@ -35,8 +34,8 @@ dependencies {
 
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+    common(project(path: ":Common", configuration: "namedElements")) { transitive false }
+    shadowBundle(project(path: ":Common", configuration: "transformProductionFabric")) { transitive false }
 }
 
 processResources {
@@ -58,50 +57,54 @@ processResources {
 }
 
 shadowJar {
-    exclude "architectury.common.json"
-
-    configurations = [project.configurations.shadowCommon]
-    archiveClassifier.set("dev-shadow")
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
 }
 
 remapJar {
-    inputFile.set shadowJar.archiveFile
+    input.set shadowJar.archiveFile
     dependsOn shadowJar
-    archiveClassifier.set(null)
+
+    archiveClassifier = 'fabric'
 }
 
-jar {
-    archiveClassifier.set("dev")
-}
+publisher {
+    def mcVersions = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
+    def changelogFile = rootProject.file("CHANGELOG.md")
+    def changelogText = changelogFile.exists() ? changelogFile.getText("UTF-8") : ""
 
-sourcesJar {
-    def commonSources = project(":common").sourcesJar
-    dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
-    }
-}
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = mod_modrinth_id
-    versionNumber = mod_version
-    versionType = release_channel
-    loaders = ["fabric"]
-    file = tasks.named("remapJar").get().archiveFile
-
-    if (changelog_file.exists()) {
-        changelog = changelog_file.text
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
     }
 
-    dependencies {
-        required.project 'architectury-api'
-        required.project 'fabric-api'
-        optional.project 'modmenu'
-        optional.project 'jei'
+    setCurseID((rootProject.findProperty("mod_curseforge_id") ?: "").toString())
+
+    setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
+
+    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+
+    setChangelog(changelogText)
+
+    setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_min_version}")
+
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name} ${rootProject.minecraft_min_version})")
+
+    setGameVersions(*mcVersions)
+
+    setLoaders("fabric")
+
+    setCurseEnvironment("both")
+
+    setArtifact(tasks.remapJar)
+
+    modrinthDepends {
+        required("architectury-api", "fabric-api")
+        optional("jei", "modmenu")
+    }
+
+    curseDepends {
+        required("architectury-api", "fabric-api")
+        optional("jei", "modmenu")
     }
 }
