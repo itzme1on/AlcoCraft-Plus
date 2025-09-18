@@ -45,5 +45,7 @@
   "alcocraftplus.tooltip.mug.place.line2": "Press [%s] with an empty hand on the mug to pick it up",
 
   "pack.alcocraftplus.3d_models_pack.title": "3D Mugs Models",
-  "pack.alcocraftplus.3d_models_pack.description": "3D Models for beer mugs"
+  "pack.alcocraftplus.3d_models_pack.description": "3D Models for beer mugs",
+  
+  "tag.item.alcocraftplus.beer_mugs": "Beer Mugs"
 }
