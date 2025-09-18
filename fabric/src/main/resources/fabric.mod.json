@@ -31,11 +31,9 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20",
-    "architectury": ">=9.2.14"
-  },
-  "suggests": {
-    "modmenu": ">=7.2.2"
+    "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
+    "architectury": ">=${architectury_api_version}",
+    "fabric-api": "*"
   },
   "custom": {
     "modmenu": {

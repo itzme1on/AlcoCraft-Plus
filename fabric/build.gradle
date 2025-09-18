@@ -39,20 +39,27 @@ dependencies {
 }
 
 processResources {
+    def expandProps = [
+            "mod_authors"             : project.findProperty("mod_authors"),
+            "mod_discord_url"         : project.findProperty("mod_discord_url"),
+            "mod_description"         : project.findProperty("mod_description"),
+            "mod_display_name"        : project.findProperty("mod_display_name"),
+            "mod_git_url"             : project.findProperty("mod_git_url"),
+            "mod_id"                  : project.findProperty("mod_id"),
+            "mod_issues_url"          : project.findProperty("mod_issues_url"),
+            "mod_license"             : project.findProperty("mod_license"),
+            "mod_name"                : project.findProperty("mod_display_name"),
+            "mod_page_url"            : project.findProperty("mod_page_url"),
+            "mod_version"             : project.findProperty("mod_version"),
+            "minecraft_min_version"   : (project.findProperty("minecraft_min_version") ?: "").toString(),
+            "minecraft_max_version"   : (project.findProperty("minecraft_max_version") ?: "").toString(),
+            "architectury_api_version": (project.findProperty("architectury_api_version") ?: "").toString(),
+    ]
+
+    inputs.properties(expandProps)
+
     filesMatching("fabric.mod.json") {
-        expand(
-                "mod_authors": project.findProperty("mod_authors"),
-                "mod_discord_url": project.findProperty("mod_discord_url"),
-                "mod_description": project.findProperty("mod_description"),
-                "mod_display_name": project.findProperty("mod_display_name"),
-                "mod_git_url": project.findProperty("mod_git_url"),
-                "mod_id": project.findProperty("mod_id"),
-                "mod_issues_url": project.findProperty("mod_issues_url"),
-                "mod_license": project.findProperty("mod_license"),
-                "mod_name": project.findProperty("mod_display_name"),
-                "mod_page_url": project.findProperty("mod_page_url"),
-                "mod_version": project.findProperty("mod_version")
-        )
+        expand(expandProps)
     }
 }
 
