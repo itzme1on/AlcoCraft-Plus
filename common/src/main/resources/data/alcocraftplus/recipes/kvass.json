@@ -2,7 +2,7 @@
   "type": "alcocraftplus:beer_brewing",
   "ingredients": [
     {
-      "item": "alcocraftplus:hop"
+      "item": "minecraft:sugar"
     },
     {
       "item": "minecraft:apple"
