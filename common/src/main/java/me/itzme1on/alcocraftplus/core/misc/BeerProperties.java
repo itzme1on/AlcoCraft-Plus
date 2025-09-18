@@ -19,7 +19,6 @@ public class BeerProperties {
             .alwaysEat()
             .effect(new MobEffectInstance(MobEffects.SATURATION, 2400, 0), 1.0f)
             .effect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 600, 1), 1.0f)
-            .effect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0), 1.0f)
             .build();
 
     public static final FoodProperties CHORUS_ALE = new FoodProperties.Builder()
@@ -105,6 +104,7 @@ public class BeerProperties {
             .saturationMod(0.6f)
             .alwaysEat()
             .effect(new MobEffectInstance(MobEffects.REGENERATION, 3600, 0), 1.0f)
+            .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 1.0f)
             .build();
 
     public static final FoodProperties WITHER_STOUT = new FoodProperties.Builder()
