@@ -42,8 +42,7 @@ subprojects {
     apply plugin: 'maven-publish'
 
     base {
-        // Set up a suffixed format for the mod jar names, e.g. `example-fabric`.
-        archivesName = "$rootProject.mod_id-$rootProject.minecraft_version-$project.name"
+        archivesName = "$rootProject.mod_id-$rootProject.minecraft_version"
     }
 
     repositories {}
