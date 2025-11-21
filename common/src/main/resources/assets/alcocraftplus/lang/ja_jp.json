@@ -1,0 +1,65 @@
+{
+  "modmenu.descriptionTranslation.alcocraftplus": "このMODを使用すれば、ビールを醸造して仲の良い友人に振る舞うことができます！",
+  "alcocraftplus.discord": "Discord",
+
+  "itemGroup.alcocraftplus.tab": "AlcoCraft+",
+
+  "item.alcocraftplus.hop": "ホップ",
+  "item.alcocraftplus.hop_seeds": "ホップの種",
+  "item.alcocraftplus.dry_seeds": "乾燥した種",
+
+  "block.alcocraftplus.keg": "酒樽",
+  "block.alcocraftplus.mug": "空のジョッキ",
+  "block.alcocraftplus.chorus_ale": "コーラスエールのジョッキ",
+  "block.alcocraftplus.digger_bitter": "ディガービターのジョッキ",
+  "block.alcocraftplus.drowned_ale": "ドラウンドエールのジョッキ",
+  "block.alcocraftplus.ice_beer": "アイスビールのジョッキ",
+  "block.alcocraftplus.kvass": "クワスのジョッキ",
+  "block.alcocraftplus.leprechaun_cider": "レプレコンサイダーのジョッキ",
+  "block.alcocraftplus.magnet_pilsner": "マグネットピルスナーのジョッキ",
+  "block.alcocraftplus.nether_porter": "ネザーポーターのジョッキ",
+  "block.alcocraftplus.nether_star_lager": "ネザースターラガーのジョッキ",
+  "block.alcocraftplus.night_rauch": "ナイトラオホのジョッキ",
+  "block.alcocraftplus.sun_pale_ale": "サンペールエールのジョッキ",
+  "block.alcocraftplus.wither_stout": "ウィンタースタウトのジョッキ",
+
+  "item.alcocraftplus.mug": "空のジョッキ",
+  "item.alcocraftplus.keg": "酒樽",
+  "item.alcocraftplus.chorus_ale": "コーラスエールのジョッキ",
+  "item.alcocraftplus.digger_bitter": "ディガービターのジョッキ",
+  "item.alcocraftplus.drowned_ale": "ドラウンドエールのジョッキ",
+  "item.alcocraftplus.ice_beer": "アイスビールのジョッキ",
+  "item.alcocraftplus.kvass": "クワスのジョッキ",
+  "item.alcocraftplus.leprechaun_cider": "レプレコンサイダーのジョッキ",
+  "item.alcocraftplus.magnet_pilsner": "マグネットピルスナーのジョッキ",
+  "item.alcocraftplus.nether_porter": "ネザーポーターのジョッキ",
+  "item.alcocraftplus.nether_star_lager": "ネザースターラガーのジョッキ",
+  "item.alcocraftplus.night_rauch": "ナイトラオホのジョッキ",
+  "item.alcocraftplus.sun_pale_ale": "サンペールエールのジョッキ",
+  "item.alcocraftplus.wither_stout": "ウィンタースタウトのジョッキ",
+
+  "effect.alcocraftplus.attract": "磁力",
+  "effect.alcocraftplus.freeze": "フロスト",
+  "effect.alcocraftplus.phantom": "ファントム主義",
+  "effect.alcocraftplus.wither": "ウィザーの力",
+
+  "advancements.husbandry.hop.title": "ホップ・ステップ・ジャンプ",
+  "advancements.husbandry.hop.description": "ブロックの下部にホップの種を植え、ホップを入手する",
+  "advancements.husbandry.keg.title": "すべてはジョッキから始まった",
+  "advancements.husbandry.keg.description": "ジョッキをクラフトし、醸造への道のりの第一歩を踏み出す",
+  "advancements.husbandry.mug.title": "酒を飲むべきか、避けるべきか",
+  "advancements.husbandry.mug.description": "初めてのビールを醸造する。",
+  "advancements.husbandry.all_beer.title": "ビール全部ゲットだぜ！",
+  "advancements.husbandry.all_beer.description": "すべての種類のビールを飲む",
+
+  "alcocraftplus.tooltip.key_shift": "Shift",
+  "alcocraftplus.tooltip.key_use": "右ボタン",
+  "alcocraftplus.tooltip.mug.default": "[%s]長押しで詳細を確認",
+  "alcocraftplus.tooltip.mug.place.line1": "[%s]長押しでジョッキを設置",
+  "alcocraftplus.tooltip.mug.place.line2": "手に何も持っていない状態で[%s]を押してジョッキを回収",
+
+  "pack.alcocraftplus.3d_models_pack.title": "3Dジョッキモデル",
+  "pack.alcocraftplus.3d_models_pack.description": "ビールジョッキ用の3Dモデル",
+
+  "tag.item.alcocraftplus.beer_mugs": "ビールジョッキ"
+}
