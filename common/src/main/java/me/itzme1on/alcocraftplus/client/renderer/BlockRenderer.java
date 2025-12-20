@@ -9,5 +9,6 @@ public class BlockRenderer {
         RenderTypeRegistry.register(RenderType.cutout(), BlocksRegistry.HOP.get());
         RenderTypeRegistry.register(RenderType.cutout(), BlocksRegistry.HOP_PLANT.get());
         RenderTypeRegistry.register(RenderType.cutout(), BlocksRegistry.MUG.get());
+        RenderTypeRegistry.register(RenderType.cutout(), BlocksRegistry.KEG.get());
     }
 }
