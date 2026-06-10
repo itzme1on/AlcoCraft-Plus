@@ -12,6 +12,11 @@ on:
         description: "Dry run (build + resolve tasks, do NOT upload)"
         type: boolean
         default: false
+      platform:
+        description: "Target platform(s)"
+        type: choice
+        options: [both, modrinth, curseforge]
+        default: both
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -53,5 +58,5 @@ jobs:
       - name: Build and publish
         run: ./gradlew build publishMod -Prelease_channel=${{ inputs.release_channel }} ${{ inputs.dry_run && '--dry-run' || '' }} --stacktrace
         env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          MODRINTH_TOKEN: ${{ inputs.platform != 'curseforge' && secrets.MODRINTH_TOKEN || '' }}
+          CURSEFORGE_TOKEN: ${{ inputs.platform != 'modrinth' && secrets.CURSEFORGE_TOKEN || '' }}
