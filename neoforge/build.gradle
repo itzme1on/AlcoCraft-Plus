@@ -42,12 +42,18 @@ dependencies {
 }
 
 processResources {
+    def toCsv = { propName ->
+        (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }.join(", ")
+    }
+
     filesMatching('META-INF/neoforge.mods.toml') {
         expand(
                 "architectury_api_version": project.findProperty("architectury_api_version"),
                 "neoforge_loader_version_range": project.findProperty("neoforge_loader_version_range"),
                 "neoforge_version_range": project.findProperty("neoforge_version_range"),
-                "mod_authors": project.findProperty("mod_authors"),
+                "mod_authors": toCsv("mod_authors"),
+                "mod_credits": toCsv("mod_contributors"),
                 "mod_discord_url": project.findProperty("mod_discord_url"),
                 "mod_description": project.findProperty("mod_description"),
                 "mod_display_name": project.findProperty("mod_display_name"),
