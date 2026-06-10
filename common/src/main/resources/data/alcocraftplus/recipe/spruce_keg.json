@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "121",
+    "010"
+  ],
+  "key": {
+    "0": "#minecraft:wooden_slabs",
+    "1": "minecraft:iron_ingot",
+    "2": "alcocraftplus:hop"
+  },
+  "result": {
+    "id": "alcocraftplus:keg",
+    "count": 1
+  }
+}

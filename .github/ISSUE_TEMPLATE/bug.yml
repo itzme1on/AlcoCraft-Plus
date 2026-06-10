@@ -1,0 +1,115 @@
+name: Bug report
+description: Report a reproducible issue in AlcoCraft+
+labels: [ "bug" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please use our Discord for gameplay questions. This form is only for **reproducible bugs**.
+
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Pre-checks
+      options:
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: I am not asking a gameplay question (those go to Discord).
+          required: true
+        - label: I reproduced on a new world with only AlcoCraft+ and dependencies.
+          required: true
+        - label: I disabled texture/resource packs.
+          required: true
+
+  - type: input
+    id: mod_version
+    attributes:
+      label: AlcoCraft+ version
+      placeholder: e.g. 2.1.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mc_version
+    attributes:
+      label: Minecraft version
+      options:
+        - "1.21.8"
+        - "1.21.7"
+        - "1.21.6"
+        - "1.21.5"
+        - "1.21.4"
+        - "1.21.1"
+        - "1.21"
+        - "1.20.2"
+        - "1.20.1"
+        - "1.20"
+        - "1.19.3"
+        - "1.19.2"
+        - "1.19"
+        - "1.18.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Mod loader
+      options: [ "Forge", "NeoForge", "Fabric" ]
+    validations:
+      required: true
+
+  - type: input
+    id: loader_version
+    attributes:
+      label: Loader version
+      placeholder: e.g. NeoForge 21.1.62 / Fabric Loader 0.16.x
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered, minimal steps from a fresh world.
+      placeholder: |
+        1) ...
+        2) ...
+        3) ...
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: modlist
+    attributes:
+      label: Mod list / pack
+      description: Paste your mods or attach a manifest. Reproduce with the smallest possible list.
+      render: text
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / crash report
+      description: latest.log or crash report; use a gist.github.com if long.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / video
+      description: Drag & drop files here.

@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:diamond",
+    "minecraft:nether_star"
+  ],
+  "result": {
+    "id": "alcocraftplus:nether_star_lager",
+    "count": 1
+  }
+}
