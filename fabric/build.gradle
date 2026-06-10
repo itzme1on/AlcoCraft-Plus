@@ -1,6 +1,6 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
-    id "me.shedaniel.unified-publishing"
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
 version = rootProject.mod_version
@@ -88,5 +88,33 @@ sourcesJar {
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
+    }
+}
+
+publisher {
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID((rootProject.findProperty("mod_curseforge_id") ?: "").toString())
+    setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
+    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+    setChangelog(rootProject.changelogFor(rootProject.mod_version))
+    setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_version}")
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name} ${rootProject.minecraft_version})")
+    setGameVersions(rootProject.minecraft_version.toString())
+    setLoaders("fabric")
+    setCurseEnvironment("both")
+    setArtifact(tasks.remapJar)
+
+    modrinthDepends {
+        required("architectury-api", "fabric-api")
+        optional("jei", "modmenu")
+    }
+
+    curseDepends {
+        required("architectury-api", "fabric-api")
+        optional("jei", "modmenu")
     }
 }
