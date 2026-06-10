@@ -42,11 +42,17 @@ dependencies {
 }
 
 processResources {
+    def toCsv = { propName ->
+        (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }.join(", ")
+    }
+
     def expandProps = [
             "architectury_api_version"     : (project.findProperty("architectury_api_version") ?: "").toString(),
             "neoforge_loader_version_range": (project.findProperty("neoforge_loader_version_range") ?: "").toString(),
             "neoforge_version_range"       : (project.findProperty("neoforge_version_range") ?: "").toString(),
-            "mod_authors"                  : (project.findProperty("mod_authors") ?: "").toString(),
+            "mod_authors"                  : toCsv("mod_authors"),
+            "mod_credits"                  : toCsv("mod_contributors"),
             "mod_discord_url"              : (project.findProperty("mod_discord_url") ?: "").toString(),
             "mod_description"              : (project.findProperty("mod_description") ?: "").toString(),
             "mod_display_name"             : (project.findProperty("mod_display_name") ?: "").toString(),
