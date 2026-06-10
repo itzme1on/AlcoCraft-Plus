@@ -1,9 +1,7 @@
 plugins {
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
-    id "me.shedaniel.unified-publishing" version "0.1.+" apply false
     id "io.github.juuxel.loom-quiltflower" version "1.7.+" apply false
-    id 'com.modrinth.minotaur' version '2.+'
 }
 
 architectury {
@@ -32,8 +30,24 @@ allprojects {
     }
 }
 
-ext {
-    changelog_file = rootProject.file("changelog.md")
+ext.changelogFor = { String version ->
+    def file = rootProject.file("CHANGELOG.md")
+    if (!file.exists()) return ""
+    def body = []
+    def capturing = false
+    file.eachLine("UTF-8") { line ->
+        if (line ==~ /^##\s+.*/) {
+            if (capturing) capturing = false
+            else if (line.contains(version)) { capturing = true; return }
+        } else if (capturing) {
+            body << line
+        }
+    }
+    body.join("\n").trim()
+}
+
+tasks.register('printChangelog') {
+    doLast { println rootProject.changelogFor(rootProject.mod_version) }
 }
 
 subprojects {
