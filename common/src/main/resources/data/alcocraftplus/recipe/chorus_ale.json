@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:phantom_membrane",
+    "minecraft:chorus_fruit"
+  ],
+  "result": {
+    "id": "alcocraftplus:chorus_ale",
+    "count": 1
+  }
+}

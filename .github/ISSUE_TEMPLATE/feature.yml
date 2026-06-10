@@ -1,0 +1,35 @@
+name: Feature request
+description: Propose an improvement or new content
+labels: [ "enhancement" ]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Context
+      placeholder: What are you trying to solve or improve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      placeholder: Describe the feature and how it would work.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Balance / numbers
+        - New recipe / content
+        - UX / QoL
+        - Compatibility
+        - Other
+    validations:
+      required: true

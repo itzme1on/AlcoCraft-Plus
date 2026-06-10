@@ -1,0 +1,38 @@
+modLoader = "javafml"
+license = "${mod_license}"
+loaderVersion = "${neoforge_loader_version_range}"
+displayURL = "${mod_page_url}"
+issueTrackerURL = "${mod_issues_url}"
+logoFile = "logo.png"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_display_name}"
+authors = "${mod_authors}"
+credits = "${mod_credits}"
+description = "${mod_description}"
+
+[[mixins]]
+config = "alcocraftplus.neoforge.mixins.json"
+
+[[dependencies."${mod_id}"]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_min_version},${minecraft_max_version})"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "architectury"
+type = "required"
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER"
+side = "BOTH"

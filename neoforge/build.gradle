@@ -1,0 +1,131 @@
+plugins {
+    id "com.gradleup.shadow" version "8.3.9"
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
+}
+
+architectury {
+    platformSetupLoomIde()
+    neoForge()
+}
+
+configurations {
+    common
+    shadowBundle
+
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentNeoForge.extendsFrom common
+}
+
+repositories {
+    maven {
+        name = 'NeoForged'
+        url = 'https://maven.neoforged.net/releases'
+    }
+}
+
+dependencies {
+    neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
+
+    modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
+
+    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rootProject.rei_version}"
+    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rootProject.rei_version}"
+
+    modRuntimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rootProject.rei_version}"
+
+    common(project(path: ':Common', configuration: 'namedElements')) { transitive false }
+    shadowBundle(project(path: ":Common", configuration: "transformProductionNeoForge")) { transitive = false }
+}
+
+processResources {
+    def toCsv = { propName ->
+        (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }.join(", ")
+    }
+
+    def expandProps = [
+            "architectury_api_version"     : (project.findProperty("architectury_api_version") ?: "").toString(),
+            "neoforge_loader_version_range": (project.findProperty("neoforge_loader_version_range") ?: "").toString(),
+            "neoforge_version_range"       : (project.findProperty("neoforge_version_range") ?: "").toString(),
+            "mod_authors"                  : toCsv("mod_authors"),
+            "mod_credits"                  : toCsv("mod_contributors"),
+            "mod_discord_url"              : (project.findProperty("mod_discord_url") ?: "").toString(),
+            "mod_description"              : (project.findProperty("mod_description") ?: "").toString(),
+            "mod_display_name"             : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_git_url"                  : (project.findProperty("mod_git_url") ?: "").toString(),
+            "mod_id"                       : (project.findProperty("mod_id") ?: "").toString(),
+            "mod_issues_url"               : (project.findProperty("mod_issues_url") ?: "").toString(),
+            "mod_license"                  : (project.findProperty("mod_license") ?: "").toString(),
+            "mod_name"                     : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_page_url"                 : (project.findProperty("mod_page_url") ?: "").toString(),
+            "mod_version"                  : (project.findProperty("mod_version") ?: "").toString(),
+            "minecraft_min_version"        : (project.findProperty("minecraft_min_version") ?: "").toString(),
+            "minecraft_max_version"        : (project.findProperty("minecraft_max_version") ?: "").toString(),
+            "jei_min_version"              : (project.findProperty("jei_version") ?: "").toString(),
+    ]
+
+    inputs.properties(expandProps)
+
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(expandProps)
+    }
+
+    from(project(':Common').sourceSets.main.resources.srcDirs) {
+        include 'resourcepacks/**'
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+
+    archiveClassifier = 'neoforge'
+}
+
+publisher {
+    def mcVersions = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
+
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID((rootProject.findProperty("mod_curseforge_id") ?: "").toString())
+
+    setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
+
+    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+
+    setChangelog(rootProject.changelogFor(rootProject.mod_version))
+
+    setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_version}")
+
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name.capitalize()} ${rootProject.minecraft_version})")
+
+    setGameVersions(*mcVersions)
+
+    setLoaders("neoforge")
+
+    setCurseEnvironment("both")
+
+    setArtifact(tasks.remapJar)
+
+    modrinthDepends {
+        required("architectury-api")
+        optional("rei")
+    }
+
+    curseDepends {
+        required("architectury-api")
+        optional("roughly-enough-items")
+    }
+}

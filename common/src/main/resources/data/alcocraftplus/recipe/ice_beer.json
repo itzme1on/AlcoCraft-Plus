@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:snowball",
+    "minecraft:packed_ice"
+  ],
+  "result": {
+    "id": "alcocraftplus:ice_beer",
+    "count": 1
+  }
+}

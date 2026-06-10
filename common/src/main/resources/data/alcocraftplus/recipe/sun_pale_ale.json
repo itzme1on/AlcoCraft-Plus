@@ -1,0 +1,13 @@
+{
+  "type": "alcocraftplus:beer_brewing",
+  "ingredients": [
+    "alcocraftplus:hop",
+    "alcocraftplus:dry_seeds",
+    "minecraft:sunflower",
+    "minecraft:glistering_melon_slice"
+  ],
+  "result": {
+    "id": "alcocraftplus:sun_pale_ale",
+    "count": 1
+  }
+}

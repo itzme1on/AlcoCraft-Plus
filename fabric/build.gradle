@@ -1,0 +1,122 @@
+plugins {
+    id "com.gradleup.shadow" version "8.3.9"
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
+}
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+loom {
+    accessWidenerPath = project(":Common").loom.accessWidenerPath
+}
+
+configurations {
+    common
+    shadowBundle
+
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+}
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
+    modImplementation "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
+
+    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-api-fabric:${rootProject.rei_version}"
+    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rootProject.rei_version}"
+
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
+
+    common(project(path: ':Common', configuration: 'namedElements')) { transitive false }
+    shadowBundle(project(path: ":Common", configuration: "transformProductionFabric")) { transitive = false }
+}
+
+processResources {
+    def toJsonArray = { propName ->
+        def list = (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }
+        groovy.json.JsonOutput.toJson(list)
+    }
+
+    def expandProps = [
+            "mod_authors"             : toJsonArray("mod_authors"),
+            "mod_contributors"        : toJsonArray("mod_contributors"),
+            "mod_discord_url"         : (project.findProperty("mod_discord_url") ?: "").toString(),
+            "mod_description"         : (project.findProperty("mod_description") ?: "").toString(),
+            "mod_display_name"        : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_git_url"             : (project.findProperty("mod_git_url") ?: "").toString(),
+            "mod_id"                  : (project.findProperty("mod_id") ?: "").toString(),
+            "mod_issues_url"          : (project.findProperty("mod_issues_url") ?: "").toString(),
+            "mod_license"             : (project.findProperty("mod_license") ?: "").toString(),
+            "mod_name"                : (project.findProperty("mod_display_name") ?: "").toString(),
+            "mod_page_url"            : (project.findProperty("mod_page_url") ?: "").toString(),
+            "mod_version"             : (project.findProperty("mod_version") ?: "").toString(),
+            "fabric_loader_version"   : (project.findProperty("fabric_loader_version") ?: "").toString(),
+            "minecraft_min_version"   : (project.findProperty("minecraft_min_version") ?: "").toString(),
+            "minecraft_max_version"   : (project.findProperty("minecraft_max_version") ?: "").toString(),
+            "java_version"            : (project.findProperty("java_version") ?: "").toString(),
+            "architectury_api_version": (project.findProperty("architectury_api_version") ?: "").toString(),
+    ]
+
+    inputs.properties(expandProps)
+
+    filesMatching('fabric.mod.json') {
+        expand(expandProps)
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+
+    archiveClassifier = 'fabric'
+}
+
+publisher {
+    def mcVersions = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
+
+    apiKeys {
+        modrinth System.getenv("MODRINTH_TOKEN")
+        curseforge System.getenv("CURSEFORGE_TOKEN")
+    }
+
+    setCurseID((rootProject.findProperty("mod_curseforge_id") ?: "").toString())
+
+    setModrinthID((rootProject.findProperty("mod_modrinth_id") ?: "").toString())
+
+    setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
+
+    setChangelog(rootProject.changelogFor(rootProject.mod_version))
+
+    setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_version}")
+
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name.capitalize()} ${rootProject.minecraft_version})")
+
+    setGameVersions(*mcVersions)
+
+    setLoaders("fabric")
+
+    setCurseEnvironment("both")
+
+    setArtifact(tasks.remapJar)
+
+    modrinthDepends {
+        required("architectury-api", "fabric-api")
+        optional("rei", "modmenu")
+    }
+
+    curseDepends {
+        required("architectury-api", "fabric-api")
+        optional("roughly-enough-items", "modmenu")
+    }
+}
