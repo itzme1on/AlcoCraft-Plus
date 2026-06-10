@@ -10,7 +10,8 @@ license = "All Rights Reserved"
 modId = "alcocraftplus"
 version = "${version}"
 displayName = "AlcoCraft+"
-authors = "itzme1on"
+authors = "${mod_authors}"
+credits = "${mod_credits}"
 description = '''
 With this mod you will be able to brew beer and treat your good friends with it!
 '''

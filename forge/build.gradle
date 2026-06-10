@@ -47,10 +47,19 @@ dependencies {
 }
 
 processResources {
+    def toCsv = { propName ->
+        (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }.join(", ")
+    }
+
     inputs.property "version", project.version
+    inputs.property "mod_authors", (project.findProperty("mod_authors") ?: "").toString()
+    inputs.property "mod_contributors", (project.findProperty("mod_contributors") ?: "").toString()
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": project.version,
+                "mod_authors": toCsv("mod_authors"),
+                "mod_credits": toCsv("mod_contributors")
     }
 }
 

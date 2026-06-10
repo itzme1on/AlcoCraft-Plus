@@ -41,14 +41,24 @@ dependencies {
 }
 
 processResources {
+    def toJsonArray = { propName ->
+        def list = (project.findProperty(propName) ?: "").toString()
+                .split(",").collect { it.trim() }.findAll { it }
+        groovy.json.JsonOutput.toJson(list)
+    }
+
     inputs.property "version", project.version
     inputs.property "mc_version", project.minecraft_version
     inputs.property "loader_version", project.fabric_loader_version
+    inputs.property "mod_authors", (project.findProperty("mod_authors") ?: "").toString()
+    inputs.property "mod_contributors", (project.findProperty("mod_contributors") ?: "").toString()
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "mc_version": project.minecraft_version,
-                "loader_version": project.fabric_loader_version
+                "loader_version": project.fabric_loader_version,
+                "mod_authors": toJsonArray("mod_authors"),
+                "mod_contributors": toJsonArray("mod_contributors")
     }
 }
 
