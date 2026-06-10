@@ -103,7 +103,7 @@ publisher {
     setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
     setChangelog(rootProject.changelogFor(rootProject.mod_version))
     setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_version}")
-    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name} ${rootProject.minecraft_version})")
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name.capitalize()} ${rootProject.minecraft_version})")
     setGameVersions(rootProject.minecraft_version.toString())
     setLoaders("fabric")
     setCurseEnvironment("both")
