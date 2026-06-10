@@ -4,9 +4,8 @@
   "version": "${mod_version}",
   "name": "${mod_name}",
   "description": "${mod_description}",
-  "authors": [
-    "itzme1on"
-  ],
+  "authors": ${mod_authors},
+  "contributors": ${mod_contributors},
   "license": "${mod_license}",
   "icon": "logo.png",
   "contact": {
