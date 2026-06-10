@@ -95,7 +95,7 @@ publisher {
 
     setProjectVersion(rootProject.mod_version)
 
-    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name} ${rootProject.minecraft_version})")
+    setDisplayName("${rootProject.mod_display_name} ${rootProject.mod_version} (${project.name.capitalize()} ${rootProject.minecraft_version})")
 
     setGameVersions(*mcVersionsFabric)
 
