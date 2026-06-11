@@ -171,6 +171,7 @@ public class Keg extends BaseEntityBlock {
                         popResource(level, pos, stack.copy());
                     }
                 });
+                kegEntity.getItems().clear();
 
                 level.updateNeighbourForOutputSignal(pos, this);
             }
