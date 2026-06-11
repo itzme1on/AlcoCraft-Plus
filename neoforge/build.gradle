@@ -90,8 +90,6 @@ remapJar {
 
 publisher {
     def mcVersions = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
-    def changelogFile = rootProject.file("CHANGELOG.md")
-    def changelogText = changelogFile.exists() ? changelogFile.getText("UTF-8") : ""
 
     apiKeys {
         modrinth System.getenv("MODRINTH_TOKEN")
@@ -104,7 +102,7 @@ publisher {
 
     setVersionType((rootProject.findProperty("release_channel") ?: "release").toString())
 
-    setChangelog(changelogText)
+    setChangelog(rootProject.changelogFor(rootProject.mod_version))
 
     setProjectVersion("${rootProject.mod_version}+${rootProject.minecraft_version}")
 
