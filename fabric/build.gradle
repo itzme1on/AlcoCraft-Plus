@@ -70,6 +70,10 @@ processResources {
                 "architectury_api_version": project.findProperty("architectury_api_version"),
         )
     }
+
+    from(project(':Common').sourceSets.main.resources.srcDirs) {
+        include 'resourcepacks/**'
+    }
 }
 
 shadowJar {
