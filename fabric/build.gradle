@@ -68,6 +68,10 @@ processResources {
     filesMatching('fabric.mod.json') {
         expand(expandProps)
     }
+
+    from(project(':Common').sourceSets.main.resources.srcDirs) {
+        include 'resourcepacks/**'
+    }
 }
 
 shadowJar {
