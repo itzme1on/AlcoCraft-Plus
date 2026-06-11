@@ -7,6 +7,26 @@ architectury {
     minecraft = project.minecraft_version
 }
 
+ext.changelogFor = { String version ->
+    def file = rootProject.file("CHANGELOG.md")
+    if (!file.exists()) return ""
+    def body = []
+    def capturing = false
+    file.eachLine("UTF-8") { line ->
+        if (line ==~ /^##\s+.*/) {
+            if (capturing) capturing = false
+            else if (line.contains(version)) { capturing = true; return }
+        } else if (capturing) {
+            body << line
+        }
+    }
+    body.join("\n").trim()
+}
+
+tasks.register('printChangelog') {
+    doLast { println rootProject.changelogFor(rootProject.mod_version) }
+}
+
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
