@@ -9,9 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -51,13 +49,7 @@ public class HopPlant extends CaveVinesPlantBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
-    }
-
-    @Override
-    @NotNull
-    public ItemInteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (state.getValue(BERRIES)) {
             Block.popResource(level, pos, new ItemStack(ItemsRegistry.HOP.get(), 1));
             float f = Mth.randomBetween(level.random, 0.8f, 1.2f);
@@ -65,9 +57,9 @@ public class HopPlant extends CaveVinesPlantBlock {
             level.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0f, f);
             level.setBlock(pos, state.setValue(BERRIES, Boolean.FALSE), 2);
 
-            return SidedResultsUtil.itemConsume(level);
+            return SidedResultsUtil.blockSidedSuccess(level);
         } else {
-            return SidedResultsUtil.passToDefault();
+            return SidedResultsUtil.pass();
         }
     }
 
