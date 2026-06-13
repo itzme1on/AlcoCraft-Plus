@@ -1,5 +1,6 @@
 package me.itzme1on.alcocraftplus.client.gui.handler;
 
+import me.itzme1on.alcocraftplus.core.network.ClientKegData;
 import me.itzme1on.alcocraftplus.core.recipes.HasIngredients;
 import me.itzme1on.alcocraftplus.core.registries.ScreenHandlerRegistry;
 import net.minecraft.world.Container;
@@ -98,7 +99,7 @@ public class KegGuiHandler extends AbstractContainerMenu {
 
     private boolean isIngredient(ItemStack stack) {
         if (this.level.isClientSide()) {
-            return true;
+            return ClientKegData.isEmpty() || ClientKegData.accepts(stack.getItem());
         }
 
         var server = this.level.getServer();
