@@ -1,4 +1,4 @@
-package me.itzme1on.alcocraftplus.neoforge.core.compat.jei;
+package me.itzme1on.alcocraftplus.core.compat.jei;
 
 import me.itzme1on.alcocraftplus.AlcoCraftPlus;
 import me.itzme1on.alcocraftplus.core.recipes.KegRecipes;
@@ -15,13 +15,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
-public class NeoForgeKegCategory implements IRecipeCategory<KegRecipes> {
+public class KegCategory implements IRecipeCategory<KegRecipes> {
     public static final IRecipeType<KegRecipes> RECIPE_TYPE = IRecipeType.create(AlcoCraftPlus.MOD_ID, "beer_brewing", KegRecipes.class);
 
     public final static Identifier TEXTURE = IdentifierUtil.of("textures/gui/jei_gui.png");
@@ -35,11 +36,15 @@ public class NeoForgeKegCategory implements IRecipeCategory<KegRecipes> {
 
     private final int SLOTS_Y_POSITION = 16;
 
-    public NeoForgeKegCategory(IGuiHelper helper) {
+    public KegCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, BACKGROUND_WIDTH, BACKGROUND_HEIGHT);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlocksRegistry.KEG.get()));
         this.arrow = helper.drawableBuilder(TEXTURE, BACKGROUND_WIDTH, 0, 22, 16)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+    }
+
+    static void addSlot(IRecipeLayoutBuilder builder, int x, int y, Ingredient ingredient) {
+        builder.addSlot(RecipeIngredientRole.INPUT, x, y).add(ingredient);
     }
 
     @Override
@@ -69,7 +74,7 @@ public class NeoForgeKegCategory implements IRecipeCategory<KegRecipes> {
 
     @Override
     public void draw(@NotNull KegRecipes recipe, @NotNull IRecipeSlotsView recipeSlotsView,
-                     @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+                     @NotNull GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics, 0, 0);
         arrow.draw(guiGraphics, 113, SLOTS_Y_POSITION - 1);
     }
@@ -80,7 +85,7 @@ public class NeoForgeKegCategory implements IRecipeCategory<KegRecipes> {
         int count = Math.min(4, recipe.getIngredients().size());
 
         for (int i = 0; i < count; i++) {
-            NeoForgeJEICompat.addSlot(builder, 12 + 24 * i, SLOTS_Y_POSITION, recipe.getIngredients().get(i));
+            addSlot(builder, 12 + 24 * i, SLOTS_Y_POSITION, recipe.getIngredients().get(i));
         }
 
         builder.setShapeless(163, 4);
