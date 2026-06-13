@@ -17,6 +17,11 @@ on:
         type: choice
         options: [both, modrinth, curseforge]
         default: both
+      loaders:
+        description: "Loader(s) to publish"
+        type: choice
+        options: [both, fabric, neoforge]
+        default: both
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -37,6 +42,7 @@ jobs:
         run: |
           mc=$(grep -E '^[[:space:]]*minecraft_version[[:space:]]*=' gradle.properties | head -1 | cut -d'=' -f2 | tr -d '[:space:]')
           case "$mc" in
+            26.*) jv=25 ;;
             1.21*|1.22*) jv=21 ;;
             *) jv=17 ;;
           esac
@@ -55,8 +61,26 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Compute publish tasks
+        id: tasks
+        run: |
+          case "${{ inputs.loaders }}" in
+            fabric) projects=":Fabric" ;;
+            neoforge) projects=":NeoForge" ;;
+            *) projects=":Fabric :NeoForge" ;;
+          esac
+          case "${{ inputs.platform }}" in
+            modrinth) plats="publishModrinth" ;;
+            curseforge) plats="publishCurseforge" ;;
+            *) plats="publishModrinth publishCurseforge" ;;
+          esac
+          tasks=""
+          for p in $projects; do for t in $plats; do tasks="$tasks $p:$t"; done; done
+          echo "Publish tasks:$tasks"
+          echo "list=$tasks" >> "$GITHUB_OUTPUT"
+
       - name: Build and publish
-        run: ./gradlew build publishMod -Prelease_channel=${{ inputs.release_channel }} ${{ inputs.dry_run && '--dry-run' || '' }} --stacktrace
+        run: ./gradlew build${{ steps.tasks.outputs.list }} -Prelease_channel=${{ inputs.release_channel }} ${{ inputs.dry_run && '--dry-run' || '' }} --stacktrace
         env:
           MODRINTH_TOKEN: ${{ inputs.platform != 'curseforge' && secrets.MODRINTH_TOKEN || '' }}
           CURSEFORGE_TOKEN: ${{ inputs.platform != 'modrinth' && secrets.CURSEFORGE_TOKEN || '' }}
