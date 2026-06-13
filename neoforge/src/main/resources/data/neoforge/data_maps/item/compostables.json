@@ -1,0 +1,13 @@
+{
+  "values": {
+    "alcocraftplus:hop": {
+      "chance": 0.3
+    },
+    "alcocraftplus:hop_seeds": {
+      "chance": 0.3
+    },
+    "alcocraftplus:dry_seeds": {
+      "chance": 0.3
+    }
+  }
+}
