@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +27,7 @@ public class SeedItem extends Item {
         BlockPos placePos = clickedPos.above();
         BlockState clickedState = level.getBlockState(clickedPos);
 
-        if (!(clickedState.getBlock() instanceof FarmBlock) || !level.getBlockState(placePos).isAir())
+        if (!(clickedState.getBlock() instanceof FarmlandBlock) || !level.getBlockState(placePos).isAir())
             return SidedResultsUtil.pass();
 
         if (!level.isClientSide()) {

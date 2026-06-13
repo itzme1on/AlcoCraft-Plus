@@ -137,7 +137,7 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
     @Override
     public void tick(Level level, BlockPos pos, BlockState state, KegEntity entity) {
         if (!level.isClientSide()) {
-            RandomSource random = level.random;
+            RandomSource random = level.getRandom();
 
             Optional<RecipeHolder<KegRecipes>> match = canBrewRecipe(entity);
 

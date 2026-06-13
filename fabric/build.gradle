@@ -22,17 +22,18 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    modImplementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
-    modImplementation "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
+    implementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    implementation "dev.architectury:architectury-fabric:${rootProject.architectury_api_version}"
 
-    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-api-fabric:${rootProject.rei_version}"
-    modCompileOnlyApi "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rootProject.rei_version}"
+    compileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnlyApi "mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
 
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${rootProject.rei_version}"
+    compileOnly "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
+    localRuntime "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
 
-    common(project(path: ':Common', configuration: 'namedElements')) { transitive false }
+    common(project(path: ':Common')) { transitive false }
     shadowBundle(project(path: ":Common", configuration: "transformProductionFabric")) { transitive = false }
 }
 
@@ -74,16 +75,17 @@ processResources {
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
+jar {
+    archiveClassifier = 'raw'
 }
 
-remapJar {
-    input.set shadowJar.archiveFile
-    dependsOn shadowJar
+shadowJar {
+    dependsOn(jar)
+    mainSpec.sourcePaths.clear()
+    from(zipTree(jar.archiveFile))
 
-    archiveClassifier = 'fabric'
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = null
 }
 
 publisher {
@@ -112,15 +114,15 @@ publisher {
 
     setCurseEnvironment("both")
 
-    setArtifact(tasks.remapJar)
+    setArtifact(tasks.shadowJar)
 
     modrinthDepends {
         required("architectury-api", "fabric-api")
-        optional("rei", "modmenu")
+        optional("modmenu", "jei")
     }
 
     curseDepends {
         required("architectury-api", "fabric-api")
-        optional("roughly-enough-items", "modmenu")
+        optional("modmenu", "jei")
     }
 }

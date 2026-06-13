@@ -5,9 +5,11 @@ import me.itzme1on.alcocraftplus.client.gui.handler.KegGuiHandler;
 import me.itzme1on.alcocraftplus.core.blocks.keg.KegEntity;
 import me.itzme1on.alcocraftplus.core.utils.ColorUtil;
 import me.itzme1on.alcocraftplus.core.utils.IdentifierUtil;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -42,7 +44,9 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
+
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2 - 2;
         int fluidX = (width - imageWidth) / 2 + FLUID_X_OFFSET;
@@ -67,13 +71,6 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
-        renderBackground(guiGraphics, mouseX, mouseY, delta);
-        super.render(guiGraphics, mouseX, mouseY, delta);
-        renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    @Override
     protected void containerTick() {
         super.containerTick();
 
@@ -84,7 +81,7 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         }
     }
 
-    private void renderProgressBars(GuiGraphics guiGraphics, int x, int y) {
+    private void renderProgressBars(GuiGraphicsExtractor guiGraphics, int x, int y) {
         if (menu.isCrafting()) {
             int bubbleIndex = bubbleAnimationTimer * BUBBLE_LENGTHS.length / BUBBLE_ANIM_DURATION_TICKS;
 
@@ -103,14 +100,14 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(font, title, titleLabelX, titleLabelY, 0xFF000000 | ColorUtil.getColorFromRGB(215, 171, 121));
-        guiGraphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0xFF000000 | ColorUtil.getColorFromRGB(64, 64, 64), false);
+    protected void extractLabels(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY) {
+        guiGraphics.text(font, title, titleLabelX, titleLabelY, 0xFF000000 | ColorUtil.getColorFromRGB(215, 171, 121));
+        guiGraphics.text(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0xFF000000 | ColorUtil.getColorFromRGB(64, 64, 64), false);
 
         renderTimer(guiGraphics);
     }
 
-    private void renderTimer(GuiGraphics guiGraphics) {
+    private void renderTimer(GuiGraphicsExtractor guiGraphics) {
         int colorShadow = 0xFF000000 | ColorUtil.getColorFromRGB(97, 69, 36);
         int colorText = 0xFF000000 | ColorUtil.getColorFromRGB(215, 171, 121);
 
@@ -118,8 +115,8 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         int maxProgress = menu.getMaxProgress();
 
         if (!menu.isCrafting()) {
-            guiGraphics.drawString(font, "00:00", 143, 47, colorShadow);
-            guiGraphics.drawString(font, "00:00", 143, 47, colorText);
+            guiGraphics.text(font, "00:00", 143, 47, colorShadow);
+            guiGraphics.text(font, "00:00", 143, 47, colorText);
         } else {
             if (maxProgress > 0) {
                 int remainingProgress = maxProgress - progress;
@@ -127,38 +124,30 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
 
                 String formattedTime = formatTime(timeInSeconds);
 
-                guiGraphics.drawString(font, formattedTime, 143, 47, colorShadow);
-                guiGraphics.drawString(font, formattedTime, 143, 47, colorText);
+                guiGraphics.text(font, formattedTime, 143, 47, colorShadow);
+                guiGraphics.text(font, formattedTime, 143, 47, colorText);
             } else {
-                guiGraphics.drawString(font, "00:00", 143, 47, colorShadow);
-                guiGraphics.drawString(font, "00:00", 143, 47, colorText);
+                guiGraphics.text(font, "00:00", 143, 47, colorShadow);
+                guiGraphics.text(font, "00:00", 143, 47, colorText);
             }
         }
     }
 
-    private void renderFluid(GuiGraphics guiGraphics, int x, int y) {
+    private void renderFluid(GuiGraphicsExtractor guiGraphics, int x, int y) {
         int beerLevel = menu.getBeerLevel();
         int beerType = menu.getBeerType();
         int waterLevel = menu.getWaterLevel();
 
         int maxWaterLevel = KegEntity.MAX_WATER_LEVEL;
 
-        TextureAtlasSprite sprite = ClientFluidStackHooks.getStillTexture(DEFAULT_FLUID);
-
         if (beerLevel > 0) {
             int color = getBeerColor(beerType);
-
-            assert sprite != null;
-
-            renderFluidArea(guiGraphics, x, y, beerLevel, maxWaterLevel, color, sprite);
+            renderFluidArea(guiGraphics, x, y, beerLevel, maxWaterLevel, color);
         }
 
         if (waterLevel > 0 && beerLevel < maxWaterLevel) {
             int color = getGuiFluidColor();
-
-            assert sprite != null;
-
-            renderFluidArea(guiGraphics, x, y, waterLevel, maxWaterLevel, color, sprite);
+            renderFluidArea(guiGraphics, x, y, waterLevel, maxWaterLevel, color);
         }
     }
 
@@ -173,38 +162,28 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         return rgb;
     }
 
-    private void renderFluidArea(GuiGraphics guiGraphics, int x, int y, int fluidLevel, int maxFluidLevel, int color, TextureAtlasSprite sprite) {
-        final int textureWidth = 16, textureHeight = 16;
+    private void renderFluidArea(GuiGraphicsExtractor guiGraphics, int x, int y, int fluidLevel, int maxFluidLevel, int color) {
+        final int tile = 16;
+        final int columns = 9;
 
         final int argb = (0xFF << 24) | (color & 0xFFFFFF);
 
         int denom = Math.max(1, maxFluidLevel / 4);
         int rows = Math.min(4, (int) Math.ceil((double) fluidLevel / (double) denom));
 
-        int srcW = sprite.contents().width();
-        int srcH = sprite.contents().height();
-        float u0 = sprite.getU0(), u1 = sprite.getU1();
-        float v0 = sprite.getV0(), v1 = sprite.getV1();
-
-        int atlasW = Math.max(1, Math.round(srcW / (u1 - u0)));
-        int atlasH = Math.max(1, Math.round(srcH / (v1 - v0)));
-        float uPx = u0 * atlasW;
-        float vPx = v0 * atlasH;
+        TextureAtlasSprite sprite = waterStillSprite();
 
         for (int row = 0; row < rows; row++) {
-            for (int col = 0; col <= 8; col++) {
-                guiGraphics.blit(
-                        RenderPipelines.GUI_TEXTURED,
-                        sprite.atlasLocation(),
-                        x + textureWidth * col,
-                        y + textureHeight * (3 - row),
-                        uPx, vPx,
-                        textureWidth, textureHeight,
-                        atlasW, atlasH,
-                        argb
-                );
+            int rowY = y + tile * (3 - row);
+            for (int col = 0; col < columns; col++) {
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x + tile * col, rowY, tile, tile, argb);
             }
         }
+    }
+
+    private static TextureAtlasSprite waterStillSprite() {
+        return Minecraft.getInstance().getAtlasManager()
+                .get(Sheets.BLOCKS_MAPPER.defaultNamespaceApply("water_still"));
     }
 
     private int getBeerColor(int beerType) {

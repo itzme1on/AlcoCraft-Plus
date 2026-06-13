@@ -52,7 +52,7 @@ public class Hop extends CaveVinesBlock {
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (state.getValue(BERRIES)) {
             Block.popResource(level, pos, new ItemStack(ItemsRegistry.HOP.get(), 1));
-            float f = Mth.randomBetween(level.random, 0.8f, 1.2f);
+            float f = Mth.randomBetween(level.getRandom(), 0.8f, 1.2f);
 
             level.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0f, f);
             level.setBlock(pos, state.setValue(BERRIES, Boolean.FALSE), 2);

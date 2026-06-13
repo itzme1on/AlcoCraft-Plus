@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class RecipesRegistry {
     private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(AlcoCraftPlus.MOD_ID, Registries.RECIPE_SERIALIZER);
-    public static final RegistrySupplier<RecipeSerializer<KegRecipes>> KEG_RECIPE_SERIALIZER = create(KegRecipes.Serializer::new);
+    public static final RegistrySupplier<RecipeSerializer<KegRecipes>> KEG_RECIPE_SERIALIZER = create(() -> new RecipeSerializer<>(KegRecipes.CODEC, KegRecipes.STREAM_CODEC));
     private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(AlcoCraftPlus.MOD_ID, Registries.RECIPE_TYPE);
 
     public static final RegistrySupplier<RecipeType<KegRecipes>> KEG_RECIPE_TYPE = create();

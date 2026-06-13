@@ -4,25 +4,24 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class KegRecipes implements Recipe<RecipeInput>, HasIngredients {
-    private final ItemStack output;
+    private final ItemStackTemplate output;
     private final NonNullList<Ingredient> recipeItems;
 
-    public KegRecipes(ItemStack output, NonNullList<Ingredient> recipeItems) {
+    public KegRecipes(ItemStackTemplate output, NonNullList<Ingredient> recipeItems) {
         this.output = output;
         this.recipeItems = recipeItems;
     }
@@ -59,12 +58,12 @@ public class KegRecipes implements Recipe<RecipeInput>, HasIngredients {
     }
 
     @Override
-    public @NotNull ItemStack assemble(RecipeInput input, HolderLookup.Provider registries) {
-        return output.copy();
+    public @NotNull ItemStack assemble(RecipeInput input) {
+        return output.create();
     }
 
     public @NotNull ItemStack getResultItem() {
-        return this.output.copy();
+        return output.create();
     }
 
     @Override
@@ -88,6 +87,16 @@ public class KegRecipes implements Recipe<RecipeInput>, HasIngredients {
     }
 
     @Override
+    public @NotNull String group() {
+        return "";
+    }
+
+    @Override
+    public boolean showNotification() {
+        return true;
+    }
+
+    @Override
     public boolean isSpecial() {
         return true;
     }
@@ -101,42 +110,29 @@ public class KegRecipes implements Recipe<RecipeInput>, HasIngredients {
         return this.recipeItems;
     }
 
-    public static class Serializer implements RecipeSerializer<KegRecipes> {
-        public static final MapCodec<KegRecipes> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                        Ingredient.CODEC.listOf().fieldOf("ingredients").flatXmap(list -> {
-                            if (list.isEmpty()) {
-                                return DataResult.error(() -> "No ingredients for keg recipe");
-                            }
+    public static final MapCodec<KegRecipes> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                    Ingredient.CODEC.listOf().fieldOf("ingredients").flatXmap(list -> {
+                        if (list.isEmpty()) {
+                            return DataResult.error(() -> "No ingredients for keg recipe");
+                        }
 
-                            NonNullList<Ingredient> nonNullList = NonNullList.create();
+                        NonNullList<Ingredient> nonNullList = NonNullList.create();
 
-                            nonNullList.addAll(list);
+                        nonNullList.addAll(list);
 
-                            return DataResult.success(nonNullList);
-                        }, DataResult::success).forGetter(KegRecipes::getIngredients),
+                        return DataResult.success(nonNullList);
+                    }, DataResult::success).forGetter(KegRecipes::getIngredients),
 
-                        ItemStack.CODEC.optionalFieldOf("result").forGetter(recipe -> Optional.of(recipe.output)),
-                        ItemStack.CODEC.optionalFieldOf("output").forGetter(recipe -> Optional.empty())
-                ).apply(instance, (ingredients, resultOpt, outputOpt) -> new KegRecipes(resultOpt.orElseGet(() -> outputOpt.orElse(ItemStack.EMPTY)), ingredients))
-        );
+                    ItemStackTemplate.CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
+            ).apply(instance, (ingredients, result) -> new KegRecipes(result, ingredients))
+    );
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENTS_LIST_CODEC =
-                ByteBufCodecs.collection(NonNullList::createWithCapacity, Ingredient.CONTENTS_STREAM_CODEC);
+    private static final StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENTS_LIST_CODEC =
+            ByteBufCodecs.collection(NonNullList::createWithCapacity, Ingredient.CONTENTS_STREAM_CODEC);
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, KegRecipes> STREAM_CODEC = StreamCodec.composite(
-                INGREDIENTS_LIST_CODEC, KegRecipes::getIngredients,
-                ItemStack.STREAM_CODEC, KegRecipes::getResultItem,
-                (ingredients, itemStack) -> new KegRecipes(itemStack, ingredients)
-        );
-
-        @Override
-        public @NotNull MapCodec<KegRecipes> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, KegRecipes> streamCodec() {
-            return STREAM_CODEC;
-        }
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, KegRecipes> STREAM_CODEC = StreamCodec.composite(
+            INGREDIENTS_LIST_CODEC, KegRecipes::getIngredients,
+            ItemStackTemplate.STREAM_CODEC, recipe -> recipe.output,
+            (ingredients, result) -> new KegRecipes(result, ingredients)
+    );
 }

@@ -37,6 +37,7 @@ jobs:
         run: |
           mc=$(grep -E '^[[:space:]]*minecraft_version[[:space:]]*=' gradle.properties | head -1 | cut -d'=' -f2 | tr -d '[:space:]')
           case "$mc" in
+            26.*) jv=25 ;;
             1.21*|1.22*) jv=21 ;;
             *) jv=17 ;;
           esac

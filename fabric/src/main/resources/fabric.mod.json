@@ -24,11 +24,8 @@
     "modmenu": [
       "me.itzme1on.alcocraftplus.fabric.core.compat.modmenu.ModMenuCompat"
     ],
-    "rei_client": [
-      "me.itzme1on.alcocraftplus.core.compat.rei.AlcoREIClientPlugin"
-    ],
-    "rei_common": [
-      "me.itzme1on.alcocraftplus.core.compat.rei.AlcoREICommonPlugin"
+    "jei_mod_plugin": [
+      "me.itzme1on.alcocraftplus.core.compat.jei.AlcoJEIPlugin"
     ]
   },
   "mixins": [
