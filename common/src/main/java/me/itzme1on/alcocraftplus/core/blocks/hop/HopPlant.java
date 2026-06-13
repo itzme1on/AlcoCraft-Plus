@@ -9,7 +9,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -49,14 +48,7 @@ public class HopPlant extends CaveVinesPlantBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
-    }
-
-    @Override
-    protected @NotNull InteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level,
-                                                   BlockPos pos, Player player, InteractionHand interactionHand,
-                                                   BlockHitResult blockHitResult) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult) {
         if (state.getValue(BERRIES)) {
             Block.popResource(level, pos, new ItemStack(ItemsRegistry.HOP.get(), 1));
             float f = Mth.randomBetween(level.getRandom(), 0.8f, 1.2f);
