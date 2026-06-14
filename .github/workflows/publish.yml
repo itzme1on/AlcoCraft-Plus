@@ -3,6 +3,22 @@ name: Publish
 on:
   workflow_dispatch:
     inputs:
+      branch:
+        description: "Branch to publish"
+        type: choice
+        options:
+          - "26.1"
+          - "1.21.11"
+          - "1.21.10"
+          - "1.21.8"
+          - "1.21.6"
+          - "1.21.5"
+          - "1.21.4"
+          - "1.21.1"
+          - "1.20.2"
+          - "1.20.1"
+          - "1.19.2"
+        default: "26.1"
       release_channel:
         description: "Release channel"
         type: choice
@@ -18,13 +34,13 @@ on:
         options: [both, modrinth, curseforge]
         default: both
       loaders:
-        description: "Loader(s) to publish"
+        description: "Loader(s) to publish (granular needs fabric/neoforge branches)"
         type: choice
         options: [both, fabric, neoforge]
         default: both
 
 concurrency:
-  group: publish-${{ github.ref }}
+  group: publish-${{ inputs.branch }}
   cancel-in-progress: false
 
 permissions:
@@ -34,8 +50,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout ${{ inputs.branch }}
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
 
       - name: Determine Java version from minecraft_version
         id: java
@@ -64,6 +82,11 @@ jobs:
       - name: Compute publish tasks
         id: tasks
         run: |
+          if [ "${{ inputs.loaders }}" = "both" ] && [ "${{ inputs.platform }}" = "both" ]; then
+            echo "list= publishMod"
+            echo "list= publishMod" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           case "${{ inputs.loaders }}" in
             fabric) projects=":Fabric" ;;
             neoforge) projects=":NeoForge" ;;
