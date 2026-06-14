@@ -106,7 +106,7 @@ publisher {
 
     setGameVersions(*mcVersions)
 
-    setLoaders("fabric")
+    setLoaders("fabric", "quilt")
 
     setCurseEnvironment("both")
 
