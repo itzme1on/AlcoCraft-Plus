@@ -86,8 +86,10 @@ shadowJar {
     from(zipTree(jar.archiveFile))
 
     configurations = [project.configurations.shadowBundle]
-    archiveClassifier = null
+    archiveClassifier = "neoforge"
 }
+
+tasks.assemble.dependsOn(tasks.shadowJar)
 
 publisher {
     def mcVersions = (rootProject.ext.minecraftGameVersions as List).collect { it.toString() } as String[]
