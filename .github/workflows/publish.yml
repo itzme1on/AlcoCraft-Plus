@@ -34,9 +34,9 @@ on:
         options: [both, modrinth, curseforge]
         default: both
       loaders:
-        description: "Loader(s) to publish (granular needs fabric/neoforge branches)"
+        description: "Loader(s) to publish (granular: fabric/neoforge on 1.21+/26.1, forge on 1.20.x/1.19.2)"
         type: choice
-        options: [both, fabric, neoforge]
+        options: [both, fabric, neoforge, forge]
         default: both
 
 concurrency:
@@ -90,6 +90,7 @@ jobs:
           case "${{ inputs.loaders }}" in
             fabric) projects=":Fabric" ;;
             neoforge) projects=":NeoForge" ;;
+            forge) projects=":Forge" ;;
             *) projects=":Fabric :NeoForge" ;;
           esac
           case "${{ inputs.platform }}" in
