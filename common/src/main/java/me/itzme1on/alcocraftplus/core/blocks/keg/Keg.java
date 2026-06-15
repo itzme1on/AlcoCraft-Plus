@@ -149,7 +149,7 @@ public class Keg extends BaseEntityBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        if (!level.isClientSide() && !player.isCreative()) {
+        if (!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
 
             if (blockEntity instanceof KegEntity kegEntity)

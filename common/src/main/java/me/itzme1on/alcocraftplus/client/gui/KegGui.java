@@ -27,7 +27,6 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
 
     private static final int[] BUBBLE_LENGTHS = {0, 6, 11, 16, 20, 24, 28};
 
-    private int bubbleAnimationTimer;
     private final int animationDurationTicks = 100;
 
     public KegGui(KegGuiHandler menu, Inventory inventory, Component title) {
@@ -60,19 +59,11 @@ public class KegGui extends AbstractContainerScreen<KegGuiHandler> {
         renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, delta);
         renderTooltip(guiGraphics, mouseX, mouseY);
-
-        if (menu.isCrafting(0)) {
-            bubbleAnimationTimer++;
-
-            if (bubbleAnimationTimer >= animationDurationTicks) bubbleAnimationTimer = 0;
-        } else {
-            bubbleAnimationTimer = 0;
-        }
     }
 
     private void renderProgressBars(GuiGraphics guiGraphics, int x, int y) {
         if (menu.isCrafting(0)) {
-            int bubbleIndex = bubbleAnimationTimer * BUBBLE_LENGTHS.length / animationDurationTicks;
+            int bubbleIndex = (menu.getProgress() % animationDurationTicks) * BUBBLE_LENGTHS.length / animationDurationTicks;
 
             if (bubbleIndex >= BUBBLE_LENGTHS.length) bubbleIndex = 0;
 
