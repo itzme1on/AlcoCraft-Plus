@@ -8,14 +8,6 @@ architectury {
     forge()
 }
 
-loom {
-    accessWidenerPath = project(":Common").loom.accessWidenerPath
-
-    forge {
-        convertAccessWideners.set(true)
-    }
-}
-
 configurations {
     common
     shadowBundle

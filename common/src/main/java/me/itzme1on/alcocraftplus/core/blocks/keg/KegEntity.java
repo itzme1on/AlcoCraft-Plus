@@ -7,6 +7,7 @@ import me.itzme1on.alcocraftplus.core.registries.BlockEntitiesRegistry;
 import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
 import me.itzme1on.alcocraftplus.core.utils.BeerTypeMapperUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -41,6 +42,9 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
     public int waterLevel = 0;
     public int beerLevel = 0;
     public int beerType = 0;
+
+    public int waterRemainderMb = 0;
+    public int beerRemainderMb = 0;
 
     protected final ContainerData propertyDelegate = new ContainerData() {
         @Override
@@ -91,7 +95,9 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
         ContainerHelper.loadAllItems(nbt, inventory);
         progress = nbt.getInt("progress");
         waterLevel = nbt.getInt("waterLevel");
+        waterRemainderMb = nbt.getInt("waterRemainderMb");
         beerLevel = nbt.getInt("beerLevel");
+        beerRemainderMb = nbt.getInt("beerRemainderMb");
         beerType = nbt.getInt("beerType");
     }
 
@@ -101,13 +107,97 @@ public class KegEntity extends BlockEntity implements MenuProvider, ImplementedI
         ContainerHelper.saveAllItems(nbt, inventory);
         nbt.putInt("progress", progress);
         nbt.putInt("waterLevel", waterLevel);
+        nbt.putInt("waterRemainderMb", waterRemainderMb);
         nbt.putInt("beerLevel", beerLevel);
+        nbt.putInt("beerRemainderMb", beerRemainderMb);
         nbt.putInt("beerType", beerType);
     }
 
+    public static final int MB_PER_WATER_LEVEL = 100;
+
     @Override
     public boolean canPlaceItem(int index, ItemStack stack) {
+        return index >= 0 && index < inventory.size() && isValidIngredient(stack);
+    }
+
+    public boolean isValidIngredient(ItemStack stack) {
+        if (stack.isEmpty() || level == null) return false;
+
+        return level.getRecipeManager()
+                .getAllRecipesFor(RecipesRegistry.KEG_RECIPE_TYPE.get())
+                .stream()
+                .anyMatch(recipe -> recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.test(stack)));
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return new int[]{0, 1, 2, 3};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, @NotNull ItemStack stack, @Nullable Direction side) {
+        return canPlaceItem(slot, stack);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, @NotNull ItemStack stack, @NotNull Direction side) {
         return false;
+    }
+
+    public int getWaterMb() {
+        return waterLevel * MB_PER_WATER_LEVEL + waterRemainderMb;
+    }
+
+    public int getWaterCapacityMb() {
+        return maxWaterLevel * MB_PER_WATER_LEVEL;
+    }
+
+    public int fillWaterMb(int mb, boolean execute) {
+        if (beerLevel > 0) return 0;
+
+        int accept = Math.min(mb, getWaterCapacityMb() - getWaterMb());
+
+        if (accept <= 0) return 0;
+
+        if (execute) {
+            waterRemainderMb += accept;
+
+            int gained = waterRemainderMb / MB_PER_WATER_LEVEL;
+            if (gained > 0) {
+                waterLevel += gained;
+                waterRemainderMb -= gained * MB_PER_WATER_LEVEL;
+            }
+
+            setChanged();
+        }
+
+        return accept;
+    }
+
+    public int getBeerMb() {
+        return beerLevel * MB_PER_WATER_LEVEL + beerRemainderMb;
+    }
+
+    public int getBeerCapacityMb() {
+        return maxWaterLevel * MB_PER_WATER_LEVEL;
+    }
+
+    public int drainBeerMb(int mb, boolean execute) {
+        int drain = Math.min(mb, getBeerMb());
+
+        if (drain <= 0) return 0;
+
+        if (execute) {
+            int left = getBeerMb() - drain;
+            beerLevel = left / MB_PER_WATER_LEVEL;
+            beerRemainderMb = left % MB_PER_WATER_LEVEL;
+
+            if (beerLevel == 0 && beerRemainderMb == 0) beerType = 0;
+
+            setChanged();
+        }
+
+        return drain;
     }
 
     @Override

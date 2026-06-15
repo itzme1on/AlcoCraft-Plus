@@ -3,10 +3,6 @@ plugins {
     id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
-loom {
-    accessWidenerPath = project(":Common").loom.accessWidenerPath
-}
-
 architectury {
     platformSetupLoomIde()
     fabric()
