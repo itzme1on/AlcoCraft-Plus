@@ -3,6 +3,7 @@ build/
 fabric/run/
 forge/run/
 common/run/
+neoforge/run/
 *.iws
 out/
 *.iml
