@@ -3,6 +3,12 @@
 All notable changes to AlcoCraft+ are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.1.3]
+
+### Fixed
+
+- Keg recipes are now synced without going through the custom-ingredient codec (prevent crash when Polymer is installed).
+
 ## [2.1.2]
 
 ### Added

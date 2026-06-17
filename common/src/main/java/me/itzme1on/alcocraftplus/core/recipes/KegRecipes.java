@@ -4,7 +4,9 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import me.itzme1on.alcocraftplus.core.registries.RecipesRegistry;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -127,8 +130,14 @@ public class KegRecipes implements Recipe<RecipeInput>, HasIngredients {
             ).apply(instance, (ingredients, result) -> new KegRecipes(result, ingredients))
     );
 
+    private static final StreamCodec<RegistryFriendlyByteBuf, Ingredient> INGREDIENT_STREAM_CODEC =
+            ByteBufCodecs.collection(ArrayList::new, ByteBufCodecs.holderRegistry(Registries.ITEM)).map(
+                    holders -> Ingredient.of(HolderSet.direct(holders)),
+                    ingredient -> new ArrayList<>(ingredient.items().toList())
+            );
+
     private static final StreamCodec<RegistryFriendlyByteBuf, NonNullList<Ingredient>> INGREDIENTS_LIST_CODEC =
-            ByteBufCodecs.collection(NonNullList::createWithCapacity, Ingredient.CONTENTS_STREAM_CODEC);
+            ByteBufCodecs.collection(NonNullList::createWithCapacity, INGREDIENT_STREAM_CODEC);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, KegRecipes> STREAM_CODEC = StreamCodec.composite(
             INGREDIENTS_LIST_CODEC, KegRecipes::getIngredients,
